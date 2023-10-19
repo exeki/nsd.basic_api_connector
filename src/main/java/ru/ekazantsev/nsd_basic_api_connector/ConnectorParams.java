@@ -96,8 +96,8 @@ public class ConnectorParams {
                 .filter(it -> Objects.equals(it.id, installationId))
                 .collect(Collectors.toList());
         if (installationConfigs.size() != 1) {
-            throw new ConfigurationException("Installation configuration could not be obtained с ID "
-                    + installationId + " in the configuration file at " + pathToConfigFile);
+            throw new ConfigurationException("Installation configuration "+  installationId + " could not be obtained " +
+                    "in the configuration file at " + pathToConfigFile);
         }
         ConfigFileDto.InstallationConfig installationConfig = installationConfigs.get(0);
         if (installationConfig.host == null || installationConfig.host.trim().length() == 0) {

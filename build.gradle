@@ -30,6 +30,7 @@ test {
 
 sourceCompatibility = 1.11
 targetCompatibility = 1.11
+compileJava.options.encoding = 'UTF-8'
 
 jar {
     duplicatesStrategy = 'exclude' // Устанавливаем стратегию исключения дубликатов

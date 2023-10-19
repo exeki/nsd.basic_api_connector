@@ -20,7 +20,7 @@ ApiTestUtils.getApi().addFile(
 ApiTestUtils.getApi().addFile(
         OBJECT_UUID,
         new File(getClass().getClassLoader().getResource('testFile.txt').getFile()).getBytes(),
-        'test.txt',
+        'get.txt',
         null
 )
 
