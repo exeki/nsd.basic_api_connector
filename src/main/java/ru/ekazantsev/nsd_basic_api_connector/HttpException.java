@@ -2,6 +2,9 @@ package ru.ekazantsev.nsd_basic_api_connector;
 
 import org.apache.http.client.methods.CloseableHttpResponse;
 
+/**
+ * Исключение, которое выбрасывается при получении не успешного http ответа
+ */
 public class HttpException extends RuntimeException {
 
     protected Integer serverResponseStatus;
@@ -40,6 +43,13 @@ public class HttpException extends RuntimeException {
         return "Error when accessing to " + host + ", response status: " + status + ", message:" + body;
     }
 
+
+    /**
+     * Выбрасывает исключение, если в переданном response код не успешный
+     * иначе ничего не делает
+     * @param connector коннектор
+     * @param response ответ nsd
+     */
     public static void throwIfNotOk(Connector connector, CloseableHttpResponse response) {
         int status = response.getStatusLine().getStatusCode();
         if (status >= 400 || status < 200) {

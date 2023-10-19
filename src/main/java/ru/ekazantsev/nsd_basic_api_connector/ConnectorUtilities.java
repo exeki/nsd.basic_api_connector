@@ -15,6 +15,9 @@ import java.io.UnsupportedEncodingException;
 import java.net.URI;
 import java.net.URISyntaxException;
 
+/**
+ * Утилитарный мусор, который был вытащен сюда из класса Connector с целью сократить код класса Connector
+ */
 public class ConnectorUtilities {
     public static URI buildUriBuilder(URIBuilder uriBuilder) {
         try {

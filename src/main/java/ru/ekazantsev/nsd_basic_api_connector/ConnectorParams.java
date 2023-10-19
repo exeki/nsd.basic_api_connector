@@ -10,12 +10,38 @@ import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
+/**
+ * DTO, содержит параметры для связи с NSD и методы по их упрощенному получению
+ */
 public class ConnectorParams {
+    /**
+     * Расположение конфигурационного файла по умолчанию
+     */
     private static final String DEFAULT_PARAMS_FILE_PATH = System.getProperty("user.home") + "\\nsd_sdk\\conf\\nsd_connector_params.json";
+    /**
+     * Ключ доступа
+     */
     private String accessKey;
+    /**
+     * Хост
+     */
     private String host;
+    /**
+     * Схема (http/https)
+     */
     private String scheme;
+    /**
+     * Признак необходимости игнорировать ssl
+     */
     private Boolean ignoreSSL;
+
+    /**
+     * Конструктор для ручного сбора параметров
+     * @param scheme Схема (http/https)
+     * @param host Хост
+     * @param accessKey Ключ доступа
+     * @param ignoreSSL Признак необходимости игнорировать ssl
+     */
 
     public ConnectorParams(
             String scheme,
@@ -29,13 +55,29 @@ public class ConnectorParams {
         this.ignoreSSL = ignoreSSL;
     }
 
-    protected ConnectorParams() {
-    }
+    protected ConnectorParams() {}
 
+    /**
+     * Собирает и наполняет экземпляр из параметров, описанных в конфигурационном файле,
+     * расположенном по адресу {user.home}/nsd_sdk/conf/nsd_connector_params.json
+     * @param installationId ID инсталляции, указанный конфигурационном файле
+     * @return заполненный экземпляр ConnectorParams
+     * @throws ConfigurationException выбрасывается конфиг не заполнен/заполнен не полностью
+     * @throws IOException выбрасывается если не удается считать json
+     */
     public static ConnectorParams byConfigFile(String installationId) throws ConfigurationException, IOException {
         return byConfigFileInPath(installationId, DEFAULT_PARAMS_FILE_PATH);
     }
 
+    /**
+     * Собирает и наполняет экземпляр из параметров, описанных в конфигурационном файле,
+     * расположенном по адресу {user.home}/nsd_sdk/conf/nsd_connector_params.json
+     * @param installationId ID инсталляции, указанный конфигурационном файле
+     * @param pathToConfigFile путь до конфигурационного файла
+     * @return заполненный экземпляр ConnectorParams
+     * @throws ConfigurationException выбрасывается конфиг не заполнен/заполнен не полностью
+     * @throws IOException выбрасывается если не удается считать json
+     */
     public static ConnectorParams byConfigFileInPath(String installationId, String pathToConfigFile) throws IOException, ConfigurationException {
         File configFile = new File(pathToConfigFile);
         if (!configFile.exists())

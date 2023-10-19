@@ -7,6 +7,9 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+/**
+ * Перечень DTO, которые фиксированно возвращаются из штатных методов REST API NSD
+ */
 public class NsdDto {
 
     static abstract class AbstractNsdDto {
@@ -19,6 +22,9 @@ public class NsdDto {
         }
     }
 
+    /**
+     * Исключение в классе обслуживания
+     */
     public static class ServiceTimeExclusionDto extends AbstractNsdDto {
         @JsonAlias("UUID")
         public String uuid;
@@ -28,6 +34,9 @@ public class NsdDto {
         public Date exclusionDate;
     }
 
+    /**
+     * Файл
+     */
     public static class FileDto extends AbstractNsdDto {
         public byte[] bytes;
         public String title;
