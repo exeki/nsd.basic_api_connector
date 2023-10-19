@@ -1,6 +1,6 @@
 # nsd_basic_api_connector
 ## Что это
-Библиотека предоставляет имплементацию базового API NSD.
+Библиотека предоставляет имплементацию базового REST API NSD. Писалась под версию 4.15.
 Имплементированные методы описаны в оф. документации naumen: https://www.naumen.ru/docs/sd/415/NSD_manual.htm#RESTful/REST_API_method.htm?Highlight=REST
 
 ## Как это работает
