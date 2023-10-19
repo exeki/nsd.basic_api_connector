@@ -8,4 +8,4 @@
 Класс Connector может наследоваться для реализации коннекторов к кастомным методам API NSD, в таком случае легче всего реализовывать имплементацию кастомных методов через методы Connector.execPost() и Connector.execGet(). 
 Авторизация так же будет подготовлена. 
 
-Имплементированные методы описаны тут в оф. документации naumen: https://www.naumen.ru/docs/sd/415/NSD_manual.htm#RESTful/REST_API_method.htm?Highlight=REST
+Имплементированные методы описаны в оф. документации naumen: https://www.naumen.ru/docs/sd/415/NSD_manual.htm#RESTful/REST_API_method.htm?Highlight=REST
