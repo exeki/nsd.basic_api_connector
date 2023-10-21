@@ -18,6 +18,12 @@ public class ConnectorParams {
      * Расположение конфигурационного файла по умолчанию
      */
     private static final String DEFAULT_PARAMS_FILE_PATH = System.getProperty("user.home") + "\\nsd_sdk\\conf\\nsd_connector_params.json";
+
+    /**
+     * Пользовательский идентификатор
+     */
+
+    private String userId;
     /**
      * Ключ доступа
      */
@@ -44,11 +50,13 @@ public class ConnectorParams {
      */
 
     public ConnectorParams(
+            String userId,
             String scheme,
             String host,
             String accessKey,
             Boolean ignoreSSL
     ) {
+        this.userId = userId;
         this.scheme = scheme;
         this.host = host;
         this.accessKey = accessKey;
@@ -113,6 +121,7 @@ public class ConnectorParams {
                     " in the configuration file at " + pathToConfigFile);
         }
         return new ConnectorParams(
+                installationId,
                 installationConfig.scheme,
                 installationConfig.host,
                 installationConfig.accessKey,
