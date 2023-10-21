@@ -145,4 +145,6 @@ public class ConnectorParams {
         return ignoreSSL;
     }
 
+    public String getUserId() {return userId; }
+
 }
