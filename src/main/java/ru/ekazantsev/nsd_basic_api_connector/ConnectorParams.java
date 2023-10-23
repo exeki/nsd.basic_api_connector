@@ -43,6 +43,7 @@ public class ConnectorParams {
 
     /**
      * Конструктор для ручного сбора параметров
+     * @param userId пользовательский идентификатор
      * @param scheme Схема (http/https)
      * @param host Хост
      * @param accessKey Ключ доступа

@@ -14,6 +14,7 @@ public class HttpException extends RuntimeException {
     /**
      * @param message сообщение
      * @param status  HTTP статус
+     * @param response полный ответ сервера
      */
     public HttpException(String message, Integer status, CloseableHttpResponse response) {
         super(message);

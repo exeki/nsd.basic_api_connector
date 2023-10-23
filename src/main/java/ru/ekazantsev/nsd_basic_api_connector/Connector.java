@@ -73,6 +73,7 @@ public class Connector {
 
     /**
      * Возвращает SSLConnectionSocketFactory с выключенным ssl
+     * @return SSLConnectionSocketFactory с выключенным ssl
      */
     protected static SSLConnectionSocketFactory getNoSslSocketFactory() {
         TrustStrategy acceptingTrustStrategy = (x509Certificates, s) -> true;
@@ -108,6 +109,7 @@ public class Connector {
 
     /**
      * Возвращает базовый конструктор URI
+     * @return  базовый конструктор URI
      */
     protected URIBuilder getBasicUriBuilder() {
         return new URIBuilder().setScheme(scheme).setHost(host).addParameter(ACCESS_KEY_PARAM_NAME, accessKey);
