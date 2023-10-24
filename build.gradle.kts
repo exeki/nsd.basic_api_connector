@@ -1,15 +1,10 @@
-import org.gradle.configurationcache.serialization.codecs.Encoding
-import org.gradle.configurationcache.serialization.codecs.EncodingProducer
-import org.gradle.internal.impldep.com.amazonaws.util.EncodingScheme
-import org.gradle.internal.impldep.com.amazonaws.util.EncodingSchemeEnum
-
 plugins {
     id("java-library")
     id("maven-publish")
     id("groovy")
 }
 
-group = "ru.ekazantsev"
+group = "ru.kazantsev.nsd"
 version = "1.0.0"
 
 java {
