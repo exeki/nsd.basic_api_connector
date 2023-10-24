@@ -1,2 +1,2 @@
-rootProject.name = "nsd_basic_api_connector"
+rootProject.name = "basic_api_connector"
 
