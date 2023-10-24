@@ -1,7 +1,7 @@
 package nsd_basic_api_connector.examples
 
-import ru.ekazantsev.nsd_basic_api_connector.Connector
-import ru.ekazantsev.nsd_basic_api_connector.ConnectorParams
+import ru.kazantsev.nsd.basic_api_connector.Connector
+import ru.kazantsev.nsd.basic_api_connector.ConnectorParams
 
 ConnectorParams params = ConnectorParams.byConfigFile('PUBLIC_TEST')
 Connector api = new Connector(params)

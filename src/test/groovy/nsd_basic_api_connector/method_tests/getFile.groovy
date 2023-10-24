@@ -1,8 +1,8 @@
 package nsd_basic_api_connector.method_tests
 
 import nsd_basic_api_connector.ApiTestUtils
-import ru.ekazantsev.nsd_basic_api_connector.Connector
-import ru.ekazantsev.nsd_basic_api_connector.NsdDto
+import ru.kazantsev.nsd.basic_api_connector.Connector
+import ru.kazantsev.nsd.basic_api_connector.NsdDto
 
 String FILE_UUID = 'file$50215808'
 String OBJECT_UUID = 'serviceCall$50175809'

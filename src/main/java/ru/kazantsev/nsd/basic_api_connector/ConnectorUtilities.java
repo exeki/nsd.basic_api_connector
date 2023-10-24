@@ -1,4 +1,4 @@
-package ru.ekazantsev.nsd_basic_api_connector;
+package ru.kazantsev.nsd.basic_api_connector;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
