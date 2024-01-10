@@ -44,7 +44,6 @@ public class Connector {
     protected static final String ACCESS_KEY_PARAM_NAME = "accessKey";
     protected static final String BASE_PATH = "/sd/services/rest";
     protected static final String DATE_PATTERN = "yyyy-MM-dd HH:mm:ss";
-
     protected static Logger logger = LoggerFactory.getLogger(Connector.class);
 
     protected String scheme;
