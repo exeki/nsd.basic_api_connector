@@ -626,7 +626,7 @@ public class Connector {
         String PATH_SEGMENT = "exec-post";
         logInfo("execPost (httpEntity, ", methodName, ", ", params, ", ", additionalUrlParams, ")");
         URIBuilder uriBuilder = getBasicUriBuilder().setPath(BASE_PATH + "/" + PATH_SEGMENT);
-        additionalUrlParams.forEach(uriBuilder::setParameter);
+        if(additionalUrlParams != null) additionalUrlParams.forEach(uriBuilder::setParameter);
         uriBuilder.setParameter("func", methodName);
         uriBuilder.setParameter("params", params);
         uriBuilder.setParameter("raw", "true");
