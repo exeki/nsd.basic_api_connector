@@ -35,14 +35,6 @@ public class ConnectorUtilities {
         }
     }
 
-    public static StringEntity newStringEntity(ObjectMapper objectMapper, Object value, String charset){
-        try {
-            return new StringEntity(writeValueAsString(objectMapper, value));
-        } catch (UnsupportedEncodingException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
     public static CloseableHttpResponse execute(CloseableHttpClient client, HttpUriRequest httpUriRequest){
         try {
             return client.execute(httpUriRequest);
