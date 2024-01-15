@@ -43,7 +43,7 @@ public class HttpException extends RuntimeException {
         return this.serverResponse;
     }
 
-    protected static String getErrorText(String host, String status, String body) {
+    static String createErrorText(String host, String status, String body) {
         return "Error when accessing to " + host + ", response status: " + status + ", message:" + body;
     }
 
@@ -61,7 +61,7 @@ public class HttpException extends RuntimeException {
             if (status >= 400 || status < 200) {
                 String body = EntityUtils.toString(response.getEntity());
                 throw new HttpException(
-                        getErrorText(connector.host, Integer.toString(status), body),
+                        createErrorText(connector.host, Integer.toString(status), body),
                         status,
                         response
                 );
