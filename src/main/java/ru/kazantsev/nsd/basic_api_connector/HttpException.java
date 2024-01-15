@@ -1,5 +1,6 @@
 package ru.kazantsev.nsd.basic_api_connector;
 
+import org.apache.http.HttpResponse;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.util.EntityUtils;
 
@@ -12,7 +13,7 @@ public class HttpException extends RuntimeException {
 
     protected Integer serverResponseStatus;
 
-    protected CloseableHttpResponse serverResponse;
+    protected HttpResponse serverResponse;
 
     /**
      * @param message  сообщение
@@ -39,7 +40,7 @@ public class HttpException extends RuntimeException {
      *
      * @return body ответа
      */
-    public CloseableHttpResponse getServerResponse() {
+    public HttpResponse getServerResponse() {
         return this.serverResponse;
     }
 
