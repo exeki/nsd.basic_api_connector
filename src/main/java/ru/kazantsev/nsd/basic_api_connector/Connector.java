@@ -44,6 +44,7 @@ public class Connector {
     protected static final String ACCESS_KEY_PARAM_NAME = "accessKey";
     protected static final String BASE_PATH = "/sd/services/rest";
     protected static final String DATE_PATTERN = "yyyy-MM-dd HH:mm:ss";
+    protected static final String CHARSET = "UTF-8";
     protected static Logger logger = LoggerFactory.getLogger(Connector.class);
 
     protected String scheme;
@@ -127,7 +128,7 @@ public class Connector {
         URI uri = ConnectorUtilities.buildUriBuilder(getBasicUriBuilder().setPath(path));
         logInfo("create uri: " + uri);
         HttpPost httpPost = new HttpPost(uri);
-        httpPost.setEntity(ConnectorUtilities.newStringEntity(objectMapper, attributes));
+        httpPost.setEntity(ConnectorUtilities.newStringEntity(objectMapper, attributes, CHARSET));
         CloseableHttpResponse response = ConnectorUtilities.execute(client, httpPost);
         HttpException.throwIfNotOk(this, response);
         logInfo("create response status: " + response.getStatusLine().getStatusCode() + " , body: " + ConnectorUtilities.entityToString(response.getEntity()));
@@ -318,7 +319,7 @@ public class Connector {
         URI uri = ConnectorUtilities.buildUriBuilder(builder);
         logInfo("createM2M uri: " + uri);
         HttpPost httpPost = new HttpPost(uri);
-        httpPost.setEntity(ConnectorUtilities.newStringEntity(objectMapper, attributes));
+        httpPost.setEntity(ConnectorUtilities.newStringEntity(objectMapper, attributes, CHARSET));
         CloseableHttpResponse response = ConnectorUtilities.execute(client, httpPost);
         HttpException.throwIfNotOk(this, response);
         String responseBody = ConnectorUtilities.entityToString(response.getEntity());
@@ -338,7 +339,7 @@ public class Connector {
         URI uri = ConnectorUtilities.buildUriBuilder(getBasicUriBuilder().setPath(BASE_PATH + "/" + PATH_SEGMENT));
         logInfo("createM2MMultiple uri: ", uri);
         HttpPost httpPost = new HttpPost(uri);
-        httpPost.setEntity(ConnectorUtilities.newStringEntity(objectMapper, objects));
+        httpPost.setEntity(ConnectorUtilities.newStringEntity(objectMapper, objects, CHARSET));
         CloseableHttpResponse response = ConnectorUtilities.execute(client, httpPost);
         HttpException.throwIfNotOk(this, response);
         String responseBody = ConnectorUtilities.entityToString(response.getEntity());
@@ -375,7 +376,7 @@ public class Connector {
         URI uri = ConnectorUtilities.buildUriBuilder(getBasicUriBuilder().setPath(BASE_PATH + "/" + PATH_SEGMENT + "/" + objectUuid));
         logInfo("edit uri: ", uri);
         HttpPost httpPost = new HttpPost(uri);
-        httpPost.setEntity(ConnectorUtilities.newStringEntity(objectMapper, attributes));
+        httpPost.setEntity(ConnectorUtilities.newStringEntity(objectMapper, attributes, CHARSET));
         CloseableHttpResponse response = ConnectorUtilities.execute(client, httpPost);
         HttpException.throwIfNotOk(this, response);
         logInfo("edit response status: " + response.getStatusLine().getStatusCode()
@@ -434,7 +435,7 @@ public class Connector {
         URI uri = ConnectorUtilities.buildUriBuilder(builder);
         logInfo("editM2M uri: ", uri);
         HttpPost httpPost = new HttpPost(uri);
-        httpPost.setEntity(ConnectorUtilities.newStringEntity(objectMapper, attributes));
+        httpPost.setEntity(ConnectorUtilities.newStringEntity(objectMapper, attributes, CHARSET));
         CloseableHttpResponse response = ConnectorUtilities.execute(client, httpPost);
         HttpException.throwIfNotOk(this, response);
         String responseBody = ConnectorUtilities.entityToString(response.getEntity());
@@ -600,7 +601,7 @@ public class Connector {
         URI uri = ConnectorUtilities.buildUriBuilder(uriBuilder);
         logInfo("find uri: ", uri);
         HttpPost httpPost = new HttpPost(uri);
-        httpPost.setEntity(ConnectorUtilities.newStringEntity(objectMapper, searchAttrs));
+        httpPost.setEntity(ConnectorUtilities.newStringEntity(objectMapper, searchAttrs, CHARSET));
         CloseableHttpResponse response = ConnectorUtilities.execute(client, httpPost);
         HttpException.throwIfNotOk(this, response);
         String responseBody = ConnectorUtilities.entityToString(response.getEntity());

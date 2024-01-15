@@ -35,7 +35,7 @@ public class ConnectorUtilities {
         }
     }
 
-    public static StringEntity newStringEntity(ObjectMapper objectMapper, Object value){
+    public static StringEntity newStringEntity(ObjectMapper objectMapper, Object value, String charset){
         try {
             return new StringEntity(writeValueAsString(objectMapper, value));
         } catch (UnsupportedEncodingException e) {
