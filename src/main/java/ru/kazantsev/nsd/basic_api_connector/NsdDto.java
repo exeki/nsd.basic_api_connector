@@ -2,6 +2,7 @@ package ru.kazantsev.nsd.basic_api_connector;
 
 import com.fasterxml.jackson.annotation.JsonAlias;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.text.SimpleDateFormat;
@@ -15,10 +16,13 @@ public class NsdDto {
     static abstract class AbstractNsdDto {
         @Override
         public String toString() {
-            return ConnectorUtilities.writeValueAsString(
-                    new ObjectMapper().setDateFormat(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss")),
-                    this
-            );
+            try {
+                return new ObjectMapper()
+                        .setDateFormat(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"))
+                        .writeValueAsString(this);
+            } catch (JsonProcessingException e) {
+                throw new RuntimeException(e);
+            }
         }
     }
 

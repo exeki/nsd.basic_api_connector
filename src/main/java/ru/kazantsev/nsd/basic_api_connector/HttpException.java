@@ -1,6 +1,9 @@
 package ru.kazantsev.nsd.basic_api_connector;
 
 import org.apache.http.client.methods.CloseableHttpResponse;
+import org.apache.http.util.EntityUtils;
+
+import java.io.IOException;
 
 /**
  * Исключение, которое выбрасывается при получении не успешного http ответа
@@ -12,8 +15,8 @@ public class HttpException extends RuntimeException {
     protected CloseableHttpResponse serverResponse;
 
     /**
-     * @param message сообщение
-     * @param status  HTTP статус
+     * @param message  сообщение
+     * @param status   HTTP статус
      * @param response полный ответ сервера
      */
     public HttpException(String message, Integer status, CloseableHttpResponse response) {
@@ -48,18 +51,23 @@ public class HttpException extends RuntimeException {
     /**
      * Выбрасывает исключение, если в переданном response код не успешный
      * иначе ничего не делает
+     *
      * @param connector коннектор
-     * @param response ответ nsd
+     * @param response  ответ nsd
      */
     public static void throwIfNotOk(Connector connector, CloseableHttpResponse response) {
-        int status = response.getStatusLine().getStatusCode();
-        if (status >= 400 || status < 200) {
-            String body = ConnectorUtilities.entityToString(response.getEntity());
-            throw new HttpException(
-                    getErrorText(connector.host, Integer.toString(status), body),
-                    status,
-                    response
-            );
+        try {
+            int status = response.getStatusLine().getStatusCode();
+            if (status >= 400 || status < 200) {
+                String body = EntityUtils.toString(response.getEntity());
+                throw new HttpException(
+                        getErrorText(connector.host, Integer.toString(status), body),
+                        status,
+                        response
+                );
+            }
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
     }
 
