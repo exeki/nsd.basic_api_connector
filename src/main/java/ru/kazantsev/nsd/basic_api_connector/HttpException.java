@@ -44,7 +44,14 @@ public class HttpException extends RuntimeException {
         return this.serverResponse;
     }
 
-    static String createErrorText(String host, String status, String body) {
+    /**
+     * Создает текст исключения по шаблону
+     * @param host хост, к которому происходит обращение
+     * @param status статус ответа
+     * @param body тело ответа
+     * @return текстовка исключения
+     */
+    public static String createErrorText(String host, String status, String body) {
         return "Error when accessing to " + host + ", response status: " + status + ", message:" + body;
     }
 
