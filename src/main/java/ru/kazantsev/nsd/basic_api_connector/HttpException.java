@@ -13,7 +13,7 @@ public class HttpException extends RuntimeException {
 
     protected Integer serverResponseStatus;
 
-    protected HttpResponse serverResponse;
+    protected CloseableHttpResponse serverResponse;
 
     /**
      * @param message  сообщение
@@ -47,7 +47,6 @@ public class HttpException extends RuntimeException {
     static String createErrorText(String host, String status, String body) {
         return "Error when accessing to " + host + ", response status: " + status + ", message:" + body;
     }
-
 
     /**
      * Выбрасывает исключение, если в переданном response код не успешный
