@@ -6,6 +6,7 @@ import javax.naming.ConfigurationException;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -100,10 +101,12 @@ public class ConnectorParams {
             throw new IOException("Data could not be read from the configuration file at " + pathToConfigFile + ". Error text:" + e.getMessage());
         }
 
-        List<ConfigFileDto.InstallationConfig> installationConfigs = configFileDto.installations
-                .stream()
-                .filter(it -> Objects.equals(it.id, installationId))
-                .collect(Collectors.toList());
+        List<ConfigFileDto.InstallationConfig> installationConfigs = new ArrayList<>();
+
+        for(ConfigFileDto.InstallationConfig config : configFileDto.installations) {
+            if(Objects.equals(config.id, installationId)) installationConfigs.add(config);
+        }
+
         if (installationConfigs.size() != 1) {
             throw new ConfigurationException("Installation configuration "+  installationId + " could not be obtained " +
                     "in the configuration file at " + pathToConfigFile);

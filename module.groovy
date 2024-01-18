@@ -1,6 +1,6 @@
-package ru.kazantsev.nsd.basic_api_connector;
+package ru.kazantsev.nsd.basic_api_connector
 
-import com.fasterxml.jackson.core.JsonProcessingException;
+import groovy.transform.Field;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.util.EntityUtils;
@@ -8,7 +8,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.fasterxml.jackson.databind.DeserializationFeature;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 
 import org.apache.http.impl.client.HttpClients;
@@ -26,20 +25,44 @@ import org.apache.http.entity.ContentType;
 import org.apache.http.HttpEntity;
 
 import javax.net.ssl.SSLContext;
-import java.io.File;
-import java.io.IOException;
-import java.net.URI;
-import java.net.URISyntaxException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.security.KeyManagementException;
 import java.security.KeyStoreException;
-import java.security.NoSuchAlgorithmException;
-import java.security.cert.CertificateException;
+import java.security.NoSuchAlgorithmException
+import java.security.cert.CertificateException
 import java.security.cert.X509Certificate;
 import java.text.SimpleDateFormat;
-import java.util.*;
+
+import javax.naming.ConfigurationException;
 import java.util.stream.Collectors;
+
+import org.apache.http.HttpResponse;
+import com.fasterxml.jackson.annotation.JsonAlias;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+@Field String MODULE_NAME = "nsdBasicApiConnector"
+
+/** DTO со структурой файла конфига коннектора */
+public class ConfigFileDto {
+    /** Перечень конфигов инталляций */
+    public List<InstallationConfig> installations;
+    /** Конфиг конкретной инсталляции */
+    public static class InstallationConfig {
+        /** Идентификатор инсталляции */
+        public String id;
+        /** Схема, по которой система будет обращаться */
+        public String scheme;
+        /** Хост инсталляции */
+        public String host;
+        /** Ключ, по которому будет происходить обращение */
+        public String accessKey;
+        /** Признак необходимости игнорировать ssl */
+        public Boolean ignoreSLL;
+    }
+}
 
 /**
  * Коннектор, имплементирующий методы базового API NSD4.15
@@ -719,7 +742,8 @@ public class Connector {
                 for(Map.Entry<String, String> entry : additionalUrlParams.entrySet()) {
                     uriBuilder.setParameter(entry.getKey(), entry.getValue());
                 }
-            }            uriBuilder.setParameter("func", methodName);
+            }
+            uriBuilder.setParameter("func", methodName);
             uriBuilder.setParameter("params", params);
             uriBuilder.setParameter("raw", "true");
             URI uri = uriBuilder.build();
@@ -767,6 +791,273 @@ public class Connector {
             return response;
         } catch (IOException | URISyntaxException e) {
             throw new RuntimeException(e);
+        }
+    }
+}
+
+/**
+ * DTO, содержит параметры для связи с NSD и методы по их упрощенному получению
+ */
+public class ConnectorParams {
+    /**
+     * Расположение конфигурационного файла по умолчанию
+     */
+    private static final String DEFAULT_PARAMS_FILE_PATH = System.getProperty("user.home") + "\\nsd_sdk\\conf\\nsd_connector_params.json";
+
+    /**
+     * Пользовательский идентификатор
+     */
+
+    private String userId;
+    /**
+     * Ключ доступа
+     */
+    private String accessKey;
+    /**
+     * Хост
+     */
+    private String host;
+    /**
+     * Схема (http/https)
+     */
+    private String scheme;
+    /**
+     * Признак необходимости игнорировать ssl
+     */
+    private Boolean ignoreSSL;
+
+    /**
+     * Конструктор для ручного сбора параметров
+     * @param userId пользовательский идентификатор
+     * @param scheme Схема (http/https)
+     * @param host Хост
+     * @param accessKey Ключ доступа
+     * @param ignoreSSL Признак необходимости игнорировать ssl
+     */
+
+    public ConnectorParams(
+            String userId,
+            String scheme,
+            String host,
+            String accessKey,
+            Boolean ignoreSSL
+    ) {
+        this.userId = userId;
+        this.scheme = scheme;
+        this.host = host;
+        this.accessKey = accessKey;
+        this.ignoreSSL = ignoreSSL;
+    }
+
+    protected ConnectorParams() {}
+
+    /**
+     * Собирает и наполняет экземпляр из параметров, описанных в конфигурационном файле,
+     * расположенном по адресу {user.home}/nsd_sdk/conf/nsd_connector_params.json
+     * @param installationId ID инсталляции, указанный конфигурационном файле
+     * @return заполненный экземпляр ConnectorParams
+     * @throws ConfigurationException выбрасывается конфиг не заполнен/заполнен не полностью
+     * @throws IOException выбрасывается если не удается считать json
+     */
+    public static ConnectorParams byConfigFile(String installationId) throws ConfigurationException, IOException {
+        return byConfigFileInPath(installationId, DEFAULT_PARAMS_FILE_PATH);
+    }
+
+    /**
+     * Собирает и наполняет экземпляр из параметров, описанных в конфигурационном файле,
+     * расположенном по адресу {user.home}/nsd_sdk/conf/nsd_connector_params.json
+     * @param installationId ID инсталляции, указанный конфигурационном файле
+     * @param pathToConfigFile путь до конфигурационного файла
+     * @return заполненный экземпляр ConnectorParams
+     * @throws ConfigurationException выбрасывается конфиг не заполнен/заполнен не полностью
+     * @throws IOException выбрасывается если не удается считать json
+     */
+    public static ConnectorParams byConfigFileInPath(String installationId, String pathToConfigFile) throws IOException, ConfigurationException {
+        File configFile = new File(pathToConfigFile);
+        if (!configFile.exists())
+            throw new FileNotFoundException("The configuration file was not found at " + pathToConfigFile);
+
+        ConfigFileDto configFileDto;
+
+        try {
+            configFileDto = new ObjectMapper().readValue(configFile, ConfigFileDto.class);
+        } catch (IOException e) {
+            throw new IOException("Data could not be read from the configuration file at " + pathToConfigFile + ". Error text:" + e.getMessage());
+        }
+
+        List<ConfigFileDto.InstallationConfig> installationConfigs = new ArrayList<>();
+
+        for(ConfigFileDto.InstallationConfig config : configFileDto.installations) {
+            if(Objects.equals(config.id, installationId)) installationConfigs.add(config);
+        }
+
+        if (installationConfigs.size() != 1) {
+            throw new ConfigurationException("Installation configuration "+  installationId + " could not be obtained " +
+                    "in the configuration file at " + pathToConfigFile);
+        }
+        ConfigFileDto.InstallationConfig installationConfig = installationConfigs.get(0);
+        if (installationConfig.host == null || installationConfig.host.trim().length() == 0) {
+            throw new ConfigurationException("The host for installation is not specified" + installationId
+                    + " in the configuration file at " + pathToConfigFile);
+        }
+        if (installationConfig.accessKey == null || installationConfig.accessKey.trim().length() == 0) {
+            throw new ConfigurationException("accessKey for installation is not specified for " + installationId +
+                    " in the configuration file at " + pathToConfigFile);
+        }
+        if (installationConfig.scheme == null || installationConfig.scheme.trim().length() == 0) {
+            throw new ConfigurationException("Scheme is not specified for installation" + installationId +
+                    " in the configuration file at " + pathToConfigFile);
+        }
+        return new ConnectorParams(
+                installationId,
+                installationConfig.scheme,
+                installationConfig.host,
+                installationConfig.accessKey,
+                installationConfig.ignoreSLL != null ? installationConfig.ignoreSLL : false
+        );
+    }
+
+    protected String getAccessKey() {
+        return accessKey;
+    }
+
+    public String getHost() {
+        return host;
+    }
+
+    public String getScheme() {
+        return scheme;
+    }
+
+    public Boolean isIgnoringSSL(){
+        return ignoreSSL;
+    }
+
+    public String getUserId() {return userId; }
+
+}
+
+/**
+ * Исключение, которое выбрасывается при получении не успешного http ответа
+ */
+public class HttpException extends RuntimeException {
+
+    protected Integer serverResponseStatus;
+
+    protected CloseableHttpResponse serverResponse;
+
+    /**
+     * @param message  сообщение
+     * @param status   HTTP статус
+     * @param response полный ответ сервера
+     */
+    public HttpException(String message, Integer status, CloseableHttpResponse response) {
+        super(message);
+        this.serverResponseStatus = status;
+        this.serverResponse = response;
+    }
+
+    /**
+     * Получить статус ответа
+     *
+     * @return статус ответа
+     */
+    public Integer getServerResponseStatus() {
+        return this.serverResponseStatus;
+    }
+
+    /**
+     * Получить body ответа
+     *
+     * @return body ответа
+     */
+    public HttpResponse getServerResponse() {
+        return this.serverResponse;
+    }
+
+    /**
+     * Создает текст исключения по шаблону
+     * @param host хост, к которому происходит обращение
+     * @param status статус ответа
+     * @param body тело ответа
+     * @return текстовка исключения
+     */
+    public static String createErrorText(String host, String status, String body) {
+        return "Error when accessing to " + host + ", response status: " + status + ", message:" + body;
+    }
+
+    /**
+     * Выбрасывает исключение, если в переданном response код не успешный
+     * иначе ничего не делает
+     *
+     * @param connector коннектор
+     * @param response  ответ nsd
+     */
+    public static void throwIfNotOk(Connector connector, CloseableHttpResponse response) {
+        try {
+            int status = response.getStatusLine().getStatusCode();
+            if (status >= 400 || status < 200) {
+                String body = EntityUtils.toString(response.getEntity());
+                throw new HttpException(
+                        createErrorText(connector.host, Integer.toString(status), body),
+                        status,
+                        response
+                );
+            }
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+}
+
+/**
+ * Перечень DTO, которые фиксированно возвращаются из штатных методов REST API NSD
+ */
+public class NsdDto {
+
+    static abstract class AbstractNsdDto {
+        @Override
+        public String toString() {
+            try {
+                return new ObjectMapper()
+                        .setDateFormat(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"))
+                        .writeValueAsString(this);
+            } catch (JsonProcessingException e) {
+                throw new RuntimeException(e);
+            }
+        }
+    }
+
+    /**
+     * Исключение в классе обслуживания
+     */
+    public static class ServiceTimeExclusionDto extends AbstractNsdDto {
+        @JsonAlias("UUID")
+        public String uuid;
+        public Long startTime;
+        public Long endTime;
+        @JsonFormat(pattern = "yyyy-MM-dd")
+        public Date exclusionDate;
+    }
+
+    /**
+     * Файл
+     */
+    public static class FileDto extends AbstractNsdDto {
+        public byte[] bytes;
+        public String title;
+        public String contentType;
+
+        public FileDto(byte[] bytes, String title, String contentType) {
+            this.bytes = bytes;
+            this.title = title;
+            this.contentType = contentType;
+        }
+
+        @Override
+        public String toString() {
+            return this.title + " / " + this.contentType;
         }
     }
 }
