@@ -56,7 +56,7 @@ public class Connector {
     protected String scheme;
     protected String host;
     protected String accessKey;
-    protected Boolean infoLoggingIsEnabled = true;
+    protected Boolean debugLoggingIsEnabled = true;
 
     /**
      * Клиент, с заранее вложенными парсером, авторизацией, обработчиком ошибок
@@ -104,18 +104,18 @@ public class Connector {
     }
 
     public void logInfo(Object... objects) {
-        if (infoLoggingIsEnabled) {
+        if (debugLoggingIsEnabled) {
             StringBuilder message = new StringBuilder();
             for (Object object : objects) {
                 if (object == null) message.append("null");
                 else message.append(object);
             }
-            logger.info(message.toString());
+            logger.debug(message.toString());
         }
     }
 
     public void setInfoLogging(Boolean boo) {
-        this.infoLoggingIsEnabled = boo;
+        this.debugLoggingIsEnabled = boo;
     }
 
     public void setObjectMapper(ObjectMapper mapper) {
