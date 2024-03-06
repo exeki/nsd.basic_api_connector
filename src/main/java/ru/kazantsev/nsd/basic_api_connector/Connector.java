@@ -103,7 +103,7 @@ public class Connector {
         return new SSLConnectionSocketFactory(sslContext, new NoopHostnameVerifier());
     }
 
-    public void logInfo(Object... objects) {
+    public void logDebug(Object... objects) {
         if (debugLoggingIsEnabled) {
             StringBuilder message = new StringBuilder();
             for (Object object : objects) {
@@ -114,7 +114,7 @@ public class Connector {
         }
     }
 
-    public void setInfoLogging(Boolean boo) {
+    public void setDebugLogging(Boolean boo) {
         this.debugLoggingIsEnabled = boo;
     }
 
@@ -154,15 +154,15 @@ public class Connector {
     public void create(String metaClassCode, Map<String, Object> attributes) {
         try {
             String PATH_SEGMENT = "create";
-            logInfo("create (" + metaClassCode + ", " + attributes + ")");
+            logDebug("create (" + metaClassCode + ", " + attributes + ")");
             String path = BASE_PATH + "/" + PATH_SEGMENT + "/" + metaClassCode;
             URI uri = getBasicUriBuilder().setPath(path).build();
-            logInfo("create uri: " + uri);
+            logDebug("create uri: " + uri);
             HttpPost httpPost = new HttpPost(uri);
             httpPost.setEntity(newStringEntity(attributes));
             CloseableHttpResponse response = client.execute(httpPost);
             HttpException.throwIfNotOk(this, response);
-            logInfo("create response status: " + response.getStatusLine().getStatusCode() + " , body: " + EntityUtils.toString(response.getEntity()));
+            logDebug("create response status: " + response.getStatusLine().getStatusCode() + " , body: " + EntityUtils.toString(response.getEntity()));
         } catch (IOException | URISyntaxException e) {
             throw new RuntimeException(e);
         }
@@ -209,12 +209,12 @@ public class Connector {
     public void addFile(String targetObjectUuid, List<File> files, String attrCode) {
         try {
             String PATH_SEGMENT = "add-file";
-            logInfo("addFile (" + targetObjectUuid + ", ", files);
+            logDebug("addFile (" + targetObjectUuid + ", ", files);
             String path = BASE_PATH + "/" + PATH_SEGMENT + "/" + targetObjectUuid;
             URIBuilder uriBuilder = getBasicUriBuilder().setPath(path);
             if (attrCode != null) uriBuilder.addParameter("attrCode", attrCode);
             URI uri = uriBuilder.build();
-            logInfo("addFile uri: ", uri);
+            logDebug("addFile uri: ", uri);
             HttpPost httpPost = new HttpPost(uri);
             MultipartEntityBuilder entityBuilder = MultipartEntityBuilder.create();
             for (int i = 0; i < files.size(); i++) {
@@ -223,7 +223,7 @@ public class Connector {
             httpPost.setEntity(entityBuilder.build());
             CloseableHttpResponse response = client.execute(httpPost);
             HttpException.throwIfNotOk(this, response);
-            logInfo("addFile response status: " + response.getStatusLine().getStatusCode() + ". body: "
+            logDebug("addFile response status: " + response.getStatusLine().getStatusCode() + ". body: "
                     + EntityUtils.toString(response.getEntity()));
         } catch (IOException | URISyntaxException e) {
             throw new RuntimeException(e);
@@ -253,12 +253,12 @@ public class Connector {
     public void addFile(String targetObjectUuid, byte[] fileBytes, String fileName, String attrCode) {
         try {
             String PATH_SEGMENT = "add-file";
-            logInfo("addFile (" + targetObjectUuid + "/, byte[], ", fileName, ")");
+            logDebug("addFile (" + targetObjectUuid + "/, byte[], ", fileName, ")");
             String path = BASE_PATH + "/" + PATH_SEGMENT + "/" + targetObjectUuid;
             URIBuilder uriBuilder = getBasicUriBuilder().setPath(path);
             if (attrCode != null) uriBuilder.addParameter("attrCode", attrCode);
             URI uri = uriBuilder.build();
-            logInfo("addFile uri: ", uri);
+            logDebug("addFile uri: ", uri);
             HttpPost httpPost = new HttpPost(uri);
             HttpEntity entity = MultipartEntityBuilder.create()
                     .addBinaryBody("file", fileBytes, ContentType.TEXT_PLAIN, fileName)
@@ -266,7 +266,7 @@ public class Connector {
             httpPost.setEntity(entity);
             CloseableHttpResponse response = client.execute(httpPost);
             HttpException.throwIfNotOk(this, response);
-            logInfo("addFile response status: " + response.getStatusLine().getStatusCode()
+            logDebug("addFile response status: " + response.getStatusLine().getStatusCode()
                     + ". body: " + EntityUtils.toString(response.getEntity()));
         } catch (IOException | URISyntaxException e) {
             throw new RuntimeException(e);
@@ -296,7 +296,7 @@ public class Connector {
     public NsdDto.ServiceTimeExclusionDto createExcl(String serviceTimeUuid, Date exclusionDate, Long startTime, Long endTime) {
         try {
             String PATH_SEGMENT = "create-excl";
-            logInfo("createExcl (" + serviceTimeUuid + ", ", exclusionDate, ")");
+            logDebug("createExcl (" + serviceTimeUuid + ", ", exclusionDate, ")");
             HashMap<String, String> lastSegmentMap = new HashMap<>();
             lastSegmentMap.put("exclusionDate", new SimpleDateFormat(DATE_PATTERN).format(exclusionDate));
             if (startTime != null) lastSegmentMap.put("startTime", startTime.toString());
@@ -304,11 +304,11 @@ public class Connector {
             String lastSegmentString = this.objectMapper.copy().enable(SerializationFeature.INDENT_OUTPUT).writeValueAsString(lastSegmentMap);
             String path = BASE_PATH + "/" + PATH_SEGMENT + "/" + serviceTimeUuid + "/" + lastSegmentString;
             URI uri = getBasicUriBuilder().setPath(path).build();
-            logInfo("createExcl uri: " + uri);
+            logDebug("createExcl uri: " + uri);
             CloseableHttpResponse response = client.execute(new HttpGet(uri));
             HttpException.throwIfNotOk(this, response);
             String responseBody = EntityUtils.toString(response.getEntity());
-            logInfo("createExcl response status: " + response.getStatusLine().getStatusCode() + ". body: " + responseBody);
+            logDebug("createExcl response status: " + response.getStatusLine().getStatusCode() + ". body: " + responseBody);
             return objectMapper.readValue(responseBody, NsdDto.ServiceTimeExclusionDto.class);
         } catch (IOException | URISyntaxException e) {
             throw new RuntimeException(e);
@@ -358,18 +358,18 @@ public class Connector {
     public HashMap createM2M(String metaClassCode, Map<String, Object> attributes, List<String> returnAttrs) {
         try {
             String PATH_SEGMENT = "create-m2m";
-            logInfo("createM2M (", metaClassCode, ", ", attributes, ", ", returnAttrs, ")");
+            logDebug("createM2M (", metaClassCode, ", ", attributes, ", ", returnAttrs, ")");
             String path = BASE_PATH + "/" + PATH_SEGMENT + "/" + metaClassCode;
             URIBuilder builder = getBasicUriBuilder().setPath(path);
             if (returnAttrs != null) builder.setParameter("attrs", String.join(",", returnAttrs));
             URI uri = builder.build();
-            logInfo("createM2M uri: " + uri);
+            logDebug("createM2M uri: " + uri);
             HttpPost httpPost = new HttpPost(uri);
             httpPost.setEntity(newStringEntity(attributes));
             CloseableHttpResponse response = client.execute(httpPost);
             HttpException.throwIfNotOk(this, response);
             String responseBody = EntityUtils.toString(response.getEntity());
-            logInfo("createM2M response status: " + response.getStatusLine().getStatusCode() + ". body: " + responseBody);
+            logDebug("createM2M response status: " + response.getStatusLine().getStatusCode() + ". body: " + responseBody);
             return objectMapper.readValue(responseBody, HashMap.class);
         } catch (IOException | URISyntaxException e) {
             throw new RuntimeException(e);
@@ -385,15 +385,15 @@ public class Connector {
     public List<HashMap> createM2MMultiple(List<Map<String, Object>> objects) {
         try {
             String PATH_SEGMENT = "create-m2m-multiple";
-            logInfo("createM2MMultiple (", objects, ")");
+            logDebug("createM2MMultiple (", objects, ")");
             URI uri = getBasicUriBuilder().setPath(BASE_PATH + "/" + PATH_SEGMENT).build();
-            logInfo("createM2MMultiple uri: ", uri);
+            logDebug("createM2MMultiple uri: ", uri);
             HttpPost httpPost = new HttpPost(uri);
             httpPost.setEntity(newStringEntity(objects));
             CloseableHttpResponse response = client.execute(httpPost);
             HttpException.throwIfNotOk(this, response);
             String responseBody = EntityUtils.toString(response.getEntity());
-            logInfo("createM2MMultiple response status: " + response.getStatusLine().getStatusCode() + ". body: " + responseBody);
+            logDebug("createM2MMultiple response status: " + response.getStatusLine().getStatusCode() + ". body: " + responseBody);
             return Arrays.stream(objectMapper.readValue(responseBody, HashMap[].class)).collect(Collectors.toList());
         } catch (IOException | URISyntaxException e) {
             throw new RuntimeException(e);
@@ -408,12 +408,12 @@ public class Connector {
     public void delete(String objectUuid) {
         try {
             String PATH_SEGMENT = "delete";
-            logInfo("delete (" + objectUuid + ")");
+            logDebug("delete (" + objectUuid + ")");
             URI uri = getBasicUriBuilder().setPath(BASE_PATH + "/" + PATH_SEGMENT + "/" + objectUuid).build();
-            logInfo("delete uri: ", uri);
+            logDebug("delete uri: ", uri);
             CloseableHttpResponse response = client.execute(new HttpGet(uri));
             HttpException.throwIfNotOk(this, response);
-            logInfo("delete response status: "
+            logDebug("delete response status: "
                     + response.getStatusLine().getStatusCode() + ". body: "
                     + EntityUtils.toString(response.getEntity()));
         } catch (IOException | URISyntaxException e) {
@@ -430,14 +430,14 @@ public class Connector {
     public void edit(String objectUuid, Map<String, Object> attributes) {
         try {
             String PATH_SEGMENT = "edit";
-            logInfo("edit (" + objectUuid + ", ", attributes, ")");
+            logDebug("edit (" + objectUuid + ", ", attributes, ")");
             URI uri = getBasicUriBuilder().setPath(BASE_PATH + "/" + PATH_SEGMENT + "/" + objectUuid).build();
-            logInfo("edit uri: ", uri);
+            logDebug("edit uri: ", uri);
             HttpPost httpPost = new HttpPost(uri);
             httpPost.setEntity(newStringEntity(attributes));
             CloseableHttpResponse response = client.execute(httpPost);
             HttpException.throwIfNotOk(this, response);
-            logInfo("edit response status: " + response.getStatusLine().getStatusCode()
+            logDebug("edit response status: " + response.getStatusLine().getStatusCode()
                     + ". body: " + EntityUtils.toString(response.getEntity()));
         } catch (IOException | URISyntaxException e) {
             throw new RuntimeException(e);
@@ -455,7 +455,7 @@ public class Connector {
     public NsdDto.ServiceTimeExclusionDto editExcl(String serviceTimeExclusion, Long startTime, Long endTime) {
         try {
             String PATH_SEGMENT = "edit-excl";
-            logInfo("editExcl ( " + serviceTimeExclusion + ", ", startTime, ", ", endTime, ")");
+            logDebug("editExcl ( " + serviceTimeExclusion + ", ", startTime, ", ", endTime, ")");
             HashMap<String, String> lastSegmentMap = new HashMap<>();
             lastSegmentMap.put("exclusionDate", serviceTimeExclusion);
             if (startTime != null) lastSegmentMap.put("startTime", startTime.toString());
@@ -464,11 +464,11 @@ public class Connector {
                     .enable(SerializationFeature.INDENT_OUTPUT)
                     .writeValueAsString(lastSegmentMap);
             URI uri = getBasicUriBuilder().setPath(BASE_PATH + "/" + PATH_SEGMENT + "/" + serviceTimeExclusion + "/" + lastSegmentString).build();
-            logInfo("editExcl uri: ${uri}");
+            logDebug("editExcl uri: ${uri}");
             CloseableHttpResponse response = client.execute(new HttpGet(uri));
             HttpException.throwIfNotOk(this, response);
             String responseBody = EntityUtils.toString(response.getEntity());
-            logInfo("editExcl response status: " + response.getStatusLine().getStatusCode() + ". body: " + responseBody);
+            logDebug("editExcl response status: " + response.getStatusLine().getStatusCode() + ". body: " + responseBody);
             return objectMapper.readValue(responseBody, NsdDto.ServiceTimeExclusionDto.class);
         } catch (IOException | URISyntaxException e) {
             throw new RuntimeException(e);
@@ -497,17 +497,17 @@ public class Connector {
     public HashMap editM2M(String objectUuid, Map<String, Object> attributes, List<String> returnAttrs) {
         try {
             String PATH_SEGMENT = "edit-m2m";
-            logInfo("editM2M (", objectUuid, ", ", attributes, ", ", returnAttrs, ")");
+            logDebug("editM2M (", objectUuid, ", ", attributes, ", ", returnAttrs, ")");
             URIBuilder builder = getBasicUriBuilder().setPath(BASE_PATH + "/" + PATH_SEGMENT + "/" + objectUuid);
             if (returnAttrs != null) builder.addParameter("attrs", String.join(",", returnAttrs));
             URI uri = builder.build();
-            logInfo("editM2M uri: ", uri);
+            logDebug("editM2M uri: ", uri);
             HttpPost httpPost = new HttpPost(uri);
             httpPost.setEntity(newStringEntity(attributes));
             CloseableHttpResponse response = client.execute(httpPost);
             HttpException.throwIfNotOk(this, response);
             String responseBody = EntityUtils.toString(response.getEntity());
-            logInfo("editM2M response status: " + response.getStatusLine().getStatusCode() + ". body: " + responseBody);
+            logDebug("editM2M response status: " + response.getStatusLine().getStatusCode() + ". body: " + responseBody);
             return objectMapper.readValue(responseBody, HashMap.class);
         } catch (IOException | URISyntaxException e) {
             throw new RuntimeException(e);
@@ -537,9 +537,9 @@ public class Connector {
     public String execFile(byte[] byteArray) {
         try {
             String PATH_SEGMENT = "exec";
-            logInfo("execFile (byte[])");
+            logDebug("execFile (byte[])");
             URI uri = getBasicUriBuilder().setPath(BASE_PATH + "/" + PATH_SEGMENT).build();
-            logInfo("execFile uri: ", uri);
+            logDebug("execFile uri: ", uri);
             HttpPost httpPost = new HttpPost(uri);
             HttpEntity entity = MultipartEntityBuilder.create()
                     .addBinaryBody("script", byteArray, ContentType.TEXT_PLAIN, "script.groovy")
@@ -548,7 +548,7 @@ public class Connector {
             CloseableHttpResponse response = client.execute(httpPost);
             HttpException.throwIfNotOk(this, response);
             String responseBody = EntityUtils.toString(response.getEntity());
-            logInfo("execFile response status: " + response.getStatusLine().getStatusCode() + ". body: " + responseBody);
+            logDebug("execFile response status: " + response.getStatusLine().getStatusCode() + ". body: " + responseBody);
             return responseBody;
         } catch (IOException | URISyntaxException e) {
             throw new RuntimeException(e);
@@ -585,15 +585,15 @@ public class Connector {
     public HashMap get(String objectUuid, List<String> returnAttrs) {
         try {
             String PATH_SEGMENT = "get";
-            logInfo("get (" + objectUuid + ", ", returnAttrs, ")");
+            logDebug("get (" + objectUuid + ", ", returnAttrs, ")");
             URIBuilder builder = getBasicUriBuilder().setPath(BASE_PATH + "/" + PATH_SEGMENT + "/" + objectUuid);
             if (returnAttrs != null) builder.setParameter("attrs", String.join(",", returnAttrs));
             URI uri = builder.build();
-            logInfo("get uri: ", uri);
+            logDebug("get uri: ", uri);
             CloseableHttpResponse response = client.execute(new HttpGet(uri));
             HttpException.throwIfNotOk(this, response);
             String responseBody = EntityUtils.toString(response.getEntity());
-            logInfo("get response status: " + response.getStatusLine().getStatusCode() + ". body: " + responseBody);
+            logDebug("get response status: " + response.getStatusLine().getStatusCode() + ". body: " + responseBody);
             return objectMapper.readValue(responseBody, HashMap.class);
         } catch (IOException | URISyntaxException e) {
             throw new RuntimeException(e);
@@ -609,9 +609,9 @@ public class Connector {
     public NsdDto.FileDto getFile(String fileUuid) {
         try {
             String PATH_SEGMENT = "get-file";
-            logInfo("getFile (" + fileUuid + ")");
+            logDebug("getFile (" + fileUuid + ")");
             URI uri = getBasicUriBuilder().setPath(BASE_PATH + "/" + PATH_SEGMENT + "/" + fileUuid).build();
-            logInfo("getFile uri: ", uri);
+            logDebug("getFile uri: ", uri);
             CloseableHttpResponse response = client.execute(new HttpGet(uri));
             HttpException.throwIfNotOk(this, response);
             String contentDisposition = response.getFirstHeader("Content-Disposition").getValue();
@@ -621,7 +621,7 @@ public class Connector {
                     contentDisposition.substring(index + 2, contentDisposition.length() - 1),
                     response.getFirstHeader("Content-Type").getValue()
             );
-            logInfo("getFile response status: " + response.getStatusLine().getStatusCode() + ". body: byte[]");
+            logDebug("getFile response status: " + response.getStatusLine().getStatusCode() + ". body: byte[]");
             return file;
         } catch (IOException | URISyntaxException e) {
             throw new RuntimeException(e);
@@ -677,19 +677,19 @@ public class Connector {
     ) {
         try {
             String PATH_SEGMENT = "find";
-            logInfo("find (", metaClassCode, ", ", searchAttrs, ", ", returnAttrs, ", ", offset, ", ", limit, ")");
+            logDebug("find (", metaClassCode, ", ", searchAttrs, ", ", returnAttrs, ", ", offset, ", ", limit, ")");
             URIBuilder uriBuilder = getBasicUriBuilder().setPath(BASE_PATH + "/" + PATH_SEGMENT + "/" + metaClassCode);
             if (returnAttrs != null) uriBuilder.setParameter("attrs", String.join(",", returnAttrs));
             if (offset != null) uriBuilder.setParameter("offset", offset.toString());
             if (limit != null) uriBuilder.setParameter("limit", limit.toString());
             URI uri = uriBuilder.build();
-            logInfo("find uri: ", uri);
+            logDebug("find uri: ", uri);
             HttpPost httpPost = new HttpPost(uri);
             httpPost.setEntity(newStringEntity(searchAttrs));
             CloseableHttpResponse response = client.execute(httpPost);
             HttpException.throwIfNotOk(this, response);
             String responseBody = EntityUtils.toString(response.getEntity());
-            logInfo("find response status: " + response.getStatusLine().getStatusCode() + ". body: " + responseBody);
+            logDebug("find response status: " + response.getStatusLine().getStatusCode() + ". body: " + responseBody);
             return Arrays.stream(objectMapper.readValue(responseBody, HashMap[].class)).collect(Collectors.toList());
         } catch (IOException | URISyntaxException e) {
             throw new RuntimeException(e);
@@ -713,7 +713,7 @@ public class Connector {
     ) {
         try {
             String PATH_SEGMENT = "exec-post";
-            logInfo("execPost (httpEntity, ", methodName, ", ", params, ", ", additionalUrlParams, ")");
+            logDebug("execPost (httpEntity, ", methodName, ", ", params, ", ", additionalUrlParams, ")");
             URIBuilder uriBuilder = getBasicUriBuilder().setPath(BASE_PATH + "/" + PATH_SEGMENT);
             if (additionalUrlParams != null) {
                 for(Map.Entry<String, String> entry : additionalUrlParams.entrySet()) {
@@ -723,12 +723,12 @@ public class Connector {
             uriBuilder.setParameter("params", params);
             uriBuilder.setParameter("raw", "true");
             URI uri = uriBuilder.build();
-            logInfo("execPost uri: ", uri);
+            logDebug("execPost uri: ", uri);
             HttpPost httpPost = new HttpPost(uri);
             httpPost.setEntity(httpEntity);
             CloseableHttpResponse response = client.execute(httpPost);
             HttpException.throwIfNotOk(this, response);
-            logInfo("execPost response status: " + response.getStatusLine().getStatusCode());
+            logDebug("execPost response status: " + response.getStatusLine().getStatusCode());
             return response;
         } catch (IOException | URISyntaxException e) {
             throw new RuntimeException(e);
@@ -749,7 +749,7 @@ public class Connector {
             Map<String, String> additionalUrlParams
     ) {
         try {
-            logInfo("exec (", methodName, ", ", params, ", ", additionalUrlParams, ")");
+            logDebug("exec (", methodName, ", ", params, ", ", additionalUrlParams, ")");
             String PATH_SEGMENT = "exec";
             URIBuilder uriBuilder = getBasicUriBuilder().setPath(BASE_PATH + "/" + PATH_SEGMENT);
             if (additionalUrlParams != null) {
@@ -760,10 +760,10 @@ public class Connector {
             uriBuilder.setParameter("func", methodName);
             uriBuilder.setParameter("params", params);
             URI uri = uriBuilder.build();
-            logInfo("exec uri: ", uri);
+            logDebug("exec uri: ", uri);
             CloseableHttpResponse response = client.execute(new HttpGet(uri));
             HttpException.throwIfNotOk(this, response);
-            logInfo("exec response status: " + response.getStatusLine().getStatusCode());
+            logDebug("exec response status: " + response.getStatusLine().getStatusCode());
             return response;
         } catch (IOException | URISyntaxException e) {
             throw new RuntimeException(e);
