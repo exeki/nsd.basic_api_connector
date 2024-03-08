@@ -18,14 +18,6 @@ publishing {
     publications {
         create<MavenPublication>("maven") {
             from(components["java"])
-//            artifact(tasks.named("jar"))
-//            artifact(tasks.named("javadocJar"))
-//            artifact(tasks.named("sourcesJar"))
-            //pom {
-            //    groupId = project.group.toString()
-            //    artifactId = project.name
-            //    version = project.version.toString()
-            //}
         }
     }
     repositories {
