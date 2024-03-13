@@ -21,7 +21,14 @@ publishing {
         }
     }
     repositories {
-        mavenLocal()
+        maven {
+            name = "GitHubPackages"
+            url = uri("https://maven.pkg.github.com/exeki/nsd.basic_api_connector")
+            credentials {
+                username = System.getenv("GITHUB_USERNAME")
+                password = System.getenv("GITHUB_TOKEN")
+            }
+        }
     }
 }
 
@@ -38,6 +45,17 @@ dependencies {
 
     testImplementation("ch.qos.logback:logback-classic:1.4.11")
     testImplementation("org.codehaus.groovy:groovy-all:3.0.19")
+}
+
+repositories {
+    maven {
+        url = uri("https://maven.pkg.github.com/exeki/*")
+        credentials {
+            username = System.getenv("GITHUB_USERNAME")
+            password = System.getenv("GITHUB_TOKEN")
+        }
+    }
+    mavenCentral()
 }
 
 tasks.compileJava {
