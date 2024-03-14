@@ -1,0 +1,564 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ArtifactsWorkspaceSettings">
+    <artifacts-to-build>
+      <artifact name="nsd_basic_api_connector.main:jar" />
+    </artifacts-to-build>
+  </component>
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="cd7d6f01-7d11-4fa7-8097-bb28cc6220d7" name="Changes" comment="" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ExternalProjectsData">
+    <projectState path="$PROJECT_DIR$">
+      <ProjectState />
+    </projectState>
+  </component>
+  <component name="ExternalProjectsManager">
+    <system id="GRADLE">
+      <state>
+        <task path="$PROJECT_DIR$">
+          <activation />
+        </task>
+        <projects_view>
+          <tree_state>
+            <expand>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="basic_api_connector" type="f1a62948:ProjectNode" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="basic_api_connector" type="f1a62948:ProjectNode" />
+                <item name="Tasks" type="e4a08cd1:TasksNode" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="basic_api_connector" type="f1a62948:ProjectNode" />
+                <item name="Tasks" type="e4a08cd1:TasksNode" />
+                <item name="build" type="c8890929:TasksNode$1" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="basic_api_connector" type="f1a62948:ProjectNode" />
+                <item name="Tasks" type="e4a08cd1:TasksNode" />
+                <item name="publishing" type="c8890929:TasksNode$1" />
+              </path>
+            </expand>
+            <select />
+          </tree_state>
+        </projects_view>
+      </state>
+    </system>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectId" id="2WJAku7y3sTnoqJueACKDDcNxQL" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/projects/nds/projects/sdk/nsd_basic_api_connector&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  }
+}</component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\projects\nds\sdk\nsd_basic_api_connector\src\test\resources" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\projects\nds\projects\sdk\nsd_basic_api_connector\src\test\resources" />
+    </key>
+    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="ru.ekazantsev" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="ru.ekazantsev.nsd_basic_api_connector" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Gradle.basic_api_connector [javadocJar]">
+    <configuration name="basic_api_connector [javadocJar]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value="javadocJar" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <ForceTestExec>false</ForceTestExec>
+      <method v="2" />
+    </configuration>
+    <configuration name="nsd_basic_api_connector [build]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value="build" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <ForceTestExec>false</ForceTestExec>
+      <method v="2" />
+    </configuration>
+    <configuration name="nsd_basic_api_connector [jar]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value="jar" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <ForceTestExec>false</ForceTestExec>
+      <method v="2" />
+    </configuration>
+    <configuration name="nsd_basic_api_connector [publish]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value="publish" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <ForceTestExec>false</ForceTestExec>
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Gradle.basic_api_connector [javadocJar]" />
+        <item itemvalue="Gradle.nsd_basic_api_connector [jar]" />
+        <item itemvalue="Gradle.nsd_basic_api_connector [publish]" />
+        <item itemvalue="Gradle.nsd_basic_api_connector [build]" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="StandaloneScriptsStorage">
+    <option name="files">
+      <set>
+        <option value="$PROJECT_DIR$/build.gradle.kts" />
+      </set>
+    </option>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="cd7d6f01-7d11-4fa7-8097-bb28cc6220d7" name="Changes" comment="" />
+      <created>1696440455515</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1696440455515</updated>
+      <workItem from="1698100320486" duration="390000" />
+      <workItem from="1698100730971" duration="1981000" />
+      <workItem from="1698138162576" duration="2022000" />
+      <workItem from="1698165992112" duration="148000" />
+      <workItem from="1698172137599" duration="52000" />
+      <workItem from="1698173062009" duration="196000" />
+      <workItem from="1698173842656" duration="86000" />
+      <workItem from="1698174635821" duration="46000" />
+      <workItem from="1698175246341" duration="162000" />
+      <workItem from="1698177010729" duration="34000" />
+      <workItem from="1698177126312" duration="15000" />
+      <workItem from="1698177167531" duration="600000" />
+      <workItem from="1699092759433" duration="353000" />
+      <workItem from="1699093871370" duration="1743000" />
+      <workItem from="1704879894816" duration="21943000" />
+      <workItem from="1705578201638" duration="4071000" />
+      <workItem from="1705585518676" duration="2686000" />
+      <workItem from="1709738519651" duration="2159000" />
+      <workItem from="1709919778233" duration="1405000" />
+      <workItem from="1710344600751" duration="1426000" />
+      <workItem from="1710414058272" duration="1441000" />
+    </task>
+    <task id="LOCAL-00001" summary="добавил комментариев">
+      <option name="closed" value="true" />
+      <created>1697731921980</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1697731921980</updated>
+    </task>
+    <task id="LOCAL-00002" summary="добавил описания в readme">
+      <option name="closed" value="true" />
+      <created>1697732330510</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1697732330510</updated>
+    </task>
+    <task id="LOCAL-00003" summary="добавил описания в readme">
+      <option name="closed" value="true" />
+      <created>1697734153745</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1697734153745</updated>
+    </task>
+    <task id="LOCAL-00004" summary="добавил описания в readme">
+      <option name="closed" value="true" />
+      <created>1697734480477</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1697734480477</updated>
+    </task>
+    <task id="LOCAL-00005" summary="добавил описания в readme">
+      <option name="closed" value="true" />
+      <created>1697740363240</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1697740363240</updated>
+    </task>
+    <task id="LOCAL-00006" summary="добавил файл настроек гредл">
+      <option name="closed" value="true" />
+      <created>1697745636746</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1697745636746</updated>
+    </task>
+    <task id="LOCAL-00007" summary="описание">
+      <option name="closed" value="true" />
+      <created>1697748086649</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1697748086649</updated>
+    </task>
+    <task id="LOCAL-00008" summary="описание">
+      <option name="closed" value="true" />
+      <created>1697748174262</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1697748174262</updated>
+    </task>
+    <task id="LOCAL-00009" summary="В параметры коннектора добавлен userId">
+      <option name="closed" value="true" />
+      <created>1697913829485</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1697913829486</updated>
+    </task>
+    <task id="LOCAL-00010" summary="В параметры коннектора добавлен userId">
+      <option name="closed" value="true" />
+      <created>1697913921949</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1697913921949</updated>
+    </task>
+    <task id="LOCAL-00011" summary="В параметры коннектора добавлен userId">
+      <option name="closed" value="true" />
+      <created>1697914314035</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1697914314035</updated>
+    </task>
+    <task id="LOCAL-00012" summary="build.gradle заменен на build.gradle.kts">
+      <option name="closed" value="true" />
+      <created>1698102692488</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1698102692488</updated>
+    </task>
+    <task id="LOCAL-00013" summary="build.gradle заменен на build.gradle.kts">
+      <option name="closed" value="true" />
+      <created>1698153807713</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1698153807713</updated>
+    </task>
+    <task id="LOCAL-00014" summary="изменены зависимости">
+      <option name="closed" value="true" />
+      <created>1698166032792</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1698166032792</updated>
+    </task>
+    <task id="LOCAL-00015" summary="изменены зависимости">
+      <option name="closed" value="true" />
+      <created>1698173242168</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1698173242168</updated>
+    </task>
+    <task id="LOCAL-00016" summary="изменены зависимости">
+      <option name="closed" value="true" />
+      <created>1698173920275</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1698173920275</updated>
+    </task>
+    <task id="LOCAL-00017" summary="изменены зависимости">
+      <option name="closed" value="true" />
+      <created>1698175297351</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1698175297351</updated>
+    </task>
+    <task id="LOCAL-00018" summary="изменена сборка">
+      <option name="closed" value="true" />
+      <created>1699093032920</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1699093032920</updated>
+    </task>
+    <task id="LOCAL-00019" summary="изменена сборка">
+      <option name="closed" value="true" />
+      <created>1699095160563</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1699095160563</updated>
+    </task>
+    <task id="LOCAL-00020" summary="изменены зависимости">
+      <option name="closed" value="true" />
+      <created>1704883049939</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1704883049939</updated>
+    </task>
+    <task id="LOCAL-00021" summary="исправлен нулл пойнтер">
+      <option name="closed" value="true" />
+      <created>1704977622614</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1704977622614</updated>
+    </task>
+    <task id="LOCAL-00022" summary="зафиксирован чарсет">
+      <option name="closed" value="true" />
+      <created>1705334577686</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1705334577686</updated>
+    </task>
+    <task id="LOCAL-00023" summary="зафиксирован чарсет">
+      <option name="closed" value="true" />
+      <created>1705336483476</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1705336483476</updated>
+    </task>
+    <task id="LOCAL-00024" summary="убран утилитарный класс">
+      <option name="closed" value="true" />
+      <created>1705339082747</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1705339082747</updated>
+    </task>
+    <task id="LOCAL-00025" summary="изменен доступ к методу формирования теста исключения">
+      <option name="closed" value="true" />
+      <created>1705341730813</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1705341730813</updated>
+    </task>
+    <task id="LOCAL-00026" summary="изменен доступ к методу формирования теста исключения">
+      <option name="closed" value="true" />
+      <created>1705342446778</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1705342446778</updated>
+    </task>
+    <task id="LOCAL-00027" summary="изменен доступ к методу формирования теста исключения">
+      <option name="closed" value="true" />
+      <created>1705391076327</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1705391076327</updated>
+    </task>
+    <task id="LOCAL-00028" summary="изменен доступ к методу формирования теста исключения">
+      <option name="closed" value="true" />
+      <created>1705406637335</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1705406637336</updated>
+    </task>
+    <task id="LOCAL-00029" summary="добавлен файл модуля">
+      <option name="closed" value="true" />
+      <created>1705583656341</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1705583656341</updated>
+    </task>
+    <task id="LOCAL-00030" summary="понижен уровень логгирования">
+      <option name="closed" value="true" />
+      <created>1709738620880</created>
+      <option name="number" value="00030" />
+      <option name="presentableId" value="LOCAL-00030" />
+      <option name="project" value="LOCAL" />
+      <updated>1709738620880</updated>
+    </task>
+    <task id="LOCAL-00031" summary="понижен уровень логгирования">
+      <option name="closed" value="true" />
+      <created>1709738862488</created>
+      <option name="number" value="00031" />
+      <option name="presentableId" value="LOCAL-00031" />
+      <option name="project" value="LOCAL" />
+      <updated>1709738862488</updated>
+    </task>
+    <task id="LOCAL-00032" summary="понижен уровень логгирования">
+      <option name="closed" value="true" />
+      <created>1709920545687</created>
+      <option name="number" value="00032" />
+      <option name="presentableId" value="LOCAL-00032" />
+      <option name="project" value="LOCAL" />
+      <updated>1709920545687</updated>
+    </task>
+    <task id="LOCAL-00033" summary="понижен уровень логгирования">
+      <option name="closed" value="true" />
+      <created>1710344790447</created>
+      <option name="number" value="00033" />
+      <option name="presentableId" value="LOCAL-00033" />
+      <option name="project" value="LOCAL" />
+      <updated>1710344790447</updated>
+    </task>
+    <task id="LOCAL-00034" summary="изменана сборка">
+      <option name="closed" value="true" />
+      <created>1710414156512</created>
+      <option name="number" value="00034" />
+      <option name="presentableId" value="LOCAL-00034" />
+      <option name="project" value="LOCAL" />
+      <updated>1710414156512</updated>
+    </task>
+    <task id="LOCAL-00035" summary="изменана сборка">
+      <option name="closed" value="true" />
+      <created>1710414315463</created>
+      <option name="number" value="00035" />
+      <option name="presentableId" value="LOCAL-00035" />
+      <option name="project" value="LOCAL" />
+      <updated>1710414315463</updated>
+    </task>
+    <option name="localTasksCounter" value="36" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="добавил комментариев" />
+    <MESSAGE value="добавил описания в readme" />
+    <MESSAGE value="добавил файл настроек гредл" />
+    <MESSAGE value="описание" />
+    <MESSAGE value="В параметры коннектора добавлен userId" />
+    <MESSAGE value="build.gradle заменен на build.gradle.kts" />
+    <MESSAGE value="изменена сборка" />
+    <MESSAGE value="изменены зависимости" />
+    <MESSAGE value="исправлен нулл пойнтер" />
+    <MESSAGE value="зафиксирован чарсет" />
+    <MESSAGE value="убран утилитарный класс" />
+    <MESSAGE value="изменен доступ к методу формирования теста исключения" />
+    <MESSAGE value="добавлен файл модуля" />
+    <MESSAGE value="понижен уровень логгирования" />
+    <MESSAGE value="изменана сборка" />
+    <option name="LAST_COMMIT_MESSAGE" value="изменана сборка" />
+  </component>
+</project>
