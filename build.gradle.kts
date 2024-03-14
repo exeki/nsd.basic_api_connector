@@ -32,11 +32,6 @@ publishing {
     }
 }
 
-repositories {
-    mavenCentral()
-    mavenLocal()
-}
-
 dependencies {
     api("org.apache.httpcomponents:httpclient:4.5.14")
     api("org.apache.httpcomponents:httpmime:4.5.1")
