@@ -67,6 +67,10 @@ public class ConnectorParams {
 
     protected ConnectorParams() {}
 
+    static String getDefaultParamsFilePath(){
+        return DEFAULT_PARAMS_FILE_PATH;
+    }
+
     /**
      * Собирает и наполняет экземпляр из параметров, описанных в конфигурационном файле,
      * расположенном по адресу {user.home}/nsd_sdk/conf/nsd_connector_params.json
