@@ -67,7 +67,7 @@ public class ConnectorParams {
 
     protected ConnectorParams() {}
 
-    static String getDefaultParamsFilePath(){
+    public static String getDefaultParamsFilePath(){
         return DEFAULT_PARAMS_FILE_PATH;
     }
 
