@@ -327,7 +327,7 @@ public class Connector {
         Set<Map.Entry<String, String>> entrySet = map.entrySet();
         int size = entrySet.size();
         int index = 0;
-        for(Map.Entry<String, String> entry : entrySet) {
+        for (Map.Entry<String, String> entry : entrySet) {
             index++;
             stringBuilder.append("\"").append(entry.getKey()).append("\":\"").append(entry.getValue()).append("\"");
             if (index != size) stringBuilder.append(",");
@@ -716,10 +716,11 @@ public class Connector {
             logDebug("execPost (httpEntity, ", methodName, ", ", params, ", ", additionalUrlParams, ")");
             URIBuilder uriBuilder = getBasicUriBuilder().setPath(BASE_PATH + "/" + PATH_SEGMENT);
             if (additionalUrlParams != null) {
-                for(Map.Entry<String, String> entry : additionalUrlParams.entrySet()) {
+                for (Map.Entry<String, String> entry : additionalUrlParams.entrySet()) {
                     uriBuilder.setParameter(entry.getKey(), entry.getValue());
                 }
-            }            uriBuilder.setParameter("func", methodName);
+            }
+            uriBuilder.setParameter("func", methodName);
             uriBuilder.setParameter("params", params);
             uriBuilder.setParameter("raw", "true");
             URI uri = uriBuilder.build();
@@ -753,7 +754,7 @@ public class Connector {
             String PATH_SEGMENT = "exec";
             URIBuilder uriBuilder = getBasicUriBuilder().setPath(BASE_PATH + "/" + PATH_SEGMENT);
             if (additionalUrlParams != null) {
-                for(Map.Entry<String, String> entry : additionalUrlParams.entrySet()) {
+                for (Map.Entry<String, String> entry : additionalUrlParams.entrySet()) {
                     uriBuilder.setParameter(entry.getKey(), entry.getValue());
                 }
             }
@@ -765,6 +766,113 @@ public class Connector {
             HttpException.throwIfNotOk(this, response);
             logDebug("exec response status: " + response.getStatusLine().getStatusCode());
             return response;
+        } catch (IOException | URISyntaxException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    /**
+     * Получить версию приложения инсталляции
+     *
+     * @return строка с версией
+     */
+    public String version() {
+        try {
+            logDebug("version");
+            String path = "/sd/services/smpsync/version";
+            URI uri = getBasicUriBuilder().setPath(path).build();
+            logDebug("version uri: " + uri);
+            HttpGet httpGet = new HttpGet(uri);
+            CloseableHttpResponse response = client.execute(httpGet);
+            HttpException.throwIfNotOk(this, response);
+            String body = EntityUtils.toString(response.getEntity());
+            logDebug("version response status: " + response.getStatusLine().getStatusCode() + " , body: " + body);
+            return body;
+        } catch (IOException | URISyntaxException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    /**
+     * Получить версию groovy инсталляции
+     *
+     * @return строка с версией
+     */
+    public String groovyVersion() {
+        try {
+            logDebug("groovy_version");
+            String path = "/sd/services/smpsync/groovy_version";
+            URI uri = getBasicUriBuilder().setPath(path).build();
+            logDebug("groovy_version uri: " + uri);
+            HttpGet httpGet = new HttpGet(uri);
+            CloseableHttpResponse response = client.execute(httpGet);
+            HttpException.throwIfNotOk(this, response);
+            String body = EntityUtils.toString(response.getEntity());
+            logDebug("groovy_version response status: " + response.getStatusLine().getStatusCode() + " , body: " + body);
+            return body;
+        } catch (IOException | URISyntaxException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    /**
+     * Получить ip инсталляции (наверное)
+     *
+     * @return строка с ip
+     */
+    public String jpdaInfo() {
+        try {
+            logDebug("jpda_info");
+            String path = "/sd/services/smpsync/jpda_info";
+            URI uri = getBasicUriBuilder().setPath(path).build();
+            logDebug("jpda_info uri: " + uri);
+            HttpGet httpGet = new HttpGet(uri);
+            CloseableHttpResponse response = client.execute(httpGet);
+            HttpException.throwIfNotOk(this, response);
+            String body = EntityUtils.toString(response.getEntity());
+            logDebug("jpda_info response status: " + response.getStatusLine().getStatusCode() + " , body: " + body);
+            return body;
+        } catch (IOException | URISyntaxException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    /**
+     * Получить метаинформацию с инсталляции
+     *
+     * @return строка с xml-ником метаинформации
+     */
+    public String metainfo() {
+        try {
+            logDebug("metainfo");
+            String path = "/sd/services/smpsync/metainfo";
+            URI uri = getBasicUriBuilder().setPath(path).build();
+            logDebug("metainfo uri: " + uri);
+            HttpGet httpGet = new HttpGet(uri);
+            CloseableHttpResponse response = client.execute(httpGet);
+            HttpException.throwIfNotOk(this, response);
+            String body = EntityUtils.toString(response.getEntity());
+            logDebug("metainfo response status: " + response.getStatusLine().getStatusCode());
+            return body;
+        } catch (IOException | URISyntaxException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void uploadMetainfo(String xmlFileContent) throws URISyntaxException {
+        try {
+            logDebug("upload-metainfo");
+            String path = "/sd/services/smpsync/upload-metainfo";
+            URI uri = getBasicUriBuilder().setPath(path).build();
+            logDebug("upload-metainfo uri: " + uri);
+            HttpPost httpPost = new HttpPost(uri);
+            HttpEntity entity = MultipartEntityBuilder.create()
+                    .addBinaryBody("file", xmlFileContent.getBytes(), ContentType.APPLICATION_XML, "metainfo.xml")
+                    .build();
+            httpPost.setEntity(entity);
+            CloseableHttpResponse response = client.execute(httpPost);
+            //HttpException.throwIfNotOk(this, response);
+            logDebug("upload-metainfo response status: " + response.getStatusLine().getStatusCode());
         } catch (IOException | URISyntaxException e) {
             throw new RuntimeException(e);
         }
