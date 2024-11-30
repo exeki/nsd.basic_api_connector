@@ -10,8 +10,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="cd7d6f01-7d11-4fa7-8097-bb28cc6220d7" name="Changes" comment="убран slf4j логгер из api">
+      <change afterPath="$PROJECT_DIR$/src/test/groovy/nsd_basic_api_connector/method_tests/groovyVersion.groovy" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/groovy/nsd_basic_api_connector/method_tests/metainfo.groovy" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/groovy/nsd_basic_api_connector/method_tests/uploadMetainfo.groovy" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/groovy/nsd_basic_api_connector/method_tests/version.groovy" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle.kts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/kazantsev/nsd/basic_api_connector/Connector.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/kazantsev/nsd/basic_api_connector/Connector.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/groovy/nsd_basic_api_connector/ApiTestUtils.groovy" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/groovy/nsd_basic_api_connector/ApiTestUtils.groovy" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -35,17 +41,6 @@
               <path>
                 <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
                 <item name="basic_api_connector" type="f1a62948:ProjectNode" />
-              </path>
-              <path>
-                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
-                <item name="basic_api_connector" type="f1a62948:ProjectNode" />
-                <item name="Tasks" type="e4a08cd1:TasksNode" />
-              </path>
-              <path>
-                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
-                <item name="basic_api_connector" type="f1a62948:ProjectNode" />
-                <item name="Tasks" type="e4a08cd1:TasksNode" />
-                <item name="build" type="c8890929:TasksNode$1" />
               </path>
             </expand>
             <select />
@@ -99,7 +94,7 @@
     "git-widget-placeholder": "master",
     "ignore.virus.scanning.warn.message": "true",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/kazan/OneDrive/Рабочий стол/nsd.basic_api_connector",
+    "last_opened_file_path": "C:/ekazantsev/projects/nsd/backend/standalone/nsd.basic_api_connector/src/test/groovy/nsd_basic_api_connector/method_tests",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -114,6 +109,7 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\ekazantsev\projects\nsd\backend\standalone\nsd.basic_api_connector\src\test\groovy\nsd_basic_api_connector\method_tests" />
       <recent name="C:\projects\nds\sdk\nsd_basic_api_connector\src\test\resources" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
@@ -126,7 +122,7 @@
       <recent name="ru.ekazantsev.nsd_basic_api_connector" />
     </key>
   </component>
-  <component name="RunManager" selected="Gradle.nsd_basic_api_connector [build]">
+  <component name="RunManager">
     <configuration name="basic_api_connector [javadocJar]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
@@ -146,7 +142,7 @@
       <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
       <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
       <DebugAllEnabled>false</DebugAllEnabled>
-      <RunAsTest>false</RunAsTest>
+      <ForceTestExec>false</ForceTestExec>
       <method v="2" />
     </configuration>
     <configuration name="nsd_basic_api_connector [build]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
@@ -168,7 +164,7 @@
       <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
       <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
       <DebugAllEnabled>false</DebugAllEnabled>
-      <RunAsTest>false</RunAsTest>
+      <ForceTestExec>false</ForceTestExec>
       <method v="2" />
     </configuration>
     <configuration name="nsd_basic_api_connector [jar]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
@@ -190,7 +186,7 @@
       <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
       <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
       <DebugAllEnabled>false</DebugAllEnabled>
-      <RunAsTest>false</RunAsTest>
+      <ForceTestExec>false</ForceTestExec>
       <method v="2" />
     </configuration>
     <configuration name="nsd_basic_api_connector [publish]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
@@ -212,7 +208,7 @@
       <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
       <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
       <DebugAllEnabled>false</DebugAllEnabled>
-      <RunAsTest>false</RunAsTest>
+      <ForceTestExec>false</ForceTestExec>
       <method v="2" />
     </configuration>
     <recent_temporary>
@@ -274,6 +270,7 @@
       <workItem from="1732853067737" duration="336000" />
       <workItem from="1732904293605" duration="1432000" />
       <workItem from="1732946033558" duration="4387000" />
+      <workItem from="1732990852371" duration="4709000" />
     </task>
     <task id="LOCAL-00001" summary="добавил комментариев">
       <option name="closed" value="true" />

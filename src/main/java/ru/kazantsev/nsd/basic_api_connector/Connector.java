@@ -29,6 +29,8 @@ import org.apache.http.HttpEntity;
 import javax.net.ssl.SSLContext;
 import java.io.File;
 import java.io.IOException;
+import java.net.SocketException;
+import java.net.SocketTimeoutException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.nio.charset.StandardCharsets;
@@ -844,7 +846,7 @@ public class Connector {
      * @param timeoutInMillis ожидание ответа в миллисекундаз
      * @return строка с xml-ником метаинформации
      */
-    public String metainfo(int timeoutInMillis) {
+    public String metainfo(int timeoutInMillis) throws SocketException, SocketTimeoutException {
         try {
             logDebug("metainfo");
             String path = "/sd/services/smpsync/metainfo";
@@ -872,7 +874,7 @@ public class Connector {
      *
      * @return строка с xml-ником метаинформации
      */
-    public String metainfo(){
+    public String metainfo() throws SocketException, SocketTimeoutException{
         return metainfo(15000);
     }
 
@@ -882,15 +884,15 @@ public class Connector {
      * @param xmlFileContent строка xml файла конфигурации
      * @param timeoutInMillis таймаут ответа
      */
-    public void uploadMetainfo(String xmlFileContent, Integer timeoutInMillis) {
+    public void uploadMetainfo(String xmlFileContent, Integer timeoutInMillis) throws SocketException, SocketTimeoutException {
         try {
             logDebug("upload-metainfo");
-            String path = "/sd/services/smpsync/upload-metainfo";
+            String path = "/sd/services/rest/upload-metainfo";
             URI uri = getBasicUriBuilder().setPath(path).build();
             logDebug("upload-metainfo uri: " + uri);
             HttpPost httpPost = new HttpPost(uri);
             HttpEntity entity = MultipartEntityBuilder.create()
-                    .addBinaryBody("file", xmlFileContent.getBytes(), ContentType.APPLICATION_XML, "metainfo.xml")
+                    .addBinaryBody("metainfo", xmlFileContent.getBytes(), ContentType.APPLICATION_XML, "metainfo.xml")
                     .build();
             RequestConfig requestConfig = RequestConfig.custom()
                     .setSocketTimeout(timeoutInMillis)
@@ -912,7 +914,7 @@ public class Connector {
      *
      * @param xmlFileContent строка xml файла конфигурации
      */
-    void uploadMetainfo(String xmlFileContent){
+    public void uploadMetainfo(String xmlFileContent) throws SocketException, SocketTimeoutException{
         int TIMEOUT = 15 * 60 * 1000;
         uploadMetainfo(xmlFileContent, TIMEOUT);
     }
