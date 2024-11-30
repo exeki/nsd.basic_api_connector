@@ -1,6 +1,7 @@
 package ru.kazantsev.nsd.basic_api_connector;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import org.apache.http.client.config.RequestConfig;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.util.EntityUtils;
@@ -840,15 +841,22 @@ public class Connector {
     /**
      * Получить метаинформацию с инсталляции
      *
+     * @param timeoutInMillis ожидание ответа в миллисекундаз
      * @return строка с xml-ником метаинформации
      */
-    public String metainfo() {
+    public String metainfo(int timeoutInMillis) {
         try {
             logDebug("metainfo");
             String path = "/sd/services/smpsync/metainfo";
             URI uri = getBasicUriBuilder().setPath(path).build();
             logDebug("metainfo uri: " + uri);
             HttpGet httpGet = new HttpGet(uri);
+            RequestConfig requestConfig = RequestConfig.custom()
+                    .setSocketTimeout(timeoutInMillis)
+                    .setConnectTimeout(timeoutInMillis)
+                    .setConnectionRequestTimeout(timeoutInMillis)
+                    .build();
+            httpGet.setConfig(requestConfig);
             CloseableHttpResponse response = client.execute(httpGet);
             HttpException.throwIfNotOk(this, response);
             String body = EntityUtils.toString(response.getEntity());
@@ -859,7 +867,22 @@ public class Connector {
         }
     }
 
-    public void uploadMetainfo(String xmlFileContent) throws URISyntaxException {
+    /**
+     * Получить метаинформацию с инсталляции со стандартным таймаутом в 15000 миллисекунд
+     *
+     * @return строка с xml-ником метаинформации
+     */
+    public String metainfo(){
+        return metainfo(15000);
+    }
+
+    /**
+     * Загрузить метаинформацию
+     *
+     * @param xmlFileContent строка xml файла конфигурации
+     * @param timeoutInMillis таймаут ответа
+     */
+    public void uploadMetainfo(String xmlFileContent, Integer timeoutInMillis) {
         try {
             logDebug("upload-metainfo");
             String path = "/sd/services/smpsync/upload-metainfo";
@@ -869,12 +892,28 @@ public class Connector {
             HttpEntity entity = MultipartEntityBuilder.create()
                     .addBinaryBody("file", xmlFileContent.getBytes(), ContentType.APPLICATION_XML, "metainfo.xml")
                     .build();
+            RequestConfig requestConfig = RequestConfig.custom()
+                    .setSocketTimeout(timeoutInMillis)
+                    .setConnectTimeout(timeoutInMillis)
+                    .setConnectionRequestTimeout(timeoutInMillis)
+                    .build();
+            httpPost.setConfig(requestConfig);
             httpPost.setEntity(entity);
             CloseableHttpResponse response = client.execute(httpPost);
-            //HttpException.throwIfNotOk(this, response);
+            HttpException.throwIfNotOk(this, response);
             logDebug("upload-metainfo response status: " + response.getStatusLine().getStatusCode());
         } catch (IOException | URISyntaxException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    /**
+     * Загрузить метаинформацию со стандартным таймаутом в 15 минут
+     *
+     * @param xmlFileContent строка xml файла конфигурации
+     */
+    void uploadMetainfo(String xmlFileContent){
+        int TIMEOUT = 15 * 60 * 1000;
+        uploadMetainfo(xmlFileContent, TIMEOUT);
     }
 }
