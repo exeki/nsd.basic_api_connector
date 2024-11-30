@@ -870,12 +870,12 @@ public class Connector {
     }
 
     /**
-     * Получить метаинформацию с инсталляции со стандартным таймаутом в 15000 миллисекунд
+     * Получить метаинформацию с инсталляции со стандартным таймаутом в 100 000 миллисекунд
      *
      * @return строка с xml-ником метаинформации
      */
     public String metainfo() throws SocketException, SocketTimeoutException{
-        return metainfo(15000);
+        return metainfo(100000);
     }
 
     /**
