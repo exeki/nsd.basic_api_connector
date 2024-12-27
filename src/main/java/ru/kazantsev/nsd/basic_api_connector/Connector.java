@@ -609,26 +609,27 @@ public class Connector {
      * @param fileUuid uuid файла
      * @return DTO содержащий информацию о файле
      */
-    public NsdDto.FileDto getFile(String fileUuid) {
+    public NsdDto.FileDto getFile(String fileUuid) throws IOException {
+        String PATH_SEGMENT = "get-file";
+        logDebug("getFile (" + fileUuid + ")");
+        URI uri = null;
         try {
-            String PATH_SEGMENT = "get-file";
-            logDebug("getFile (" + fileUuid + ")");
-            URI uri = getBasicUriBuilder().setPath(BASE_PATH + "/" + PATH_SEGMENT + "/" + fileUuid).build();
-            logDebug("getFile uri: ", uri);
-            CloseableHttpResponse response = client.execute(new HttpGet(uri));
-            HttpException.throwIfNotOk(this, response);
-            String contentDisposition = response.getFirstHeader("Content-Disposition").getValue();
-            int index = contentDisposition.indexOf('=');
-            NsdDto.FileDto file = new NsdDto.FileDto(
-                    EntityUtils.toByteArray(response.getEntity()),
-                    contentDisposition.substring(index + 2, contentDisposition.length() - 1),
-                    response.getFirstHeader("Content-Type").getValue()
-            );
-            logDebug("getFile response status: " + response.getStatusLine().getStatusCode() + ". body: byte[]");
-            return file;
-        } catch (IOException | URISyntaxException e) {
+            uri = getBasicUriBuilder().setPath(BASE_PATH + "/" + PATH_SEGMENT + "/" + fileUuid).build();
+        } catch (URISyntaxException e) {
             throw new RuntimeException(e);
         }
+        logDebug("getFile uri: ", uri);
+        CloseableHttpResponse response = client.execute(new HttpGet(uri));
+        HttpException.throwIfNotOk(this, response);
+        String contentDisposition = response.getFirstHeader("Content-Disposition").getValue();
+        int index = contentDisposition.indexOf('=');
+        NsdDto.FileDto file = new NsdDto.FileDto(
+                EntityUtils.toByteArray(response.getEntity()),
+                contentDisposition.substring(index + 2, contentDisposition.length() - 1),
+                response.getFirstHeader("Content-Type").getValue()
+        );
+        logDebug("getFile response status: " + response.getStatusLine().getStatusCode() + ". body: byte[]");
+        return file;
     }
 
     /**
@@ -874,14 +875,14 @@ public class Connector {
      *
      * @return строка с xml-ником метаинформации
      */
-    public String metainfo() throws SocketException, SocketTimeoutException{
+    public String metainfo() throws SocketException, SocketTimeoutException {
         return metainfo(100000);
     }
 
     /**
      * Загрузить метаинформацию
      *
-     * @param xmlFileContent строка xml файла конфигурации
+     * @param xmlFileContent  строка xml файла конфигурации
      * @param timeoutInMillis таймаут ответа
      */
     public void uploadMetainfo(String xmlFileContent, Integer timeoutInMillis) throws SocketException, SocketTimeoutException {
@@ -914,7 +915,7 @@ public class Connector {
      *
      * @param xmlFileContent строка xml файла конфигурации
      */
-    public void uploadMetainfo(String xmlFileContent) throws SocketException, SocketTimeoutException{
+    public void uploadMetainfo(String xmlFileContent) throws SocketException, SocketTimeoutException {
         int TIMEOUT = 15 * 60 * 1000;
         uploadMetainfo(xmlFileContent, TIMEOUT);
     }
