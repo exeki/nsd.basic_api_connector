@@ -327,7 +327,7 @@ public class Connector {
         Set<Map.Entry<String, String>> entrySet = map.entrySet();
         int size = entrySet.size();
         int index = 0;
-        for(Map.Entry<String, String> entry : entrySet) {
+        for (Map.Entry<String, String> entry : entrySet) {
             index++;
             stringBuilder.append("\"").append(entry.getKey()).append("\":\"").append(entry.getValue()).append("\"");
             if (index != size) stringBuilder.append(",");
@@ -606,26 +606,27 @@ public class Connector {
      * @param fileUuid uuid файла
      * @return DTO содержащий информацию о файле
      */
-    public NsdDto.FileDto getFile(String fileUuid) {
+    public NsdDto.FileDto getFile(String fileUuid) throws IOException {
+        String PATH_SEGMENT = "get-file";
+        logDebug("getFile (" + fileUuid + ")");
+        URI uri = null;
         try {
-            String PATH_SEGMENT = "get-file";
-            logDebug("getFile (" + fileUuid + ")");
-            URI uri = getBasicUriBuilder().setPath(BASE_PATH + "/" + PATH_SEGMENT + "/" + fileUuid).build();
-            logDebug("getFile uri: ", uri);
-            CloseableHttpResponse response = client.execute(new HttpGet(uri));
-            HttpException.throwIfNotOk(this, response);
-            String contentDisposition = response.getFirstHeader("Content-Disposition").getValue();
-            int index = contentDisposition.indexOf('=');
-            NsdDto.FileDto file = new NsdDto.FileDto(
-                    EntityUtils.toByteArray(response.getEntity()),
-                    contentDisposition.substring(index + 2, contentDisposition.length() - 1),
-                    response.getFirstHeader("Content-Type").getValue()
-            );
-            logDebug("getFile response status: " + response.getStatusLine().getStatusCode() + ". body: byte[]");
-            return file;
-        } catch (IOException | URISyntaxException e) {
+            uri = getBasicUriBuilder().setPath(BASE_PATH + "/" + PATH_SEGMENT + "/" + fileUuid).build();
+        } catch (URISyntaxException e) {
             throw new RuntimeException(e);
         }
+        logDebug("getFile uri: ", uri);
+        CloseableHttpResponse response = client.execute(new HttpGet(uri));
+        HttpException.throwIfNotOk(this, response);
+        String contentDisposition = response.getFirstHeader("Content-Disposition").getValue();
+        int index = contentDisposition.indexOf('=');
+        NsdDto.FileDto file = new NsdDto.FileDto(
+                EntityUtils.toByteArray(response.getEntity()),
+                contentDisposition.substring(index + 2, contentDisposition.length() - 1),
+                response.getFirstHeader("Content-Type").getValue()
+        );
+        logDebug("getFile response status: " + response.getStatusLine().getStatusCode() + ". body: byte[]");
+        return file;
     }
 
     /**
@@ -716,10 +717,11 @@ public class Connector {
             logDebug("execPost (httpEntity, ", methodName, ", ", params, ", ", additionalUrlParams, ")");
             URIBuilder uriBuilder = getBasicUriBuilder().setPath(BASE_PATH + "/" + PATH_SEGMENT);
             if (additionalUrlParams != null) {
-                for(Map.Entry<String, String> entry : additionalUrlParams.entrySet()) {
+                for (Map.Entry<String, String> entry : additionalUrlParams.entrySet()) {
                     uriBuilder.setParameter(entry.getKey(), entry.getValue());
                 }
-            }            uriBuilder.setParameter("func", methodName);
+            }
+            uriBuilder.setParameter("func", methodName);
             uriBuilder.setParameter("params", params);
             uriBuilder.setParameter("raw", "true");
             URI uri = uriBuilder.build();
@@ -753,7 +755,7 @@ public class Connector {
             String PATH_SEGMENT = "exec";
             URIBuilder uriBuilder = getBasicUriBuilder().setPath(BASE_PATH + "/" + PATH_SEGMENT);
             if (additionalUrlParams != null) {
-                for(Map.Entry<String, String> entry : additionalUrlParams.entrySet()) {
+                for (Map.Entry<String, String> entry : additionalUrlParams.entrySet()) {
                     uriBuilder.setParameter(entry.getKey(), entry.getValue());
                 }
             }
