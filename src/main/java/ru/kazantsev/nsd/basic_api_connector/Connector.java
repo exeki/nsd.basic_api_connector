@@ -1,7 +1,6 @@
 package ru.kazantsev.nsd.basic_api_connector;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import org.apache.http.Header;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.config.RequestConfig;
 import org.apache.http.entity.StringEntity;
@@ -611,27 +610,26 @@ public class Connector {
      * @param fileUuid uuid файла
      * @return DTO содержащий информацию о файле
      */
-    public NsdDto.FileDto getFile(String fileUuid) throws IOException, URISyntaxException {
-
-        String PATH_SEGMENT = "get-file";
-        logDebug("getFile (" + fileUuid + ")");
-        URI uri = getBasicUriBuilder().setPath(BASE_PATH + "/" + PATH_SEGMENT + "/" + fileUuid).build();
-        logDebug("getFile uri: ", uri);
-        CloseableHttpResponse response = client.execute(new HttpGet(uri));
-        HttpException.throwIfNotOk(this, response);
-        String contentDisposition = Optional.ofNullable(response.getFirstHeader("Content-Disposition")).map(NameValuePair::getValue).orElse(null);
-        if(contentDisposition == null) {
-            logDebug("getFile response status: " + response.getStatusLine().getStatusCode() + ". empty response");
-            return null;
-        } else {
-            int index = contentDisposition.indexOf('=');
+    public NsdDto.FileDto getFile(String fileUuid) {
+        try {
+            String PATH_SEGMENT = "get-file";
+            logDebug("getFile (" + fileUuid + ")");
+            URI uri = getBasicUriBuilder().setPath(BASE_PATH + "/" + PATH_SEGMENT + "/" + fileUuid).build();
+            logDebug("getFile uri: ", uri);
+            CloseableHttpResponse response = client.execute(new HttpGet(uri));
+            HttpException.throwIfNotOk(this, response);
             NsdDto.FileDto file = new NsdDto.FileDto(
                     EntityUtils.toByteArray(response.getEntity()),
-                    contentDisposition.substring(index + 2, contentDisposition.length() - 1),
-                    response.getFirstHeader("Content-Type").getValue()
+                    Optional.ofNullable(response.getFirstHeader("Content-Disposition"))
+                            .map(NameValuePair::getValue)
+                            .map(cd -> cd.substring(cd.indexOf('=') + 2, cd.length() - 1))
+                            .orElse(null),
+                    Optional.ofNullable(response.getFirstHeader("Content-Type")).map(NameValuePair::getValue).orElse(null)
             );
             logDebug("getFile response status: " + response.getStatusLine().getStatusCode() + ". body: byte[]");
             return file;
+        } catch (IOException | URISyntaxException e) {
+            throw new RuntimeException(e);
         }
     }
 
