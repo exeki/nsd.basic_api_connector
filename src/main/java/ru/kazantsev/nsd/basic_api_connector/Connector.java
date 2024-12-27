@@ -1,6 +1,8 @@
 package ru.kazantsev.nsd.basic_api_connector;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import org.apache.http.Header;
+import org.apache.http.NameValuePair;
 import org.apache.http.client.config.RequestConfig;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.HttpClientBuilder;
@@ -609,27 +611,28 @@ public class Connector {
      * @param fileUuid uuid файла
      * @return DTO содержащий информацию о файле
      */
-    public NsdDto.FileDto getFile(String fileUuid) throws IOException {
+    public NsdDto.FileDto getFile(String fileUuid) throws IOException, URISyntaxException {
+
         String PATH_SEGMENT = "get-file";
         logDebug("getFile (" + fileUuid + ")");
-        URI uri = null;
-        try {
-            uri = getBasicUriBuilder().setPath(BASE_PATH + "/" + PATH_SEGMENT + "/" + fileUuid).build();
-        } catch (URISyntaxException e) {
-            throw new RuntimeException(e);
-        }
+        URI uri = getBasicUriBuilder().setPath(BASE_PATH + "/" + PATH_SEGMENT + "/" + fileUuid).build();
         logDebug("getFile uri: ", uri);
         CloseableHttpResponse response = client.execute(new HttpGet(uri));
         HttpException.throwIfNotOk(this, response);
-        String contentDisposition = response.getFirstHeader("Content-Disposition").getValue();
-        int index = contentDisposition.indexOf('=');
-        NsdDto.FileDto file = new NsdDto.FileDto(
-                EntityUtils.toByteArray(response.getEntity()),
-                contentDisposition.substring(index + 2, contentDisposition.length() - 1),
-                response.getFirstHeader("Content-Type").getValue()
-        );
-        logDebug("getFile response status: " + response.getStatusLine().getStatusCode() + ". body: byte[]");
-        return file;
+        String contentDisposition = Optional.ofNullable(response.getFirstHeader("Content-Disposition")).map(NameValuePair::getValue).orElse(null);
+        if(contentDisposition == null) {
+            logDebug("getFile response status: " + response.getStatusLine().getStatusCode() + ". empty response");
+            return null;
+        } else {
+            int index = contentDisposition.indexOf('=');
+            NsdDto.FileDto file = new NsdDto.FileDto(
+                    EntityUtils.toByteArray(response.getEntity()),
+                    contentDisposition.substring(index + 2, contentDisposition.length() - 1),
+                    response.getFirstHeader("Content-Type").getValue()
+            );
+            logDebug("getFile response status: " + response.getStatusLine().getStatusCode() + ". body: byte[]");
+            return file;
+        }
     }
 
     /**

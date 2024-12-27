@@ -5,7 +5,7 @@ import ru.kazantsev.nsd.basic_api_connector.ConnectorParams
 
 class ApiTestUtils {
 
-    static String INSTALLATION_ID = "DSO_DEV"
+    static String INSTALLATION_ID = "DSO_TEST"
     static Boolean ENABLE_INFO_LOGGING = true
 
     static Connector getApi() {
