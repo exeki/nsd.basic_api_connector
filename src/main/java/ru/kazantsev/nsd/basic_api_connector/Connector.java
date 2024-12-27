@@ -1,6 +1,7 @@
 package ru.kazantsev.nsd.basic_api_connector;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import org.apache.http.client.config.RequestConfig;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.util.EntityUtils;
@@ -28,6 +29,8 @@ import org.apache.http.HttpEntity;
 import javax.net.ssl.SSLContext;
 import java.io.File;
 import java.io.IOException;
+import java.net.SocketException;
+import java.net.SocketTimeoutException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.nio.charset.StandardCharsets;
@@ -606,27 +609,26 @@ public class Connector {
      * @param fileUuid uuid файла
      * @return DTO содержащий информацию о файле
      */
-    public NsdDto.FileDto getFile(String fileUuid) throws IOException {
-        String PATH_SEGMENT = "get-file";
-        logDebug("getFile (" + fileUuid + ")");
-        URI uri = null;
+    public NsdDto.FileDto getFile(String fileUuid) {
         try {
-            uri = getBasicUriBuilder().setPath(BASE_PATH + "/" + PATH_SEGMENT + "/" + fileUuid).build();
-        } catch (URISyntaxException e) {
+            String PATH_SEGMENT = "get-file";
+            logDebug("getFile (" + fileUuid + ")");
+            URI uri = getBasicUriBuilder().setPath(BASE_PATH + "/" + PATH_SEGMENT + "/" + fileUuid).build();
+            logDebug("getFile uri: ", uri);
+            CloseableHttpResponse response = client.execute(new HttpGet(uri));
+            HttpException.throwIfNotOk(this, response);
+            String contentDisposition = response.getFirstHeader("Content-Disposition").getValue();
+            int index = contentDisposition.indexOf('=');
+            NsdDto.FileDto file = new NsdDto.FileDto(
+                    EntityUtils.toByteArray(response.getEntity()),
+                    contentDisposition.substring(index + 2, contentDisposition.length() - 1),
+                    response.getFirstHeader("Content-Type").getValue()
+            );
+            logDebug("getFile response status: " + response.getStatusLine().getStatusCode() + ". body: byte[]");
+            return file;
+        } catch (IOException | URISyntaxException e) {
             throw new RuntimeException(e);
         }
-        logDebug("getFile uri: ", uri);
-        CloseableHttpResponse response = client.execute(new HttpGet(uri));
-        HttpException.throwIfNotOk(this, response);
-        String contentDisposition = response.getFirstHeader("Content-Disposition").getValue();
-        int index = contentDisposition.indexOf('=');
-        NsdDto.FileDto file = new NsdDto.FileDto(
-                EntityUtils.toByteArray(response.getEntity()),
-                contentDisposition.substring(index + 2, contentDisposition.length() - 1),
-                response.getFirstHeader("Content-Type").getValue()
-        );
-        logDebug("getFile response status: " + response.getStatusLine().getStatusCode() + ". body: byte[]");
-        return file;
     }
 
     /**
@@ -770,5 +772,150 @@ public class Connector {
         } catch (IOException | URISyntaxException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    /**
+     * Получить версию приложения инсталляции
+     *
+     * @return строка с версией
+     */
+    public String version() {
+        try {
+            logDebug("version");
+            String path = "/sd/services/smpsync/version";
+            URI uri = getBasicUriBuilder().setPath(path).build();
+            logDebug("version uri: " + uri);
+            HttpGet httpGet = new HttpGet(uri);
+            CloseableHttpResponse response = client.execute(httpGet);
+            HttpException.throwIfNotOk(this, response);
+            String body = EntityUtils.toString(response.getEntity());
+            logDebug("version response status: " + response.getStatusLine().getStatusCode() + " , body: " + body);
+            return body;
+        } catch (IOException | URISyntaxException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    /**
+     * Получить версию groovy инсталляции
+     *
+     * @return строка с версией
+     */
+    public String groovyVersion() {
+        try {
+            logDebug("groovy_version");
+            String path = "/sd/services/smpsync/groovy_version";
+            URI uri = getBasicUriBuilder().setPath(path).build();
+            logDebug("groovy_version uri: " + uri);
+            HttpGet httpGet = new HttpGet(uri);
+            CloseableHttpResponse response = client.execute(httpGet);
+            HttpException.throwIfNotOk(this, response);
+            String body = EntityUtils.toString(response.getEntity());
+            logDebug("groovy_version response status: " + response.getStatusLine().getStatusCode() + " , body: " + body);
+            return body;
+        } catch (IOException | URISyntaxException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    /**
+     * Получить ip инсталляции (наверное)
+     *
+     * @return строка с ip
+     */
+    public String jpdaInfo() {
+        try {
+            logDebug("jpda_info");
+            String path = "/sd/services/smpsync/jpda_info";
+            URI uri = getBasicUriBuilder().setPath(path).build();
+            logDebug("jpda_info uri: " + uri);
+            HttpGet httpGet = new HttpGet(uri);
+            CloseableHttpResponse response = client.execute(httpGet);
+            HttpException.throwIfNotOk(this, response);
+            String body = EntityUtils.toString(response.getEntity());
+            logDebug("jpda_info response status: " + response.getStatusLine().getStatusCode() + " , body: " + body);
+            return body;
+        } catch (IOException | URISyntaxException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    /**
+     * Получить метаинформацию с инсталляции
+     *
+     * @param timeoutInMillis ожидание ответа в миллисекундаз
+     * @return строка с xml-ником метаинформации
+     */
+    public String metainfo(int timeoutInMillis) throws SocketException, SocketTimeoutException {
+        try {
+            logDebug("metainfo");
+            String path = "/sd/services/smpsync/metainfo";
+            URI uri = getBasicUriBuilder().setPath(path).build();
+            logDebug("metainfo uri: " + uri);
+            HttpGet httpGet = new HttpGet(uri);
+            RequestConfig requestConfig = RequestConfig.custom()
+                    .setSocketTimeout(timeoutInMillis)
+                    .setConnectTimeout(timeoutInMillis)
+                    .setConnectionRequestTimeout(timeoutInMillis)
+                    .build();
+            httpGet.setConfig(requestConfig);
+            CloseableHttpResponse response = client.execute(httpGet);
+            HttpException.throwIfNotOk(this, response);
+            String body = EntityUtils.toString(response.getEntity());
+            logDebug("metainfo response status: " + response.getStatusLine().getStatusCode());
+            return body;
+        } catch (IOException | URISyntaxException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    /**
+     * Получить метаинформацию с инсталляции со стандартным таймаутом в 100 000 миллисекунд
+     *
+     * @return строка с xml-ником метаинформации
+     */
+    public String metainfo() throws SocketException, SocketTimeoutException{
+        return metainfo(100000);
+    }
+
+    /**
+     * Загрузить метаинформацию
+     *
+     * @param xmlFileContent строка xml файла конфигурации
+     * @param timeoutInMillis таймаут ответа
+     */
+    public void uploadMetainfo(String xmlFileContent, Integer timeoutInMillis) throws SocketException, SocketTimeoutException {
+        try {
+            logDebug("upload-metainfo");
+            String path = "/sd/services/rest/upload-metainfo";
+            URI uri = getBasicUriBuilder().setPath(path).build();
+            logDebug("upload-metainfo uri: " + uri);
+            HttpPost httpPost = new HttpPost(uri);
+            HttpEntity entity = MultipartEntityBuilder.create()
+                    .addBinaryBody("metainfo", xmlFileContent.getBytes(), ContentType.APPLICATION_XML, "metainfo.xml")
+                    .build();
+            RequestConfig requestConfig = RequestConfig.custom()
+                    .setSocketTimeout(timeoutInMillis)
+                    .setConnectTimeout(timeoutInMillis)
+                    .setConnectionRequestTimeout(timeoutInMillis)
+                    .build();
+            httpPost.setConfig(requestConfig);
+            httpPost.setEntity(entity);
+            CloseableHttpResponse response = client.execute(httpPost);
+            HttpException.throwIfNotOk(this, response);
+            logDebug("upload-metainfo response status: " + response.getStatusLine().getStatusCode());
+        } catch (IOException | URISyntaxException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    /**
+     * Загрузить метаинформацию со стандартным таймаутом в 15 минут
+     *
+     * @param xmlFileContent строка xml файла конфигурации
+     */
+    public void uploadMetainfo(String xmlFileContent) throws SocketException, SocketTimeoutException{
+        int TIMEOUT = 15 * 60 * 1000;
+        uploadMetainfo(xmlFileContent, TIMEOUT);
     }
 }

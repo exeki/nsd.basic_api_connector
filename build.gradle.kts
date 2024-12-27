@@ -1,15 +1,14 @@
 plugins {
     id("java-library")
     id("maven-publish")
+    id("groovy")
 }
 
 group = "ru.kazantsev.nsd"
-version = "1.0.4.1"
+version = "1.1.1"
 
 java {
-    sourceCompatibility = JavaVersion.VERSION_11
-    targetCompatibility = JavaVersion.VERSION_11
-    withJavadocJar()
+    //withJavadocJar()
     withSourcesJar()
 }
 
