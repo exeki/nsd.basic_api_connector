@@ -3,7 +3,7 @@ package nsd_basic_api_connector.method_tests
 import nsd_basic_api_connector.ApiTestUtils
 import org.apache.http.entity.ContentType
 
-String OBJECT_UUID = 'serviceCall$50175809'
+String OBJECT_UUID = 'root$801'
 
 ApiTestUtils.getApi().addFile(
         OBJECT_UUID,

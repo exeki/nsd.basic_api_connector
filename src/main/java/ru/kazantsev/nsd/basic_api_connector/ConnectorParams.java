@@ -44,9 +44,10 @@ public class ConnectorParams {
 
     /**
      * Конструктор для ручного сбора параметров
-     * @param userId пользовательский идентификатор
-     * @param scheme Схема (http/https)
-     * @param host Хост
+     *
+     * @param userId    пользовательский идентификатор
+     * @param scheme    Схема (http/https)
+     * @param host      Хост
      * @param accessKey Ключ доступа
      * @param ignoreSSL Признак необходимости игнорировать ssl
      */
@@ -65,19 +66,21 @@ public class ConnectorParams {
         this.ignoreSSL = ignoreSSL;
     }
 
-    protected ConnectorParams() {}
+    protected ConnectorParams() {
+    }
 
-    public static String getDefaultParamsFilePath(){
+    public static String getDefaultParamsFilePath() {
         return DEFAULT_PARAMS_FILE_PATH;
     }
 
     /**
      * Собирает и наполняет экземпляр из параметров, описанных в конфигурационном файле,
      * расположенном по адресу {user.home}/nsd_sdk/conf/nsd_connector_params.json
+     *
      * @param installationId ID инсталляции, указанный конфигурационном файле
      * @return заполненный экземпляр ConnectorParams
      * @throws ConfigurationException выбрасывается конфиг не заполнен/заполнен не полностью
-     * @throws IOException выбрасывается если не удается считать json
+     * @throws IOException            выбрасывается если не удается считать json
      */
     public static ConnectorParams byConfigFile(String installationId) throws ConfigurationException, IOException {
         return byConfigFileInPath(installationId, DEFAULT_PARAMS_FILE_PATH);
@@ -86,11 +89,12 @@ public class ConnectorParams {
     /**
      * Собирает и наполняет экземпляр из параметров, описанных в конфигурационном файле,
      * расположенном по адресу {user.home}/nsd_sdk/conf/nsd_connector_params.json
-     * @param installationId ID инсталляции, указанный конфигурационном файле
+     *
+     * @param installationId   ID инсталляции, указанный конфигурационном файле
      * @param pathToConfigFile путь до конфигурационного файла
      * @return заполненный экземпляр ConnectorParams
      * @throws ConfigurationException выбрасывается конфиг не заполнен/заполнен не полностью
-     * @throws IOException выбрасывается если не удается считать json
+     * @throws IOException            выбрасывается если не удается считать json
      */
     public static ConnectorParams byConfigFileInPath(String installationId, String pathToConfigFile) throws IOException, ConfigurationException {
         File configFile = new File(pathToConfigFile);
@@ -107,12 +111,12 @@ public class ConnectorParams {
 
         List<ConfigFileDto.InstallationConfig> installationConfigs = new ArrayList<>();
 
-        for(ConfigFileDto.InstallationConfig config : configFileDto.installations) {
-            if(Objects.equals(config.id, installationId)) installationConfigs.add(config);
+        for (ConfigFileDto.InstallationConfig config : configFileDto.installations) {
+            if (Objects.equals(config.id, installationId)) installationConfigs.add(config);
         }
 
         if (installationConfigs.size() != 1) {
-            throw new ConfigurationException("Installation configuration "+  installationId + " could not be obtained " +
+            throw new ConfigurationException("Installation configuration " + installationId + " could not be obtained " +
                     "in the configuration file at " + pathToConfigFile);
         }
         ConfigFileDto.InstallationConfig installationConfig = installationConfigs.get(0);
@@ -120,10 +124,13 @@ public class ConnectorParams {
             throw new ConfigurationException("The host for installation is not specified" + installationId
                     + " in the configuration file at " + pathToConfigFile);
         }
+        /*
+        теперь это не обязательно
         if (installationConfig.accessKey == null || installationConfig.accessKey.trim().length() == 0) {
             throw new ConfigurationException("accessKey for installation is not specified for " + installationId +
                     " in the configuration file at " + pathToConfigFile);
         }
+        */
         if (installationConfig.scheme == null || installationConfig.scheme.trim().length() == 0) {
             throw new ConfigurationException("Scheme is not specified for installation" + installationId +
                     " in the configuration file at " + pathToConfigFile);
@@ -149,10 +156,12 @@ public class ConnectorParams {
         return scheme;
     }
 
-    public Boolean isIgnoringSSL(){
+    public Boolean isIgnoringSSL() {
         return ignoreSSL;
     }
 
-    public String getUserId() {return userId; }
+    public String getUserId() {
+        return userId;
+    }
 
 }
