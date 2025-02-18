@@ -9,15 +9,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="cd7d6f01-7d11-4fa7-8097-bb28cc6220d7" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/test/groovy/nsd_basic_api_connector/method_tests/getAccessKey.groovy" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ru/kazantsev/nsd/basic_api_connector/Connector.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/kazantsev/nsd/basic_api_connector/Connector.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ru/kazantsev/nsd/basic_api_connector/ConnectorParams.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/kazantsev/nsd/basic_api_connector/ConnectorParams.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/groovy/nsd_basic_api_connector/ApiTestUtils.groovy" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/groovy/nsd_basic_api_connector/ApiTestUtils.groovy" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/groovy/nsd_basic_api_connector/method_tests/addFile.groovy" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/groovy/nsd_basic_api_connector/method_tests/addFile.groovy" afterDir="false" />
-    </list>
+    <list default="true" id="cd7d6f01-7d11-4fa7-8097-bb28cc6220d7" name="Changes" comment="поправил доку" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -68,10 +60,10 @@
       </list>
     </option>
   </component>
-  <component name="KubernetesApiPersistence"><![CDATA[{}]]></component>
-  <component name="KubernetesApiProvider"><![CDATA[{
-  "isMigrated": true
-}]]></component>
+  <component name="KubernetesApiPersistence">{}</component>
+  <component name="KubernetesApiProvider">{
+  &quot;isMigrated&quot;: true
+}</component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
@@ -86,36 +78,36 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "Gradle.Build nsd.basic_api_connector.executor": "Run",
-    "Gradle.Download Sources.executor": "Run",
-    "Gradle.basic_api_connector [javadocJar].executor": "Run",
-    "Gradle.nsd.basic_api_connector [publishMavenPublicationToGitHubPackagesRepository].executor": "Run",
-    "Gradle.nsd.basic_api_connector [publishToMavenLocal].executor": "Run",
-    "Gradle.nsd_basic_api_connector [build].executor": "Run",
-    "Groovy.addFile.executor": "Run",
-    "Groovy.getAccessKey.executor": "Run",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "git-widget-placeholder": "master",
-    "ignore.virus.scanning.warn.message": "true",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/projects/jvm/nsd.basic_api_connector",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "Project",
-    "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.2",
-    "settings.editor.selected.configurable": "reference.settingsdialog.project.gradle",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;Gradle.Build nsd.basic_api_connector.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.Download Sources.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.basic_api_connector [javadocJar].executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.nsd.basic_api_connector [publishMavenPublicationToGitHubPackagesRepository].executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.nsd.basic_api_connector [publishToMavenLocal].executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.nsd_basic_api_connector [build].executor&quot;: &quot;Run&quot;,
+    &quot;Groovy.addFile.executor&quot;: &quot;Run&quot;,
+    &quot;Groovy.getAccessKey.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/projects/jvm/nsd.basic_api_connector&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settingsdialog.project.gradle&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\ekazantsev\projects\nsd\backend\standalone\nsd.basic_api_connector\src\test\groovy\nsd_basic_api_connector\method_tests" />
@@ -131,7 +123,7 @@
       <recent name="ru.ekazantsev.nsd_basic_api_connector" />
     </key>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Gradle.basic_api_connector [javadocJar]">
     <configuration name="basic_api_connector [javadocJar]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
@@ -303,7 +295,7 @@
       <workItem from="1732904293605" duration="1432000" />
       <workItem from="1732946033558" duration="4387000" />
       <workItem from="1732990852371" duration="4709000" />
-      <workItem from="1739395005361" duration="10104000" />
+      <workItem from="1739395005361" duration="10385000" />
     </task>
     <task id="LOCAL-00001" summary="добавил комментариев">
       <option name="closed" value="true" />
@@ -641,7 +633,23 @@
       <option name="project" value="LOCAL" />
       <updated>1735299222375</updated>
     </task>
-    <option name="localTasksCounter" value="43" />
+    <task id="LOCAL-00043" summary="упростил и сократил код&#10;добавил метод получения ключа по логину и паролю&#10;кажись работает, но это не точно">
+      <option name="closed" value="true" />
+      <created>1739405486488</created>
+      <option name="number" value="00043" />
+      <option name="presentableId" value="LOCAL-00043" />
+      <option name="project" value="LOCAL" />
+      <updated>1739405486488</updated>
+    </task>
+    <task id="LOCAL-00044" summary="поправил доку">
+      <option name="closed" value="true" />
+      <created>1739405616088</created>
+      <option name="number" value="00044" />
+      <option name="presentableId" value="LOCAL-00044" />
+      <option name="project" value="LOCAL" />
+      <updated>1739405616088</updated>
+    </task>
+    <option name="localTasksCounter" value="45" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -678,7 +686,10 @@
     <MESSAGE value="убран slf4j логгер из api" />
     <MESSAGE value="тесты" />
     <MESSAGE value="правка багов" />
-    <option name="LAST_COMMIT_MESSAGE" value="правка багов" />
+    <MESSAGE value="упростил и сократил код&#10;добавил метод получения ключа по логину и паролю" />
+    <MESSAGE value="упростил и сократил код&#10;добавил метод получения ключа по логину и паролю&#10;кажись работает, но это не точно" />
+    <MESSAGE value="поправил доку" />
+    <option name="LAST_COMMIT_MESSAGE" value="поправил доку" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
