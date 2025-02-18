@@ -811,7 +811,7 @@ public class Connector {
      * Если у вас есть nginx, то он по умолчанию обрезает используемые в запросе хедеры, вам нужно будет настроить параметр underscores_in_headers
      * @param login логин
      * @param password пароль
-     * @param livetime срок жизни
+     * @param livetime срок жизни В МИНУТАХ
      * @return новый ключ
      */
     public String getAccessKey(String login, String password, Integer livetime) {

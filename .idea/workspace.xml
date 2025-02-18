@@ -9,7 +9,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="cd7d6f01-7d11-4fa7-8097-bb28cc6220d7" name="Changes" comment="поправил доку" />
+    <list default="true" id="cd7d6f01-7d11-4fa7-8097-bb28cc6220d7" name="Changes" comment="поправил доку">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/kazantsev/nsd/basic_api_connector/Connector.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/kazantsev/nsd/basic_api_connector/Connector.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/groovy/nsd_basic_api_connector/method_tests/getAccessKey.groovy" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/groovy/nsd_basic_api_connector/method_tests/getAccessKey.groovy" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -32,6 +36,17 @@
               <path>
                 <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
                 <item name="basic_api_connector" type="f1a62948:ProjectNode" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="basic_api_connector" type="f1a62948:ProjectNode" />
+                <item name="Tasks" type="e4a08cd1:TasksNode" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="basic_api_connector" type="f1a62948:ProjectNode" />
+                <item name="Tasks" type="e4a08cd1:TasksNode" />
+                <item name="publishing" type="c8890929:TasksNode$1" />
               </path>
             </expand>
             <select />
@@ -123,7 +138,7 @@
       <recent name="ru.ekazantsev.nsd_basic_api_connector" />
     </key>
   </component>
-  <component name="RunManager" selected="Gradle.basic_api_connector [javadocJar]">
+  <component name="RunManager">
     <configuration name="basic_api_connector [javadocJar]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
@@ -236,10 +251,10 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Gradle.nsd.basic_api_connector [publishToMavenLocal]" />
         <item itemvalue="Gradle.basic_api_connector [javadocJar]" />
         <item itemvalue="Gradle.nsd_basic_api_connector [build]" />
         <item itemvalue="Gradle.nsd.basic_api_connector [publishMavenPublicationToGitHubPackagesRepository]" />
-        <item itemvalue="Gradle.nsd.basic_api_connector [publishToMavenLocal]" />
         <item itemvalue="Gradle.nsd_basic_api_connector [jar]" />
       </list>
     </recent_temporary>
@@ -296,6 +311,7 @@
       <workItem from="1732946033558" duration="4387000" />
       <workItem from="1732990852371" duration="4709000" />
       <workItem from="1739395005361" duration="10385000" />
+      <workItem from="1739878630498" duration="1161000" />
     </task>
     <task id="LOCAL-00001" summary="добавил комментариев">
       <option name="closed" value="true" />
@@ -649,7 +665,15 @@
       <option name="project" value="LOCAL" />
       <updated>1739405616088</updated>
     </task>
-    <option name="localTasksCounter" value="45" />
+    <task id="LOCAL-00045" summary="поправил доку">
+      <option name="closed" value="true" />
+      <created>1739878918982</created>
+      <option name="number" value="00045" />
+      <option name="presentableId" value="LOCAL-00045" />
+      <option name="project" value="LOCAL" />
+      <updated>1739878918982</updated>
+    </task>
+    <option name="localTasksCounter" value="46" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
