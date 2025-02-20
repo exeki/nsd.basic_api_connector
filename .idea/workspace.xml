@@ -11,8 +11,6 @@
   <component name="ChangeListManager">
     <list default="true" id="cd7d6f01-7d11-4fa7-8097-bb28cc6220d7" name="Changes" comment="поправил доку">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ru/kazantsev/nsd/basic_api_connector/Connector.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/kazantsev/nsd/basic_api_connector/Connector.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/groovy/nsd_basic_api_connector/method_tests/getAccessKey.groovy" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/groovy/nsd_basic_api_connector/method_tests/getAccessKey.groovy" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -138,7 +136,7 @@
       <recent name="ru.ekazantsev.nsd_basic_api_connector" />
     </key>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Gradle.basic_api_connector [javadocJar]">
     <configuration name="basic_api_connector [javadocJar]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
@@ -311,7 +309,8 @@
       <workItem from="1732946033558" duration="4387000" />
       <workItem from="1732990852371" duration="4709000" />
       <workItem from="1739395005361" duration="10385000" />
-      <workItem from="1739878630498" duration="1161000" />
+      <workItem from="1739878630498" duration="2638000" />
+      <workItem from="1740076971431" duration="22000" />
     </task>
     <task id="LOCAL-00001" summary="добавил комментариев">
       <option name="closed" value="true" />
@@ -673,7 +672,15 @@
       <option name="project" value="LOCAL" />
       <updated>1739878918982</updated>
     </task>
-    <option name="localTasksCounter" value="46" />
+    <task id="LOCAL-00046" summary="поправил доку">
+      <option name="closed" value="true" />
+      <created>1739881520693</created>
+      <option name="number" value="00046" />
+      <option name="presentableId" value="LOCAL-00046" />
+      <option name="project" value="LOCAL" />
+      <updated>1739881520693</updated>
+    </task>
+    <option name="localTasksCounter" value="47" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
