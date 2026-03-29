@@ -9,11 +9,19 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="cd7d6f01-7d11-4fa7-8097-bb28cc6220d7" name="Changes" comment="поправил доку" />
+    <list default="true" id="cd7d6f01-7d11-4fa7-8097-bb28cc6220d7" name="Changes" comment="ConnectorParams.getAccessKey стал public">
+      <change beforePath="$PROJECT_DIR$/.github/workflows/gradle.yml" beforeDir="false" afterPath="$PROJECT_DIR$/.github/workflows/gradle.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle.kts" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="EmbeddingIndexingInfo">
+    <option name="cachedIndexableFilesCount" value="51" />
   </component>
   <component name="ExternalProjectsData">
     <projectState path="$PROJECT_DIR$">
@@ -32,6 +40,17 @@
               <path>
                 <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
                 <item name="basic_api_connector" type="f1a62948:ProjectNode" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="basic_api_connector" type="f1a62948:ProjectNode" />
+                <item name="Tasks" type="e4a08cd1:TasksNode" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="basic_api_connector" type="f1a62948:ProjectNode" />
+                <item name="Tasks" type="e4a08cd1:TasksNode" />
+                <item name="build" type="c8890929:TasksNode$1" />
               </path>
             </expand>
             <select />
@@ -62,7 +81,7 @@
     "accountId": "678ca613-af78-4bb2-994b-c29bbb590d5a"
   }
 }]]></component>
-  <component name="GradleScriptDefinitionsStorage" workingDir="$PROJECT_DIR$" gradleHome="C:\Users\exeki\.gradle\wrapper\dists\gradle-8.0-bin\ca5e32bp14vu59qr306oxotwh\gradle-8.0" javaHome="C:\Users\exeki\.jdks\corretto-11.0.18" gradleVersion="8.0" />
+  <component name="GradleScriptDefinitionsStorage" workingDir="$PROJECT_DIR$" gradleHome="C:\Users\exeki\.gradle\wrapper\dists\gradle-8.0-bin\ca5e32bp14vu59qr306oxotwh\gradle-8.0" javaHome="C:\Users\exeki\.jdks\corretto-21.0.2" gradleVersion="8.0" />
   <component name="GroovyConsoleState">
     <option name="list">
       <list>
@@ -143,7 +162,7 @@
       <recent name="ru.ekazantsev.nsd_basic_api_connector" />
     </key>
   </component>
-  <component name="RunManager" selected="Gradle.basic_api_connector [javadocJar]">
+  <component name="RunManager" selected="Gradle.nsd_basic_api_connector [build]">
     <configuration name="basic_api_connector [javadocJar]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
@@ -271,9 +290,9 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Gradle.nsd_basic_api_connector [build]" />
         <item itemvalue="Gradle.nsd.basic_api_connector [publishToMavenLocal]" />
         <item itemvalue="Gradle.basic_api_connector [javadocJar]" />
-        <item itemvalue="Gradle.nsd_basic_api_connector [build]" />
         <item itemvalue="Gradle.nsd.basic_api_connector [publishMavenPublicationToGitHubPackagesRepository]" />
         <item itemvalue="Gradle.nsd_basic_api_connector [jar]" />
       </list>
@@ -333,7 +352,7 @@
       <workItem from="1739395005361" duration="10385000" />
       <workItem from="1739878630498" duration="2638000" />
       <workItem from="1740076971431" duration="22000" />
-      <workItem from="1774821417799" duration="66000" />
+      <workItem from="1774821417799" duration="730000" />
     </task>
     <task id="LOCAL-00001" summary="добавил комментариев">
       <option name="closed" value="true" />
@@ -703,7 +722,15 @@
       <option name="project" value="LOCAL" />
       <updated>1739881520693</updated>
     </task>
-    <option name="localTasksCounter" value="47" />
+    <task id="LOCAL-00047" summary="ConnectorParams.getAccessKey стал public">
+      <option name="closed" value="true" />
+      <created>1774821647910</created>
+      <option name="number" value="00047" />
+      <option name="presentableId" value="LOCAL-00047" />
+      <option name="project" value="LOCAL" />
+      <updated>1774821647910</updated>
+    </task>
+    <option name="localTasksCounter" value="48" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -743,7 +770,8 @@
     <MESSAGE value="упростил и сократил код&#10;добавил метод получения ключа по логину и паролю" />
     <MESSAGE value="упростил и сократил код&#10;добавил метод получения ключа по логину и паролю&#10;кажись работает, но это не точно" />
     <MESSAGE value="поправил доку" />
-    <option name="LAST_COMMIT_MESSAGE" value="поправил доку" />
+    <MESSAGE value="ConnectorParams.getAccessKey стал public" />
+    <option name="LAST_COMMIT_MESSAGE" value="ConnectorParams.getAccessKey стал public" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

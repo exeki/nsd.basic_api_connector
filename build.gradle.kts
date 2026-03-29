@@ -1,7 +1,6 @@
 plugins {
     id("java-library")
     id("maven-publish")
-    id("groovy")
 }
 
 group = "ru.kazantsev.nsd"
@@ -10,6 +9,12 @@ version = "1.2.2"
 java {
     //withJavadocJar()
     withSourcesJar()
+}
+
+java {
+    toolchain {
+        languageVersion.set(JavaLanguageVersion.of(21))
+    }
 }
 
 publishing {
