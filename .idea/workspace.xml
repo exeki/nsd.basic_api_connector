@@ -9,11 +9,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="cd7d6f01-7d11-4fa7-8097-bb28cc6220d7" name="Changes" comment="ConnectorParams.getAccessKey стал public">
-      <change beforePath="$PROJECT_DIR$/.github/workflows/gradle.yml" beforeDir="false" afterPath="$PROJECT_DIR$/.github/workflows/gradle.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
+    <list default="true" id="cd7d6f01-7d11-4fa7-8097-bb28cc6220d7" name="Changes" comment="целевая версия java повышена до 21">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle.kts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/kazantsev/nsd/basic_api_connector/ConnectorParams.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/kazantsev/nsd/basic_api_connector/ConnectorParams.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -352,7 +351,7 @@
       <workItem from="1739395005361" duration="10385000" />
       <workItem from="1739878630498" duration="2638000" />
       <workItem from="1740076971431" duration="22000" />
-      <workItem from="1774821417799" duration="730000" />
+      <workItem from="1774821417799" duration="1781000" />
     </task>
     <task id="LOCAL-00001" summary="добавил комментариев">
       <option name="closed" value="true" />
@@ -730,7 +729,15 @@
       <option name="project" value="LOCAL" />
       <updated>1774821647910</updated>
     </task>
-    <option name="localTasksCounter" value="48" />
+    <task id="LOCAL-00048" summary="целевая версия java повышена до 21">
+      <option name="closed" value="true" />
+      <created>1774822185232</created>
+      <option name="number" value="00048" />
+      <option name="presentableId" value="LOCAL-00048" />
+      <option name="project" value="LOCAL" />
+      <updated>1774822185232</updated>
+    </task>
+    <option name="localTasksCounter" value="49" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -771,7 +778,8 @@
     <MESSAGE value="упростил и сократил код&#10;добавил метод получения ключа по логину и паролю&#10;кажись работает, но это не точно" />
     <MESSAGE value="поправил доку" />
     <MESSAGE value="ConnectorParams.getAccessKey стал public" />
-    <option name="LAST_COMMIT_MESSAGE" value="ConnectorParams.getAccessKey стал public" />
+    <MESSAGE value="целевая версия java повышена до 21" />
+    <option name="LAST_COMMIT_MESSAGE" value="целевая версия java повышена до 21" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

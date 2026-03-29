@@ -9,7 +9,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-import java.util.stream.Collectors;
 
 /**
  * DTO, содержит параметры для связи с NSD и методы по их упрощенному получению
@@ -24,7 +23,7 @@ public class ConnectorParams {
      * Пользовательский идентификатор
      */
 
-    private String userId;
+    private String installationId;
     /**
      * Ключ доступа
      */
@@ -45,7 +44,7 @@ public class ConnectorParams {
     /**
      * Конструктор для ручного сбора параметров
      *
-     * @param userId    пользовательский идентификатор
+     * @param installationId    пользовательский идентификатор
      * @param scheme    Схема (http/https)
      * @param host      Хост
      * @param accessKey Ключ доступа
@@ -53,13 +52,13 @@ public class ConnectorParams {
      */
 
     public ConnectorParams(
-            String userId,
+            String installationId,
             String scheme,
             String host,
             String accessKey,
             Boolean ignoreSSL
     ) {
-        this.userId = userId;
+        this.installationId = installationId;
         this.scheme = scheme;
         this.host = host;
         this.accessKey = accessKey;
@@ -120,7 +119,7 @@ public class ConnectorParams {
                     "in the configuration file at " + pathToConfigFile);
         }
         ConfigFileDto.InstallationConfig installationConfig = installationConfigs.get(0);
-        if (installationConfig.host == null || installationConfig.host.trim().length() == 0) {
+        if (installationConfig.host == null || installationConfig.host.trim().isEmpty()) {
             throw new ConfigurationException("The host for installation is not specified" + installationId
                     + " in the configuration file at " + pathToConfigFile);
         }
@@ -131,7 +130,7 @@ public class ConnectorParams {
                     " in the configuration file at " + pathToConfigFile);
         }
         */
-        if (installationConfig.scheme == null || installationConfig.scheme.trim().length() == 0) {
+        if (installationConfig.scheme == null || installationConfig.scheme.trim().isEmpty()) {
             throw new ConfigurationException("Scheme is not specified for installation" + installationId +
                     " in the configuration file at " + pathToConfigFile);
         }
@@ -160,8 +159,8 @@ public class ConnectorParams {
         return ignoreSSL;
     }
 
-    public String getUserId() {
-        return userId;
+    public String getInstallationId() {
+        return installationId;
     }
 
 }
