@@ -144,7 +144,7 @@ public class ConnectorParams {
         );
     }
 
-    protected String getAccessKey() {
+    public String getAccessKey() {
         return accessKey;
     }
 
