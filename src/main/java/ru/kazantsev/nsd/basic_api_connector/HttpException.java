@@ -1,8 +1,8 @@
 package ru.kazantsev.nsd.basic_api_connector;
 
-import org.apache.http.HttpResponse;
-import org.apache.http.client.methods.CloseableHttpResponse;
-import org.apache.http.util.EntityUtils;
+import org.apache.hc.client5.http.impl.classic.CloseableHttpResponse;
+import org.apache.hc.core5.http.ParseException;
+import org.apache.hc.core5.http.io.entity.EntityUtils;
 
 import java.io.IOException;
 
@@ -40,7 +40,7 @@ public class HttpException extends RuntimeException {
      *
      * @return body ответа
      */
-    public HttpResponse getServerResponse() {
+    public CloseableHttpResponse getServerResponse() {
         return this.serverResponse;
     }
 
@@ -64,7 +64,7 @@ public class HttpException extends RuntimeException {
      */
     public static void throwIfNotOk(Connector connector, CloseableHttpResponse response) {
         try {
-            int status = response.getStatusLine().getStatusCode();
+            int status = response.getCode();
             if (status >= 400 || status < 200) {
                 String body = EntityUtils.toString(response.getEntity());
                 throw new HttpException(
@@ -73,7 +73,7 @@ public class HttpException extends RuntimeException {
                         response
                 );
             }
-        } catch (IOException e) {
+        } catch (IOException | ParseException e) {
             throw new RuntimeException(e);
         }
     }

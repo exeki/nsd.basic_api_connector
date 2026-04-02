@@ -1,30 +1,34 @@
 package ru.kazantsev.nsd.basic_api_connector;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import org.apache.http.NameValuePair;
-import org.apache.http.client.config.RequestConfig;
-import org.apache.http.entity.StringEntity;
-import org.apache.http.impl.client.HttpClientBuilder;
-import org.apache.http.util.EntityUtils;
+import org.apache.hc.core5.http.NameValuePair;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import org.apache.http.impl.client.HttpClients;
-import org.apache.http.impl.client.CloseableHttpClient;
-import org.apache.http.ssl.SSLContexts;
-import org.apache.http.conn.ssl.NoopHostnameVerifier;
-import org.apache.http.conn.ssl.SSLConnectionSocketFactory;
-import org.apache.http.conn.ssl.TrustStrategy;
-import org.apache.http.client.methods.CloseableHttpResponse;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.client.utils.URIBuilder;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.entity.mime.MultipartEntityBuilder;
-import org.apache.http.entity.ContentType;
-import org.apache.http.HttpEntity;
+import org.apache.hc.client5.http.classic.methods.HttpGet;
+import org.apache.hc.client5.http.classic.methods.HttpPost;
+import org.apache.hc.client5.http.config.RequestConfig;
+import org.apache.hc.client5.http.entity.mime.MultipartEntityBuilder;
+import org.apache.hc.client5.http.impl.classic.CloseableHttpClient;
+import org.apache.hc.client5.http.impl.classic.CloseableHttpResponse;
+import org.apache.hc.client5.http.impl.classic.HttpClientBuilder;
+import org.apache.hc.client5.http.impl.classic.HttpClients;
+import org.apache.hc.client5.http.impl.io.PoolingHttpClientConnectionManager;
+import org.apache.hc.client5.http.impl.io.PoolingHttpClientConnectionManagerBuilder;
+import org.apache.hc.client5.http.ssl.ClientTlsStrategyBuilder;
+import org.apache.hc.client5.http.ssl.NoopHostnameVerifier;
+import org.apache.hc.client5.http.ssl.TrustAllStrategy;
+import org.apache.hc.core5.http.ContentType;
+import org.apache.hc.core5.http.HttpEntity;
+import org.apache.hc.core5.http.ParseException;
+import org.apache.hc.core5.http.io.entity.EntityUtils;
+import org.apache.hc.core5.http.io.entity.StringEntity;
+import org.apache.hc.core5.net.URIBuilder;
+import org.apache.hc.core5.ssl.SSLContexts;
+import org.apache.hc.core5.util.Timeout;
 
 import javax.net.ssl.SSLContext;
 import java.io.File;
@@ -33,10 +37,6 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
-import java.security.KeyManagementException;
-import java.security.KeyStoreException;
-import java.security.NoSuchAlgorithmException;
-import java.security.cert.X509Certificate;
 import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.stream.Collectors;
@@ -72,37 +72,32 @@ public class Connector {
     public Connector(ConnectorParams params) {
         this.setParams(params);
         HttpClientBuilder clientBuilder = HttpClients.custom();
-        if (params.isIgnoringSSL()) clientBuilder.setSSLSocketFactory(getNoSslSocketFactory());
+        if (params.isIgnoringSSL()) clientBuilder.setConnectionManager(getNoSslConnectionManager());
         this.client = clientBuilder.build();
         this.objectMapper = new ObjectMapper()
                 .configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false)
                 .setDateFormat(new SimpleDateFormat(DATE_PATTERN));
     }
 
-    static class TrustAllStrategy implements TrustStrategy {
-
-        public static final TrustAllStrategy INSTANCE = new TrustAllStrategy();
-
-        @Override
-        public boolean isTrusted(X509Certificate[] chain, String authType) {
-            return true;
-        }
-    }
-
     /**
-     * Возвращает SSLConnectionSocketFactory с выключенным ssl
+     * Возвращает connection manager с отключенной проверкой сертификата и hostname verification
      *
-     * @return SSLConnectionSocketFactory с выключенным ssl
+     * @return connection manager
      */
-    protected static SSLConnectionSocketFactory getNoSslSocketFactory() {
-        TrustStrategy acceptingTrustStrategy = TrustAllStrategy.INSTANCE;
-        SSLContext sslContext;
+    protected static PoolingHttpClientConnectionManager getNoSslConnectionManager() {
         try {
-            sslContext = SSLContexts.custom().loadTrustMaterial(null, acceptingTrustStrategy).build();
-        } catch (NoSuchAlgorithmException | KeyManagementException | KeyStoreException e) {
+            SSLContext sslContext = SSLContexts.custom()
+                    .loadTrustMaterial(null, TrustAllStrategy.INSTANCE)
+                    .build();
+            return PoolingHttpClientConnectionManagerBuilder.create()
+                    .setTlsSocketStrategy(ClientTlsStrategyBuilder.create()
+                            .setSslContext(sslContext)
+                            .setHostnameVerifier(NoopHostnameVerifier.INSTANCE)
+                            .buildClassic())
+                    .build();
+        } catch (Exception e) {
             throw new RuntimeException(e);
         }
-        return new SSLConnectionSocketFactory(sslContext, new NoopHostnameVerifier());
     }
 
     public void logDebug(Object... objects) {
@@ -150,7 +145,7 @@ public class Connector {
 
     protected StringEntity newStringEntity(Object value) {
         try {
-            return new StringEntity(objectMapper.writeValueAsString(value), CHARSET);
+            return new StringEntity(objectMapper.writeValueAsString(value), ContentType.APPLICATION_JSON);
         } catch (JsonProcessingException e) {
             throw new RuntimeException(e);
         }
@@ -158,10 +153,10 @@ public class Connector {
 
     protected CloseableHttpResponse executePost(HttpPost request, String method) {
         try {
-            logDebug("POST request \"" + method + "\" uri: \"" + request.getURI() + "\"");
+            logDebug("POST request \"" + method + "\" uri: \"" + request.getRequestUri() + "\"");
             var response = client.execute(request);
             HttpException.throwIfNotOk(this, response);
-            logDebug(method + " response status: " + response.getStatusLine().getStatusCode());
+            logDebug(method + " response status: " + response.getCode());
             return response;
         } catch (IOException e) {
             throw new RuntimeException(e);
@@ -173,7 +168,7 @@ public class Connector {
             logDebug("GET request \"" + method + "\" uri: \"" + uri + "\"");
             var response = client.execute(new HttpGet(uri));
             HttpException.throwIfNotOk(this, response);
-            logDebug(method + " response status: " + response.getStatusLine().getStatusCode());
+            logDebug(method + " response status: " + response.getCode());
             return response;
         } catch (IOException e) {
             throw new RuntimeException(e);
@@ -186,10 +181,10 @@ public class Connector {
 
     protected CloseableHttpResponse executeGet(HttpGet httpGet, String method) {
         try {
-            logDebug("GET request \"" + method + "\" uri: \"" + httpGet.getURI() + "\"");
+            logDebug("GET request \"" + method + "\" uri: \"" + httpGet.getRequestUri() + "\"");
             var response = client.execute(httpGet);
             HttpException.throwIfNotOk(this, response);
-            logDebug(method + " response status: " + response.getStatusLine().getStatusCode());
+            logDebug(method + " response status: " + response.getCode());
             return response;
         } catch (IOException e) {
             throw new RuntimeException(e);
@@ -200,7 +195,7 @@ public class Connector {
         try {
             String responseBody = EntityUtils.toString(response.getEntity());
             return objectMapper.readValue(responseBody, clazz);
-        } catch (IOException e) {
+        } catch (IOException | ParseException e) {
             throw new RuntimeException(e);
         }
     }
@@ -208,7 +203,7 @@ public class Connector {
     protected String parseStringBody(CloseableHttpResponse response) {
         try {
             return EntityUtils.toString(response.getEntity());
-        } catch (IOException e) {
+        } catch (IOException | ParseException e) {
             throw new RuntimeException(e);
         }
     }
@@ -749,9 +744,9 @@ public class Connector {
         var builder = getBasicUriBuilder().setPath(path);
         HttpGet httpGet = new HttpGet(buildUri(builder));
         RequestConfig requestConfig = RequestConfig.custom()
-                .setSocketTimeout(timeoutInMillis)
-                .setConnectTimeout(timeoutInMillis)
-                .setConnectionRequestTimeout(timeoutInMillis)
+                .setResponseTimeout(Timeout.ofMilliseconds(timeoutInMillis))
+                .setConnectTimeout(Timeout.ofMilliseconds(timeoutInMillis))
+                .setConnectionRequestTimeout(Timeout.ofMilliseconds(timeoutInMillis))
                 .build();
         httpGet.setConfig(requestConfig);
         CloseableHttpResponse response = executeGet(httpGet, PATH_SEGMENT);
@@ -767,12 +762,12 @@ public class Connector {
         return metainfo(100000);
     }
 
-    /**
+    /*
      * Загрузить метаинформацию
      *
      * @param xmlFileContent  строка xml файла конфигурации
      * @param timeoutInMillis таймаут ответа
-     */
+
     public void uploadMetainfo(String xmlFileContent, Integer timeoutInMillis)  {
         String PATH_SEGMENT = "upload-metainfo";
         String path = BASE_SMPSYNC_PATH + "/" + PATH_SEGMENT;
@@ -781,26 +776,27 @@ public class Connector {
                 .addBinaryBody("metainfo", xmlFileContent.getBytes(), ContentType.APPLICATION_XML, "metainfo.xml")
                 .build();
         RequestConfig requestConfig = RequestConfig.custom()
-                .setSocketTimeout(timeoutInMillis)
-                .setConnectTimeout(timeoutInMillis)
-                .setConnectionRequestTimeout(timeoutInMillis)
+                .setResponseTimeout(Timeout.ofMilliseconds(timeoutInMillis))
+                .setConnectTimeout(Timeout.ofMilliseconds(timeoutInMillis))
+                .setConnectionRequestTimeout(Timeout.ofMilliseconds(timeoutInMillis))
                 .build();
         httpPost.setConfig(requestConfig);
         httpPost.setEntity(entity);
         CloseableHttpResponse response = executePost(httpPost, PATH_SEGMENT);
         HttpException.throwIfNotOk(this, response);
-        logDebug("upload-metainfo response status: " + response.getStatusLine().getStatusCode());
+        logDebug("upload-metainfo response status: " + response.getCode());
     }
 
-    /**
+    *
      * Загрузить метаинформацию со стандартным таймаутом в 15 минут
      *
      * @param xmlFileContent строка xml файла конфигурации
-     */
+     *
     public void uploadMetainfo(String xmlFileContent)  {
         int TIMEOUT = 15 * 60 * 1000;
         uploadMetainfo(xmlFileContent, TIMEOUT);
     }
+   */
 
     /**
      * Получение ключа для по логину и паролю.

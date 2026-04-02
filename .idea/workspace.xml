@@ -10,15 +10,32 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="cd7d6f01-7d11-4fa7-8097-bb28cc6220d7" name="Changes" comment="добавлены методы smpsync по работе со скриптами">
-      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/resources/src.zip" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle.kts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.jar" beforeDir="false" afterPath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.properties" beforeDir="false" afterPath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gradlew" beforeDir="false" afterPath="$PROJECT_DIR$/gradlew" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gradlew.bat" beforeDir="false" afterPath="$PROJECT_DIR$/gradlew.bat" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/ru/kazantsev/nsd/basic_api_connector/Connector.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/kazantsev/nsd/basic_api_connector/Connector.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ru/kazantsev/nsd/basic_api_connector/NsdDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/kazantsev/nsd/basic_api_connector/NsdDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/kazantsev/nsd/basic_api_connector/HttpException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/kazantsev/nsd/basic_api_connector/HttpException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/groovy/nsd_basic_api_connector/ApiTestUtils.groovy" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/groovy/nsd_basic_api_connector/examples/edit.groovy" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/groovy/nsd_basic_api_connector/examples/get.groovy" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/groovy/nsd_basic_api_connector/method_tests/addFile.groovy" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/groovy/nsd_basic_api_connector/method_tests/create.groovy" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/groovy/nsd_basic_api_connector/method_tests/createExcl.groovy" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/groovy/nsd_basic_api_connector/method_tests/createM2M.groovy" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/groovy/nsd_basic_api_connector/method_tests/createM2MMultiple.groovy" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/groovy/nsd_basic_api_connector/method_tests/delete.groovy" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/groovy/nsd_basic_api_connector/method_tests/edit.groovy" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/groovy/nsd_basic_api_connector/method_tests/editExcl.groovy" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/groovy/nsd_basic_api_connector/method_tests/editM2M.groovy" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/groovy/nsd_basic_api_connector/method_tests/execFile.groovy" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/groovy/nsd_basic_api_connector/method_tests/find.groovy" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/groovy/nsd_basic_api_connector/method_tests/get.groovy" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/groovy/nsd_basic_api_connector/method_tests/getAccessKey.groovy" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/groovy/nsd_basic_api_connector/method_tests/getFile.groovy" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/groovy/nsd_basic_api_connector/method_tests/groovyVersion.groovy" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/groovy/nsd_basic_api_connector/method_tests/metainfo.groovy" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/groovy/nsd_basic_api_connector/method_tests/uploadMetainfo.groovy" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/groovy/nsd_basic_api_connector/method_tests/version.groovy" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -126,9 +143,28 @@
   "keyToString": {
     "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "Gradle.Build nsd.basic_api_connector.executor": "Run",
+    "Gradle.ConnectorMethodTests.addFileFromBytes.executor": "Run",
+    "Gradle.ConnectorMethodTests.addFileFromFile.executor": "Run",
+    "Gradle.ConnectorMethodTests.addFileFromFileList.executor": "Run",
+    "Gradle.ConnectorMethodTests.create.executor": "Run",
+    "Gradle.ConnectorMethodTests.createExcl.executor": "Run",
+    "Gradle.ConnectorMethodTests.createM2M.executor": "Run",
+    "Gradle.ConnectorMethodTests.createM2MMultiple.executor": "Run",
+    "Gradle.ConnectorMethodTests.delete.executor": "Run",
+    "Gradle.ConnectorMethodTests.edit.executor": "Run",
+    "Gradle.ConnectorMethodTests.editExcl.executor": "Run",
+    "Gradle.ConnectorMethodTests.editM2M.executor": "Run",
+    "Gradle.ConnectorMethodTests.executor": "Run",
+    "Gradle.ConnectorMethodTests.find.executor": "Run",
+    "Gradle.ConnectorMethodTests.findWithReturnAttrs.executor": "Run",
+    "Gradle.ConnectorMethodTests.get.executor": "Run",
+    "Gradle.ConnectorMethodTests.getWithoutReturnAttrs.executor": "Run",
+    "Gradle.ConnectorMethodTests.uploadMetainfoDefaultTimeout.executor": "Run",
+    "Gradle.ConnectorMethodTests.version.executor": "Run",
     "Gradle.Download Sources.executor": "Run",
     "Gradle.Upgrade Gradle wrapper.executor": "Run",
     "Gradle.basic_api_connector [javadocJar].executor": "Run",
+    "Gradle.nsd.basic_api_connector [build].executor": "Run",
     "Gradle.nsd.basic_api_connector [publishMavenPublicationToGitHubPackagesRepository].executor": "Run",
     "Gradle.nsd.basic_api_connector [publishToMavenLocal].executor": "Run",
     "Gradle.nsd_basic_api_connector [build].executor": "Run",
@@ -143,7 +179,7 @@
     "git-widget-placeholder": "master",
     "ignore.virus.scanning.warn.message": "true",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/projects/jvm/nsd.basic_api_connector",
+    "last_opened_file_path": "C:/projects/jvm/nsd/standalone/nsd.basic_api_connector/src/test/resources",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -158,6 +194,7 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\projects\jvm\nsd\standalone\nsd.basic_api_connector\src\test\resources" />
       <recent name="C:\ekazantsev\projects\nsd\backend\standalone\nsd.basic_api_connector\src\test\groovy\nsd_basic_api_connector\method_tests" />
       <recent name="C:\projects\nds\sdk\nsd_basic_api_connector\src\test\resources" />
     </key>
@@ -171,33 +208,89 @@
       <recent name="ru.ekazantsev.nsd_basic_api_connector" />
     </key>
   </component>
-  <component name="RunManager" selected="Gradle.nsd_basic_api_connector [build]">
-    <configuration name="basic_api_connector [javadocJar]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+  <component name="RunManager" selected="Gradle.nsd.basic_api_connector [jar]">
+    <configuration name="ConnectorMethodTests" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
         <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" />
+        <option name="scriptParameters" value="" />
         <option name="taskDescriptions">
           <list />
         </option>
         <option name="taskNames">
           <list>
-            <option value="javadocJar" />
+            <option value=":test" />
+            <option value="--tests" />
+            <option value="&quot;nsd_basic_api_connector.method_tests.ConnectorMethodTests&quot;" />
           </list>
         </option>
         <option name="vmOptions" />
       </ExternalSystemSettings>
-      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
+      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
       <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
       <ExternalSystemDebugDisabled>false</ExternalSystemDebugDisabled>
       <DebugAllEnabled>false</DebugAllEnabled>
-      <RunAsTest>false</RunAsTest>
+      <RunAsTest>true</RunAsTest>
       <GradleProfilingDisabled>false</GradleProfilingDisabled>
       <GradleCoverageDisabled>false</GradleCoverageDisabled>
       <method v="2" />
     </configuration>
-    <configuration name="nsd_basic_api_connector [build]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+    <configuration name="ConnectorMethodTests.get" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value=":test" />
+            <option value="--tests" />
+            <option value="&quot;nsd_basic_api_connector.method_tests.ConnectorMethodTests.get&quot;" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <ExternalSystemDebugDisabled>false</ExternalSystemDebugDisabled>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <RunAsTest>true</RunAsTest>
+      <GradleProfilingDisabled>false</GradleProfilingDisabled>
+      <GradleCoverageDisabled>false</GradleCoverageDisabled>
+      <method v="2" />
+    </configuration>
+    <configuration name="ConnectorMethodTests.getWithoutReturnAttrs" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value=":test" />
+            <option value="--tests" />
+            <option value="&quot;nsd_basic_api_connector.method_tests.ConnectorMethodTests.getWithoutReturnAttrs&quot;" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <ExternalSystemDebugDisabled>false</ExternalSystemDebugDisabled>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <RunAsTest>true</RunAsTest>
+      <GradleProfilingDisabled>false</GradleProfilingDisabled>
+      <GradleCoverageDisabled>false</GradleCoverageDisabled>
+      <method v="2" />
+    </configuration>
+    <configuration name="nsd.basic_api_connector [build]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
@@ -222,7 +315,7 @@
       <GradleCoverageDisabled>false</GradleCoverageDisabled>
       <method v="2" />
     </configuration>
-    <configuration name="nsd_basic_api_connector [jar]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+    <configuration name="nsd.basic_api_connector [jar]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
@@ -247,63 +340,13 @@
       <GradleCoverageDisabled>false</GradleCoverageDisabled>
       <method v="2" />
     </configuration>
-    <configuration name="nsd.basic_api_connector [publishMavenPublicationToGitHubPackagesRepository]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
-      <ExternalSystemSettings>
-        <option name="executionName" />
-        <option name="externalProjectPath" value="$PROJECT_DIR$" />
-        <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" />
-        <option name="taskDescriptions">
-          <list />
-        </option>
-        <option name="taskNames">
-          <list>
-            <option value="publishMavenPublicationToGitHubPackagesRepository" />
-          </list>
-        </option>
-        <option name="vmOptions" />
-      </ExternalSystemSettings>
-      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
-      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
-      <ExternalSystemDebugDisabled>false</ExternalSystemDebugDisabled>
-      <DebugAllEnabled>false</DebugAllEnabled>
-      <RunAsTest>false</RunAsTest>
-      <GradleProfilingDisabled>false</GradleProfilingDisabled>
-      <GradleCoverageDisabled>false</GradleCoverageDisabled>
-      <method v="2" />
-    </configuration>
-    <configuration name="nsd.basic_api_connector [publishToMavenLocal]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
-      <ExternalSystemSettings>
-        <option name="executionName" />
-        <option name="externalProjectPath" value="$PROJECT_DIR$" />
-        <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" />
-        <option name="taskDescriptions">
-          <list />
-        </option>
-        <option name="taskNames">
-          <list>
-            <option value="publishToMavenLocal" />
-          </list>
-        </option>
-        <option name="vmOptions" />
-      </ExternalSystemSettings>
-      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
-      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
-      <ExternalSystemDebugDisabled>false</ExternalSystemDebugDisabled>
-      <DebugAllEnabled>false</DebugAllEnabled>
-      <RunAsTest>false</RunAsTest>
-      <GradleProfilingDisabled>false</GradleProfilingDisabled>
-      <GradleCoverageDisabled>false</GradleCoverageDisabled>
-      <method v="2" />
-    </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Gradle.nsd_basic_api_connector [build]" />
-        <item itemvalue="Gradle.nsd.basic_api_connector [publishToMavenLocal]" />
-        <item itemvalue="Gradle.nsd.basic_api_connector [publishMavenPublicationToGitHubPackagesRepository]" />
-        <item itemvalue="Gradle.nsd_basic_api_connector [jar]" />
-        <item itemvalue="Gradle.basic_api_connector [javadocJar]" />
+        <item itemvalue="Gradle.nsd.basic_api_connector [jar]" />
+        <item itemvalue="Gradle.ConnectorMethodTests" />
+        <item itemvalue="Gradle.nsd.basic_api_connector [build]" />
+        <item itemvalue="Gradle.ConnectorMethodTests.getWithoutReturnAttrs" />
+        <item itemvalue="Gradle.ConnectorMethodTests.get" />
       </list>
     </recent_temporary>
   </component>
@@ -369,15 +412,7 @@
       <workItem from="1775072498951" duration="4000" />
       <workItem from="1775072554301" duration="5000" />
       <workItem from="1775072680218" duration="49000" />
-      <workItem from="1775083359056" duration="3469000" />
-    </task>
-    <task id="LOCAL-00001" summary="добавил комментариев">
-      <option name="closed" value="true" />
-      <created>1697731921980</created>
-      <option name="number" value="00001" />
-      <option name="presentableId" value="LOCAL-00001" />
-      <option name="project" value="LOCAL" />
-      <updated>1697731921980</updated>
+      <workItem from="1775083359056" duration="5627000" />
     </task>
     <task id="LOCAL-00002" summary="добавил описания в readme">
       <option name="closed" value="true" />
@@ -763,7 +798,15 @@
       <option name="project" value="LOCAL" />
       <updated>1774824531665</updated>
     </task>
-    <option name="localTasksCounter" value="50" />
+    <task id="LOCAL-00050" summary="добавлены методы smpsync по работе со скриптами">
+      <option name="closed" value="true" />
+      <created>1775091920875</created>
+      <option name="number" value="00050" />
+      <option name="presentableId" value="LOCAL-00050" />
+      <option name="project" value="LOCAL" />
+      <updated>1775091920875</updated>
+    </task>
+    <option name="localTasksCounter" value="51" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
