@@ -17,7 +17,7 @@ public class ConnectorParams {
     /**
      * Расположение конфигурационного файла по умолчанию
      */
-    private static final String DEFAULT_PARAMS_FILE_PATH = System.getProperty("user.home") + "\\nsd_sdk\\conf\\nsd_connector_params.json";
+    private static final String DEFAULT_PARAMS_FILE_PATH = System.getProperty("user.home") + "\\.nsmp_sdk\\conf\\connector_params.json";
 
     /**
      * Пользовательский идентификатор
