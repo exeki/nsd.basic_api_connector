@@ -13,6 +13,7 @@
       <option name="customHeaders">
         <set>
           <option value="HTTP_AUTH_PASSWD" />
+          <option value="HTTP_AUTH_LOGIN" />
         </set>
       </option>
     </inspection_tool>

@@ -65,9 +65,10 @@ public class ConnectorParams {
         this.ignoreSSL = ignoreSSL;
     }
 
-    protected ConnectorParams() {
-    }
+    @SuppressWarnings("unused")
+    protected ConnectorParams() {}
 
+    @SuppressWarnings("unused")
     public static String getDefaultParamsFilePath() {
         return DEFAULT_PARAMS_FILE_PATH;
     }
@@ -118,7 +119,7 @@ public class ConnectorParams {
             throw new ConfigurationException("Installation configuration " + installationId + " could not be obtained " +
                     "in the configuration file at " + pathToConfigFile);
         }
-        ConfigFileDto.InstallationConfig installationConfig = installationConfigs.get(0);
+        ConfigFileDto.InstallationConfig installationConfig = installationConfigs.getFirst();
         if (installationConfig.host == null || installationConfig.host.trim().isEmpty()) {
             throw new ConfigurationException("The host for installation is not specified" + installationId
                     + " in the configuration file at " + pathToConfigFile);
@@ -159,6 +160,7 @@ public class ConnectorParams {
         return ignoreSSL;
     }
 
+    @SuppressWarnings("unused")
     public String getInstallationId() {
         return installationId;
     }

@@ -1,6 +1,6 @@
 package ru.kazantsev.nsd.basic_api_connector;
 
-import org.apache.hc.client5.http.impl.classic.CloseableHttpResponse;
+import org.apache.hc.core5.http.ClassicHttpResponse;
 import org.apache.hc.core5.http.ParseException;
 import org.apache.hc.core5.http.io.entity.EntityUtils;
 
@@ -13,14 +13,14 @@ public class HttpException extends RuntimeException {
 
     protected Integer serverResponseStatus;
 
-    protected CloseableHttpResponse serverResponse;
+    protected ClassicHttpResponse serverResponse;
 
     /**
      * @param message  сообщение
      * @param status   HTTP статус
      * @param response полный ответ сервера
      */
-    public HttpException(String message, Integer status, CloseableHttpResponse response) {
+    public HttpException(String message, Integer status, ClassicHttpResponse response) {
         super(message);
         this.serverResponseStatus = status;
         this.serverResponse = response;
@@ -31,6 +31,7 @@ public class HttpException extends RuntimeException {
      *
      * @return статус ответа
      */
+    @SuppressWarnings("unused")
     public Integer getServerResponseStatus() {
         return this.serverResponseStatus;
     }
@@ -40,7 +41,8 @@ public class HttpException extends RuntimeException {
      *
      * @return body ответа
      */
-    public CloseableHttpResponse getServerResponse() {
+    @SuppressWarnings("unused")
+    public ClassicHttpResponse getServerResponse() {
         return this.serverResponse;
     }
 
@@ -62,7 +64,8 @@ public class HttpException extends RuntimeException {
      * @param connector коннектор
      * @param response  ответ nsd
      */
-    public static void throwIfNotOk(Connector connector, CloseableHttpResponse response) {
+    @SuppressWarnings("unused")
+    public static void throwIfNotOk(Connector connector, ClassicHttpResponse response) {
         try {
             int status = response.getCode();
             if (status >= 400 || status < 200) {
