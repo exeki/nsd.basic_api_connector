@@ -29,8 +29,6 @@ import org.apache.http.HttpEntity;
 import javax.net.ssl.SSLContext;
 import java.io.File;
 import java.io.IOException;
-import java.net.SocketException;
-import java.net.SocketTimeoutException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.nio.charset.StandardCharsets;
@@ -38,7 +36,6 @@ import java.nio.file.Files;
 import java.security.KeyManagementException;
 import java.security.KeyStoreException;
 import java.security.NoSuchAlgorithmException;
-import java.security.cert.CertificateException;
 import java.security.cert.X509Certificate;
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -87,7 +84,7 @@ public class Connector {
         public static final TrustAllStrategy INSTANCE = new TrustAllStrategy();
 
         @Override
-        public boolean isTrusted(X509Certificate[] chain, String authType) throws CertificateException {
+        public boolean isTrusted(X509Certificate[] chain, String authType) {
             return true;
         }
     }
@@ -746,7 +743,7 @@ public class Connector {
      * @param timeoutInMillis ожидание ответа в миллисекундаз
      * @return строка с xml-ником метаинформации
      */
-    public String metainfo(int timeoutInMillis) throws SocketException, SocketTimeoutException {
+    public String metainfo(int timeoutInMillis) {
         String PATH_SEGMENT = "metainfo";
         String path = BASE_SMPSYNC_PATH + "/" + PATH_SEGMENT;
         var builder = getBasicUriBuilder().setPath(path);
@@ -766,7 +763,7 @@ public class Connector {
      *
      * @return строка с xml-ником метаинформации
      */
-    public String metainfo() throws SocketException, SocketTimeoutException {
+    public String metainfo(){
         return metainfo(100000);
     }
 
@@ -776,9 +773,9 @@ public class Connector {
      * @param xmlFileContent  строка xml файла конфигурации
      * @param timeoutInMillis таймаут ответа
      */
-    public void uploadMetainfo(String xmlFileContent, Integer timeoutInMillis) throws SocketException, SocketTimeoutException {
+    public void uploadMetainfo(String xmlFileContent, Integer timeoutInMillis)  {
         String PATH_SEGMENT = "upload-metainfo";
-        String path = BASE_REST_PATH + "/" + PATH_SEGMENT;
+        String path = BASE_SMPSYNC_PATH + "/" + PATH_SEGMENT;
         HttpPost httpPost = new HttpPost(buildUri(getBasicUriBuilder().setPath(path)));
         HttpEntity entity = MultipartEntityBuilder.create()
                 .addBinaryBody("metainfo", xmlFileContent.getBytes(), ContentType.APPLICATION_XML, "metainfo.xml")
@@ -800,7 +797,7 @@ public class Connector {
      *
      * @param xmlFileContent строка xml файла конфигурации
      */
-    public void uploadMetainfo(String xmlFileContent) throws SocketException, SocketTimeoutException {
+    public void uploadMetainfo(String xmlFileContent)  {
         int TIMEOUT = 15 * 60 * 1000;
         uploadMetainfo(xmlFileContent, TIMEOUT);
     }
@@ -809,7 +806,8 @@ public class Connector {
      * Получение ключа для по логину и паролю.
      * Если у коннектора нету ключа - установит пришедший.
      * Если у вас есть nginx, то он по умолчанию обрезает используемые в запросе хедеры, вам нужно будет настроить параметр underscores_in_headers
-     * @param login логин
+     *
+     * @param login    логин
      * @param password пароль
      * @param livetime срок жизни В МИНУТАХ
      * @return новый ключ
@@ -827,5 +825,56 @@ public class Connector {
         var key = parseStringBody(response);
         if (this.accessKey == null || !this.accessKey.isEmpty()) this.accessKey = key;
         return key;
+    }
+
+    /**
+     * Получить скрипты из инсталляции
+     *
+     * @return архив со скриптами
+     */
+    public byte[] getScripts() {
+        try {
+            String PATH_SEGMENT = "scripts";
+            String path = BASE_SMPSYNC_PATH + "/" + PATH_SEGMENT;
+            var builder = getBasicUriBuilder().setPath(path);
+            var httpGet = new HttpGet(buildUri(builder));
+            var response = executeGet(httpGet, PATH_SEGMENT);
+            return EntityUtils.toByteArray(response.getEntity());
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    /**
+     * Отправить скрипты на загрузку в инсталляцию
+     *
+     * @param archive архив со скриптами (формат - информация секретная)
+     * @return ДТО с чексуммами загруженного файла
+     */
+    public NsdDto.ScriptChecksums pushScripts(byte[] archive) {
+        String PATH_SEGMENT = "scripts";
+        String path = BASE_SMPSYNC_PATH + "/" + PATH_SEGMENT;
+        var builder = getBasicUriBuilder().setPath(path);
+        HttpPost httpPost = new HttpPost(buildUri(builder));
+        HttpEntity entity = MultipartEntityBuilder.create()
+                .addBinaryBody("file", archive, ContentType.create("application/zip"), "archive.zip")
+                .build();
+        httpPost.setEntity(entity);
+        var response = executePost(httpPost, PATH_SEGMENT);
+        return parseStringBody(response, NsdDto.ScriptChecksums.class);
+    }
+
+    /**
+     * Получить текущие чексуммы инсатлляции
+     *
+     * @return чексуммы
+     */
+    public NsdDto.ScriptChecksums getScriptsStatus() {
+        String PATH_SEGMENT = "scripts/status";
+        String path = BASE_SMPSYNC_PATH + "/" + PATH_SEGMENT;
+        var builder = getBasicUriBuilder().setPath(path);
+        var httpGet = new HttpGet(buildUri(builder));
+        var response = executeGet(httpGet, PATH_SEGMENT);
+        return parseStringBody(response, NsdDto.ScriptChecksums.class);
     }
 }

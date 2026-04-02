@@ -9,10 +9,16 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="cd7d6f01-7d11-4fa7-8097-bb28cc6220d7" name="Changes" comment="целевая версия java повышена до 21">
+    <list default="true" id="cd7d6f01-7d11-4fa7-8097-bb28cc6220d7" name="Changes" comment="добавлены методы smpsync по работе со скриптами">
+      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle.kts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ru/kazantsev/nsd/basic_api_connector/ConnectorParams.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/kazantsev/nsd/basic_api_connector/ConnectorParams.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.jar" beforeDir="false" afterPath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.properties" beforeDir="false" afterPath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gradlew" beforeDir="false" afterPath="$PROJECT_DIR$/gradlew" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gradlew.bat" beforeDir="false" afterPath="$PROJECT_DIR$/gradlew.bat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/kazantsev/nsd/basic_api_connector/Connector.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/kazantsev/nsd/basic_api_connector/Connector.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/kazantsev/nsd/basic_api_connector/NsdDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/kazantsev/nsd/basic_api_connector/NsdDto.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -20,7 +26,7 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="EmbeddingIndexingInfo">
-    <option name="cachedIndexableFilesCount" value="51" />
+    <option name="cachedIndexableFilesCount" value="116" />
   </component>
   <component name="ExternalProjectsData">
     <projectState path="$PROJECT_DIR$">
@@ -68,19 +74,19 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
-  "lastFilter": {
-    "state": "OPEN",
-    "assignee": "exeki"
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;exeki&quot;
   }
-}]]></component>
-  <component name="GithubPullRequestsUISettings"><![CDATA[{
-  "selectedUrlAndAccountId": {
-    "url": "https://github.com/exeki/nsd.basic_api_connector.git",
-    "accountId": "678ca613-af78-4bb2-994b-c29bbb590d5a"
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/exeki/nsd.basic_api_connector.git&quot;,
+    &quot;accountId&quot;: &quot;678ca613-af78-4bb2-994b-c29bbb590d5a&quot;
   }
-}]]></component>
-  <component name="GradleScriptDefinitionsStorage" workingDir="$PROJECT_DIR$" gradleHome="C:\Users\exeki\.gradle\wrapper\dists\gradle-8.0-bin\ca5e32bp14vu59qr306oxotwh\gradle-8.0" javaHome="C:\Users\exeki\.jdks\corretto-21.0.2" gradleVersion="8.0" />
+}</component>
+  <component name="GradleScriptDefinitionsStorage" workingDir="$PROJECT_DIR$" gradleHome="C:\Users\exeki\.gradle\wrapper\dists\gradle-9.0.0-bin\d6wjpkvcgsg3oed0qlfss3wgl\gradle-9.0.0" javaHome="C:\Users\exeki\.jdks\corretto-21.0.2" gradleVersion="9.0.0" />
   <component name="GroovyConsoleState">
     <option name="list">
       <list>
@@ -102,6 +108,9 @@
     <commands />
     <urls />
   </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
+  </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 3
 }</component>
@@ -118,6 +127,7 @@
     "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "Gradle.Build nsd.basic_api_connector.executor": "Run",
     "Gradle.Download Sources.executor": "Run",
+    "Gradle.Upgrade Gradle wrapper.executor": "Run",
     "Gradle.basic_api_connector [javadocJar].executor": "Run",
     "Gradle.nsd.basic_api_connector [publishMavenPublicationToGitHubPackagesRepository].executor": "Run",
     "Gradle.nsd.basic_api_connector [publishToMavenLocal].executor": "Run",
@@ -291,9 +301,9 @@
       <list>
         <item itemvalue="Gradle.nsd_basic_api_connector [build]" />
         <item itemvalue="Gradle.nsd.basic_api_connector [publishToMavenLocal]" />
-        <item itemvalue="Gradle.basic_api_connector [javadocJar]" />
         <item itemvalue="Gradle.nsd.basic_api_connector [publishMavenPublicationToGitHubPackagesRepository]" />
         <item itemvalue="Gradle.nsd_basic_api_connector [jar]" />
+        <item itemvalue="Gradle.basic_api_connector [javadocJar]" />
       </list>
     </recent_temporary>
   </component>
@@ -351,7 +361,15 @@
       <workItem from="1739395005361" duration="10385000" />
       <workItem from="1739878630498" duration="2638000" />
       <workItem from="1740076971431" duration="22000" />
-      <workItem from="1774821417799" duration="1781000" />
+      <workItem from="1774821417799" duration="2547000" />
+      <workItem from="1774894700352" duration="11000" />
+      <workItem from="1774894870195" duration="1222000" />
+      <workItem from="1774952996624" duration="2156000" />
+      <workItem from="1775049964161" duration="595000" />
+      <workItem from="1775072498951" duration="4000" />
+      <workItem from="1775072554301" duration="5000" />
+      <workItem from="1775072680218" duration="49000" />
+      <workItem from="1775083359056" duration="3469000" />
     </task>
     <task id="LOCAL-00001" summary="добавил комментариев">
       <option name="closed" value="true" />
@@ -737,7 +755,15 @@
       <option name="project" value="LOCAL" />
       <updated>1774822185232</updated>
     </task>
-    <option name="localTasksCounter" value="49" />
+    <task id="LOCAL-00049" summary="поле ConnectorParams.userId переименовано в installationId">
+      <option name="closed" value="true" />
+      <created>1774824531665</created>
+      <option name="number" value="00049" />
+      <option name="presentableId" value="LOCAL-00049" />
+      <option name="project" value="LOCAL" />
+      <updated>1774824531665</updated>
+    </task>
+    <option name="localTasksCounter" value="50" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -755,7 +781,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="добавил комментариев" />
     <MESSAGE value="добавил описания в readme" />
     <MESSAGE value="добавил файл настроек гредл" />
     <MESSAGE value="описание" />
@@ -779,7 +804,9 @@
     <MESSAGE value="поправил доку" />
     <MESSAGE value="ConnectorParams.getAccessKey стал public" />
     <MESSAGE value="целевая версия java повышена до 21" />
-    <option name="LAST_COMMIT_MESSAGE" value="целевая версия java повышена до 21" />
+    <MESSAGE value="поле ConnectorParams.userId переименовано в installationId" />
+    <MESSAGE value="добавлены методы smpsync по работе со скриптами" />
+    <option name="LAST_COMMIT_MESSAGE" value="добавлены методы smpsync по работе со скриптами" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

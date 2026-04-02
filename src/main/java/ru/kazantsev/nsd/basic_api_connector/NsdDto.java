@@ -7,12 +7,16 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
 
 /**
  * Перечень DTO, которые фиксированно возвращаются из штатных методов REST API NSD
  */
+@SuppressWarnings("unused")
 public class NsdDto {
 
+    @SuppressWarnings("unused")
     static abstract class AbstractNsdDto {
         @Override
         public String toString() {
@@ -29,6 +33,7 @@ public class NsdDto {
     /**
      * Исключение в классе обслуживания
      */
+    @SuppressWarnings("unused")
     public static class ServiceTimeExclusionDto extends AbstractNsdDto {
         @JsonAlias("UUID")
         public String uuid;
@@ -41,6 +46,7 @@ public class NsdDto {
     /**
      * Файл
      */
+    @SuppressWarnings("unused")
     public static class FileDto extends AbstractNsdDto {
         public byte[] bytes;
         public String title;
@@ -56,5 +62,34 @@ public class NsdDto {
         public String toString() {
             return this.title + " / " + this.contentType;
         }
+    }
+
+    /**
+     * Ответ при пуше скриптов smpsync
+     */
+    @SuppressWarnings("unused")
+    public static class ScriptChecksums extends AbstractNsdDto {
+        public List<SrcChecksum> scripts;
+        public List<SrcChecksum> modules;
+        public List<ScriptCategory> scriptsCategories;
+        public List<HashMap<String, Object>> advimports;
+    }
+
+    /**
+     * Чексумма исходника
+     */
+    @SuppressWarnings("unused")
+    public static class SrcChecksum {
+        public String code;
+        public String checksum;
+    }
+
+    /**
+     * Категория скрипта
+     */
+    @SuppressWarnings("unused")
+    public static class ScriptCategory {
+        public List<String> list;
+        public String code;
     }
 }
