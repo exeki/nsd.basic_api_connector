@@ -888,12 +888,12 @@ public class Connector {
      *
      * @return архив со скриптами
      */
-    public byte[] getScripts() {
+    public String getScripts() {
         String PATH_SEGMENT = "scripts";
         String path = BASE_SMPSYNC_PATH + "/" + PATH_SEGMENT;
         var builder = getBasicUriBuilder().setPath(path);
         var httpGet = new HttpGet(buildUri(builder));
-        return executeGet(httpGet, PATH_SEGMENT, this::readBytes);
+        return executeGet(httpGet, PATH_SEGMENT, this::readBody);
     }
 
     /**

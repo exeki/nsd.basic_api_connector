@@ -238,9 +238,9 @@ class ConnectorMethodTests {
 
     @Test
     void getScripts() {
-        byte[] archive = api().getScripts();
+        String archive = api().getScripts();
         assertNotNull(archive);
-        assertTrue(archive.length > 0);
+        assertFalse(archive.isBlank());
     }
 
     @Test
@@ -278,7 +278,7 @@ class ConnectorMethodTests {
     @Test
     void pushScripts() {
         Connector api = api();
-        NsdDto.ScriptChecksums checksums = api.pushScripts(api.getScripts());
+        NsdDto.ScriptChecksums checksums = api.pushScripts(api.getScripts().getBytes(StandardCharsets.UTF_8));
         assertNotNull(checksums);
     }
 

@@ -9,10 +9,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="cd7d6f01-7d11-4fa7-8097-bb28cc6220d7" name="Changes" comment="версия apache http client повышена до 5. &#10;тесты переписаны на java. методы коннектора переписаны на рекомендуемую для нового клиента сигнатуру">
+    <list default="true" id="cd7d6f01-7d11-4fa7-8097-bb28cc6220d7" name="Changes" comment="путь к конфигурационному файлу по умолчанию изменен">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ru/kazantsev/nsd/basic_api_connector/ConnectorParams.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/kazantsev/nsd/basic_api_connector/ConnectorParams.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -20,7 +18,7 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="EmbeddingIndexingInfo">
-    <option name="cachedIndexableFilesCount" value="33" />
+    <option name="cachedIndexableFilesCount" value="39" />
   </component>
   <component name="ExternalProjectsData">
     <projectState path="$PROJECT_DIR$">
@@ -164,7 +162,7 @@
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
     &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
     &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
     &quot;settings.editor.selected.configurable&quot;: &quot;reference.settingsdialog.project.gradle&quot;,
@@ -392,15 +390,8 @@
       <workItem from="1775072554301" duration="5000" />
       <workItem from="1775072680218" duration="49000" />
       <workItem from="1775083359056" duration="7637000" />
-      <workItem from="1775126063037" duration="370000" />
-    </task>
-    <task id="LOCAL-00004" summary="добавил описания в readme">
-      <option name="closed" value="true" />
-      <created>1697734480477</created>
-      <option name="number" value="00004" />
-      <option name="presentableId" value="LOCAL-00004" />
-      <option name="project" value="LOCAL" />
-      <updated>1697734480477</updated>
+      <workItem from="1775126063037" duration="2852000" />
+      <workItem from="1775163830914" duration="1339000" />
     </task>
     <task id="LOCAL-00005" summary="добавил описания в readme">
       <option name="closed" value="true" />
@@ -786,7 +777,15 @@
       <option name="project" value="LOCAL" />
       <updated>1775095424879</updated>
     </task>
-    <option name="localTasksCounter" value="53" />
+    <task id="LOCAL-00053" summary="путь к конфигурационному файлу по умолчанию изменен">
+      <option name="closed" value="true" />
+      <created>1775126739197</created>
+      <option name="number" value="00053" />
+      <option name="presentableId" value="LOCAL-00053" />
+      <option name="project" value="LOCAL" />
+      <updated>1775126739197</updated>
+    </task>
+    <option name="localTasksCounter" value="54" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -804,7 +803,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="описание" />
     <MESSAGE value="В параметры коннектора добавлен userId" />
     <MESSAGE value="build.gradle заменен на build.gradle.kts" />
     <MESSAGE value="изменена сборка" />
@@ -829,7 +827,8 @@
     <MESSAGE value="добавлены методы smpsync по работе со скриптами" />
     <MESSAGE value="версия apache http client повышена до 5. &#10;тесты переписаны на java" />
     <MESSAGE value="версия apache http client повышена до 5. &#10;тесты переписаны на java. методы коннектора переписаны на рекомендуемую для нового клиента сигнатуру" />
-    <option name="LAST_COMMIT_MESSAGE" value="версия apache http client повышена до 5. &#10;тесты переписаны на java. методы коннектора переписаны на рекомендуемую для нового клиента сигнатуру" />
+    <MESSAGE value="путь к конфигурационному файлу по умолчанию изменен" />
+    <option name="LAST_COMMIT_MESSAGE" value="путь к конфигурационному файлу по умолчанию изменен" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
