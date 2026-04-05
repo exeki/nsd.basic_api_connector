@@ -9,16 +9,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="cd7d6f01-7d11-4fa7-8097-bb28cc6220d7" name="Changes" comment="изменено возвращаемое значение getScripts">
+    <list default="true" id="cd7d6f01-7d11-4fa7-8097-bb28cc6220d7" name="Changes" comment="смена терминологии, расширение, правка MD">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle.kts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/module.groovy" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ru/kazantsev/nsd/basic_api_connector/ConfigFileDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/kazantsev/nsmp/basic_api_connector/ConfigFileDto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ru/kazantsev/nsd/basic_api_connector/Connector.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/kazantsev/nsmp/basic_api_connector/Connector.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ru/kazantsev/nsd/basic_api_connector/ConnectorParams.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/kazantsev/nsmp/basic_api_connector/ConnectorParams.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ru/kazantsev/nsd/basic_api_connector/HttpException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/kazantsev/nsmp/basic_api_connector/HttpException.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ru/kazantsev/nsd/basic_api_connector/NsdDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/kazantsev/nsmp/basic_api_connector/NsdDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/kazantsev/nsmp/basic_api_connector/Connector.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/kazantsev/nsmp/basic_api_connector/Connector.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/kazantsev/nsmp/basic_api_connector/ConnectorParams.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/kazantsev/nsmp/basic_api_connector/ConnectorParams.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/kazantsev/nsmp/basic_api_connector/HttpException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/kazantsev/nsmp/basic_api_connector/HttpException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/kazantsev/nsmp/basic_api_connector/NsdDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/kazantsev/nsmp/basic_api_connector/NsmpDto.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/nsd_basic_api_connector/ApiTestUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/nsd_basic_api_connector/ApiTestUtils.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/nsd_basic_api_connector/method_tests/ConnectorMethodTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/nsd_basic_api_connector/method_tests/ConnectorMethodTests.java" afterDir="false" />
     </list>
@@ -59,6 +55,18 @@
                 <item name="Tasks" type="e4a08cd1:TasksNode" />
                 <item name="build" type="c8890929:TasksNode$1" />
               </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="basic_api_connector" type="f1a62948:ProjectNode" />
+                <item name="Tasks" type="e4a08cd1:TasksNode" />
+                <item name="publishing" type="c8890929:TasksNode$1" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="basic_api_connector" type="f1a62948:ProjectNode" />
+                <item name="Tasks" type="e4a08cd1:TasksNode" />
+                <item name="verification" type="c8890929:TasksNode$1" />
+              </path>
             </expand>
             <select />
           </tree_state>
@@ -82,12 +90,12 @@
     &quot;assignee&quot;: &quot;exeki&quot;
   }
 }</component>
-  <component name="GithubPullRequestsUISettings">{
-  &quot;selectedUrlAndAccountId&quot;: {
-    &quot;url&quot;: &quot;https://github.com/exeki/nsd.basic_api_connector.git&quot;,
-    &quot;accountId&quot;: &quot;678ca613-af78-4bb2-994b-c29bbb590d5a&quot;
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/exeki/nsmp.basic_api_connector.git",
+    "accountId": "678ca613-af78-4bb2-994b-c29bbb590d5a"
   }
-}</component>
+}]]></component>
   <component name="GradleScriptDefinitionsStorage" workingDir="$PROJECT_DIR$" gradleHome="C:\Users\exeki\.gradle\wrapper\dists\gradle-9.0.0-bin\d6wjpkvcgsg3oed0qlfss3wgl\gradle-9.0.0" javaHome="C:\Users\exeki\.jdks\corretto-21.0.2" gradleVersion="9.0.0" />
   <component name="GroovyConsoleState">
     <option name="list">
@@ -154,6 +162,7 @@
     "Gradle.nsd.basic_api_connector [jar].executor": "Run",
     "Gradle.nsd.basic_api_connector [publishMavenPublicationToGitHubPackagesRepository].executor": "Run",
     "Gradle.nsd.basic_api_connector [publishToMavenLocal].executor": "Run",
+    "Gradle.nsd.basic_api_connector [test].executor": "Run",
     "Gradle.nsd_basic_api_connector [build].executor": "Run",
     "Groovy.addFile.executor": "Run",
     "Groovy.getAccessKey.executor": "Run",
@@ -196,7 +205,7 @@
       <recent name="ru.ekazantsev.nsd_basic_api_connector" />
     </key>
   </component>
-  <component name="RunManager" selected="Gradle.nsd.basic_api_connector [build]">
+  <component name="RunManager" selected="Gradle.nsd.basic_api_connector [publishToMavenLocal]">
     <configuration name="ConnectorMethodTests" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
@@ -211,33 +220,6 @@
             <option value=":test" />
             <option value="--tests" />
             <option value="&quot;nsd_basic_api_connector.method_tests.ConnectorMethodTests&quot;" />
-          </list>
-        </option>
-        <option name="vmOptions" />
-      </ExternalSystemSettings>
-      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
-      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
-      <ExternalSystemDebugDisabled>false</ExternalSystemDebugDisabled>
-      <DebugAllEnabled>false</DebugAllEnabled>
-      <RunAsTest>true</RunAsTest>
-      <GradleProfilingDisabled>false</GradleProfilingDisabled>
-      <GradleCoverageDisabled>false</GradleCoverageDisabled>
-      <method v="2" />
-    </configuration>
-    <configuration name="ConnectorMethodTests.getWithoutReturnAttrs" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
-      <ExternalSystemSettings>
-        <option name="executionName" />
-        <option name="externalProjectPath" value="$PROJECT_DIR$" />
-        <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" value="" />
-        <option name="taskDescriptions">
-          <list />
-        </option>
-        <option name="taskNames">
-          <list>
-            <option value=":test" />
-            <option value="--tests" />
-            <option value="&quot;nsd_basic_api_connector.method_tests.ConnectorMethodTests.getWithoutReturnAttrs&quot;" />
           </list>
         </option>
         <option name="vmOptions" />
@@ -301,7 +283,7 @@
       <GradleCoverageDisabled>false</GradleCoverageDisabled>
       <method v="2" />
     </configuration>
-    <configuration name="nsd.basic_api_connector [jar]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+    <configuration name="nsd.basic_api_connector [publishToMavenLocal]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
@@ -312,7 +294,32 @@
         </option>
         <option name="taskNames">
           <list>
-            <option value="jar" />
+            <option value="publishToMavenLocal" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <ExternalSystemDebugDisabled>false</ExternalSystemDebugDisabled>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <RunAsTest>false</RunAsTest>
+      <GradleProfilingDisabled>false</GradleProfilingDisabled>
+      <GradleCoverageDisabled>false</GradleCoverageDisabled>
+      <method v="2" />
+    </configuration>
+    <configuration name="nsd.basic_api_connector [test]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value="test" />
           </list>
         </option>
         <option name="vmOptions" />
@@ -328,11 +335,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Gradle.nsd.basic_api_connector [build]" />
-        <item itemvalue="Gradle.nsd.basic_api_connector [clean]" />
+        <item itemvalue="Gradle.nsd.basic_api_connector [publishToMavenLocal]" />
+        <item itemvalue="Gradle.nsd.basic_api_connector [test]" />
         <item itemvalue="Gradle.ConnectorMethodTests" />
-        <item itemvalue="Gradle.nsd.basic_api_connector [jar]" />
-        <item itemvalue="Gradle.ConnectorMethodTests.getWithoutReturnAttrs" />
+        <item itemvalue="Gradle.nsd.basic_api_connector [clean]" />
+        <item itemvalue="Gradle.nsd.basic_api_connector [build]" />
       </list>
     </recent_temporary>
   </component>
@@ -402,15 +409,7 @@
       <workItem from="1775126063037" duration="2852000" />
       <workItem from="1775163830914" duration="2093000" />
       <workItem from="1775207062964" duration="2815000" />
-      <workItem from="1775333018127" duration="2073000" />
-    </task>
-    <task id="LOCAL-00006" summary="добавил файл настроек гредл">
-      <option name="closed" value="true" />
-      <created>1697745636746</created>
-      <option name="number" value="00006" />
-      <option name="presentableId" value="LOCAL-00006" />
-      <option name="project" value="LOCAL" />
-      <updated>1697745636746</updated>
+      <workItem from="1775333018127" duration="2612000" />
     </task>
     <task id="LOCAL-00007" summary="описание">
       <option name="closed" value="true" />
@@ -796,7 +795,15 @@
       <option name="project" value="LOCAL" />
       <updated>1775179066925</updated>
     </task>
-    <option name="localTasksCounter" value="55" />
+    <task id="LOCAL-00055" summary="смена терминологии, расширение, правка MD">
+      <option name="closed" value="true" />
+      <created>1775356857799</created>
+      <option name="number" value="00055" />
+      <option name="presentableId" value="LOCAL-00055" />
+      <option name="project" value="LOCAL" />
+      <updated>1775356857799</updated>
+    </task>
+    <option name="localTasksCounter" value="56" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -814,7 +821,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="build.gradle заменен на build.gradle.kts" />
     <MESSAGE value="изменена сборка" />
     <MESSAGE value="изменены зависимости" />
     <MESSAGE value="исправлен нулл пойнтер" />
@@ -839,7 +845,8 @@
     <MESSAGE value="версия apache http client повышена до 5. &#10;тесты переписаны на java. методы коннектора переписаны на рекомендуемую для нового клиента сигнатуру" />
     <MESSAGE value="путь к конфигурационному файлу по умолчанию изменен" />
     <MESSAGE value="изменено возвращаемое значение getScripts" />
-    <option name="LAST_COMMIT_MESSAGE" value="изменено возвращаемое значение getScripts" />
+    <MESSAGE value="смена терминологии, расширение, правка MD" />
+    <option name="LAST_COMMIT_MESSAGE" value="смена терминологии, расширение, правка MD" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

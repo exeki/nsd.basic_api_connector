@@ -1,4 +1,4 @@
-package nsd_basic_api_connector;
+package nsmp_basic_api_connector;
 
 import org.junit.jupiter.api.Assumptions;
 import ru.kazantsev.nsmp.basic_api_connector.Connector;
@@ -11,17 +11,17 @@ import java.nio.file.Path;
 
 public final class ApiTestUtils {
 
-    private static final String DEFAULT_INSTALLATION_ID = System.getProperty("nsd.installationId", "EXEKI1");
+    private static final String DEFAULT_INSTALLATION_ID = "EXEKI1";
     private static final boolean ENABLE_DEBUG_LOGGING = true;
 
     private ApiTestUtils() {
     }
 
     public static Connector getApi() {
-        Path configPath = Path.of(System.getProperty("user.home"), "nsd_sdk", "conf", "nsd_connector_params.json");
+        Path configPath = Path.of(System.getProperty("user.home"), ".nsmp_sdk", "conf", "connector_params.json");
         Assumptions.assumeTrue(
                 Files.exists(configPath),
-                "NSD integration config not found at " + configPath
+                "NSMP integration config not found at " + configPath
         );
         try {
             ConnectorParams params = ConnectorParams.byConfigFile(DEFAULT_INSTALLATION_ID);

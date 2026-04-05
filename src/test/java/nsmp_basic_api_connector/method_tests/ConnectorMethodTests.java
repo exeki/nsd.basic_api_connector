@@ -1,9 +1,9 @@
-package nsd_basic_api_connector.method_tests;
+package nsmp_basic_api_connector.method_tests;
 
-import nsd_basic_api_connector.ApiTestUtils;
+import nsmp_basic_api_connector.ApiTestUtils;
 import org.junit.jupiter.api.Test;
 import ru.kazantsev.nsmp.basic_api_connector.Connector;
-import ru.kazantsev.nsmp.basic_api_connector.NsdDto;
+import ru.kazantsev.nsmp.basic_api_connector.NsmpDto;
 
 import java.io.File;
 import java.io.IOException;
@@ -85,7 +85,7 @@ class ConnectorMethodTests {
 
     @Test
     void createExcl() throws Exception {
-        NsdDto.ServiceTimeExclusionDto excl = api().createExcl(
+        NsmpDto.ServiceTimeExclusionDto excl = api().createExcl(
                 SERVICE_TIME_UUID,
                 new SimpleDateFormat(DATE_PATTERN).parse("2022-01-15")
         );
@@ -142,11 +142,11 @@ class ConnectorMethodTests {
     @Test
     void editExcl() throws Exception {
         Connector api = api();
-        NsdDto.ServiceTimeExclusionDto excl = api.createExcl(
+        NsmpDto.ServiceTimeExclusionDto excl = api.createExcl(
                 SERVICE_TIME_UUID,
                 new SimpleDateFormat(DATE_PATTERN).parse("2023-01-17")
         );
-        NsdDto.ServiceTimeExclusionDto edited = api.editExcl(excl.uuid, 28_800_000L, 53_000_000L);
+        NsmpDto.ServiceTimeExclusionDto edited = api.editExcl(excl.uuid, 28_800_000L, 53_000_000L);
         assertNotNull(edited);
         assertNotNull(edited.uuid);
     }
@@ -228,7 +228,7 @@ class ConnectorMethodTests {
 
     @Test
     void getFile() {
-        NsdDto.FileDto file = api().getFile(FILE_UUID);
+        NsmpDto.FileDto file = api().getFile(FILE_UUID);
         assertNotNull(file);
         assertNotNull(file.bytes);
         assertTrue(file.bytes.length > 0);
@@ -244,7 +244,7 @@ class ConnectorMethodTests {
 
     @Test
     void getScriptsStatus() {
-        NsdDto.ScriptChecksums checksums = api().getScriptsStatus();
+        NsmpDto.ScriptChecksums checksums = api().getScriptsStatus();
         assertNotNull(checksums);
     }
 
@@ -277,7 +277,7 @@ class ConnectorMethodTests {
     @Test
     void pushScripts() {
         Connector api = api();
-        NsdDto.ScriptChecksums checksums = api.pushScripts(api.getScripts().getBytes(StandardCharsets.UTF_8));
+        NsmpDto.ScriptChecksums checksums = api.pushScripts(api.getScripts().getBytes(StandardCharsets.UTF_8));
         assertNotNull(checksums);
     }
 

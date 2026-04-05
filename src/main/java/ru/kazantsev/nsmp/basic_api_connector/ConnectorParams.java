@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Objects;
 
 /**
- * DTO, содержит параметры для связи с NSD и методы по их упрощенному получению
+ * DTO, содержит параметры для связи с NSMP и методы по их упрощенному получению
  */
 public class ConnectorParams {
     /**
@@ -75,7 +75,7 @@ public class ConnectorParams {
 
     /**
      * Собирает и наполняет экземпляр из параметров, описанных в конфигурационном файле,
-     * расположенном по адресу {user.home}/nsd_sdk/conf/nsd_connector_params.json
+     * расположенном по адресу {user.home}/.nsmp_sdk/conf/connector_params.json
      *
      * @param installationId ID инсталляции, указанный конфигурационном файле
      * @return заполненный экземпляр ConnectorParams
@@ -88,7 +88,7 @@ public class ConnectorParams {
 
     /**
      * Собирает и наполняет экземпляр из параметров, описанных в конфигурационном файле,
-     * расположенном по адресу {user.home}/nsd_sdk/conf/nsd_connector_params.json
+     * расположенном по адресу {user.home}/.nsmp_sdk/conf/connector_params.json
      *
      * @param installationId   ID инсталляции, указанный конфигурационном файле
      * @param pathToConfigFile путь до конфигурационного файла

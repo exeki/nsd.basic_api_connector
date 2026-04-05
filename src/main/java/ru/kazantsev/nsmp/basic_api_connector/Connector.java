@@ -44,7 +44,7 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 /**
- * Коннектор, имплементирующий методы базового API NSD4.15
+ * Коннектор, имплементирующий методы базового API NSMP
  */
 @SuppressWarnings("rawtypes,unused")
 public class Connector {
@@ -389,7 +389,7 @@ public class Connector {
      * @param exclusionDate   дата исключения
      * @return Созданный объект (исключение). Черновик редактируемого класса обслуживания, в котором создается исключение, будет автоматически подтвержден.
      */
-    public NsdDto.ServiceTimeExclusionDto createExcl(String serviceTimeUuid, Date exclusionDate) {
+    public NsmpDto.ServiceTimeExclusionDto createExcl(String serviceTimeUuid, Date exclusionDate) {
         return createExcl(serviceTimeUuid, exclusionDate, null, null);
     }
 
@@ -402,7 +402,7 @@ public class Connector {
      * @param endTime         время окончания исключения (необязательно)
      * @return Созданный объект (исключение). Черновик редактируемого класса обслуживания, в котором создается исключение, будет автоматически подтвержден.
      */
-    public NsdDto.ServiceTimeExclusionDto createExcl(String serviceTimeUuid, Date exclusionDate, Long startTime, Long endTime) {
+    public NsmpDto.ServiceTimeExclusionDto createExcl(String serviceTimeUuid, Date exclusionDate, Long startTime, Long endTime) {
         String PATH_SEGMENT = "create-excl";
         HashMap<String, String> lastSegmentMap = new HashMap<>();
         lastSegmentMap.put("exclusionDate", new SimpleDateFormat(DATE_PATTERN).format(exclusionDate));
@@ -419,7 +419,7 @@ public class Connector {
          */
         String path = BASE_REST_PATH + "/" + PATH_SEGMENT + "/" + serviceTimeUuid + "/" + lastSegmentString;
         return executeGet(getBasicUriBuilder().setPath(path), PATH_SEGMENT,
-                response -> readJson(response, NsdDto.ServiceTimeExclusionDto.class));
+                response -> readJson(response, NsmpDto.ServiceTimeExclusionDto.class));
     }
 
     /**
@@ -501,7 +501,7 @@ public class Connector {
      * @param endTime              время окончания исключения
      * @return измененный объект. Черновик редактируемого класса обслуживания, в котором создается исключение, будет автоматически подтвержден.
      */
-    public NsdDto.ServiceTimeExclusionDto editExcl(String serviceTimeExclusion, Long startTime, Long endTime) {
+    public NsmpDto.ServiceTimeExclusionDto editExcl(String serviceTimeExclusion, Long startTime, Long endTime) {
         String PATH_SEGMENT = "edit-excl";
         HashMap<String, String> lastSegmentMap = new HashMap<>();
         lastSegmentMap.put("exclusionDate", serviceTimeExclusion);
@@ -510,7 +510,7 @@ public class Connector {
         String lastSegmentString = createJsonForUrl(lastSegmentMap);
         var builder = getBasicUriBuilder().setPath(BASE_REST_PATH + "/" + PATH_SEGMENT + "/" + serviceTimeExclusion + "/" + lastSegmentString);
         return executeGet(buildUri(builder), PATH_SEGMENT,
-                response -> readJson(response, NsdDto.ServiceTimeExclusionDto.class));
+                response -> readJson(response, NsmpDto.ServiceTimeExclusionDto.class));
     }
 
     /**
@@ -612,12 +612,12 @@ public class Connector {
      * @param fileUuid uuid файла
      * @return DTO содержащий информацию о файле
      */
-    public NsdDto.FileDto getFile(String fileUuid) {
+    public NsmpDto.FileDto getFile(String fileUuid) {
         String PATH_SEGMENT = "get-file";
         var builder = getBasicUriBuilder().setPath(BASE_REST_PATH + "/" + PATH_SEGMENT + "/" + fileUuid);
         return executeGet(builder, PATH_SEGMENT, response -> {
             try {
-                return new NsdDto.FileDto(
+                return new NsmpDto.FileDto(
                         EntityUtils.toByteArray(response.getEntity()),
                         Optional.ofNullable(response.getFirstHeader("Content-Disposition"))
                                 .map(NameValuePair::getValue)
@@ -902,7 +902,7 @@ public class Connector {
      * @param archive архив со скриптами (формат - информация секретная)
      * @return ДТО с чексуммами загруженного файла
      */
-    public NsdDto.ScriptChecksums pushScripts(byte[] archive) {
+    public NsmpDto.ScriptChecksums pushScripts(byte[] archive) {
         String PATH_SEGMENT = "scripts";
         String path = BASE_SMPSYNC_PATH + "/" + PATH_SEGMENT;
         var builder = getBasicUriBuilder().setPath(path);
@@ -911,7 +911,7 @@ public class Connector {
                 .addBinaryBody("file", archive, ContentType.create("application/zip"), "archive.zip")
                 .build();
         httpPost.setEntity(entity);
-        return executePost(httpPost, PATH_SEGMENT, response -> readJson(response, NsdDto.ScriptChecksums.class));
+        return executePost(httpPost, PATH_SEGMENT, response -> readJson(response, NsmpDto.ScriptChecksums.class));
     }
 
     /**
@@ -919,11 +919,11 @@ public class Connector {
      *
      * @return чексуммы
      */
-    public NsdDto.ScriptChecksums getScriptsStatus() {
+    public NsmpDto.ScriptChecksums getScriptsStatus() {
         String PATH_SEGMENT = "scripts/status";
         String path = BASE_SMPSYNC_PATH + "/" + PATH_SEGMENT;
         var builder = getBasicUriBuilder().setPath(path);
         var httpGet = new HttpGet(buildUri(builder));
-        return executeGet(httpGet, PATH_SEGMENT, response -> readJson(response, NsdDto.ScriptChecksums.class));
+        return executeGet(httpGet, PATH_SEGMENT, response -> readJson(response, NsmpDto.ScriptChecksums.class));
     }
 }

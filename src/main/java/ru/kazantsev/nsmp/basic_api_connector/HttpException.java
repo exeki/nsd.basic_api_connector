@@ -62,7 +62,7 @@ public class HttpException extends RuntimeException {
      * иначе ничего не делает
      *
      * @param connector коннектор
-     * @param response  ответ nsd
+     * @param response  ответ nsmp
      */
     @SuppressWarnings("unused")
     public static void throwIfNotOk(Connector connector, ClassicHttpResponse response) {

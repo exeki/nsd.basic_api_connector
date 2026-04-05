@@ -11,13 +11,13 @@ import java.util.HashMap;
 import java.util.List;
 
 /**
- * Перечень DTO, которые фиксированно возвращаются из штатных методов REST API NSD
+ * Перечень DTO, которые фиксированно возвращаются из штатных методов REST API NSMP
  */
 @SuppressWarnings("unused")
-public class NsdDto {
+public class NsmpDto {
 
     @SuppressWarnings("unused")
-    static abstract class AbstractNsdDto {
+    static abstract class AbstractNsmpDto {
         @Override
         public String toString() {
             try {
@@ -34,7 +34,7 @@ public class NsdDto {
      * Исключение в классе обслуживания
      */
     @SuppressWarnings("unused")
-    public static class ServiceTimeExclusionDto extends AbstractNsdDto {
+    public static class ServiceTimeExclusionDto extends AbstractNsmpDto {
         @JsonAlias("UUID")
         public String uuid;
         public Long startTime;
@@ -47,7 +47,7 @@ public class NsdDto {
      * Файл
      */
     @SuppressWarnings("unused")
-    public static class FileDto extends AbstractNsdDto {
+    public static class FileDto extends AbstractNsmpDto {
         public byte[] bytes;
         public String title;
         public String contentType;
@@ -68,7 +68,7 @@ public class NsdDto {
      * Ответ при пуше скриптов smpsync
      */
     @SuppressWarnings("unused")
-    public static class ScriptChecksums extends AbstractNsdDto {
+    public static class ScriptChecksums extends AbstractNsmpDto {
         public List<SrcChecksum> scripts;
         public List<SrcChecksum> modules;
         public List<ScriptCategory> scriptsCategories;
