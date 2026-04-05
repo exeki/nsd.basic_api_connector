@@ -2,8 +2,8 @@ package nsd_basic_api_connector.method_tests;
 
 import nsd_basic_api_connector.ApiTestUtils;
 import org.junit.jupiter.api.Test;
-import ru.kazantsev.nsd.basic_api_connector.Connector;
-import ru.kazantsev.nsd.basic_api_connector.NsdDto;
+import ru.kazantsev.nsmp.basic_api_connector.Connector;
+import ru.kazantsev.nsmp.basic_api_connector.NsdDto;
 
 import java.io.File;
 import java.io.IOException;
@@ -14,7 +14,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertFalse;

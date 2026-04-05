@@ -1,4 +1,4 @@
-package ru.kazantsev.nsd.basic_api_connector;
+package ru.kazantsev.nsmp.basic_api_connector;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import org.apache.hc.core5.http.NameValuePair;

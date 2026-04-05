@@ -3,8 +3,8 @@ plugins {
     id("maven-publish")
 }
 
-group = "ru.kazantsev.nsd"
-version = "1.5.2"
+group = "ru.kazantsev.nsmp"
+version = "1.5.3"
 
 java {
     //withJavadocJar()
@@ -26,7 +26,7 @@ publishing {
     repositories {
         maven {
             name = "GitHubPackages"
-            url = uri("https://maven.pkg.github.com/exeki/nsd.basic_api_connector")
+            url = uri("https://maven.pkg.github.com/exeki/nsmp.basic_api_connector")
             credentials {
                 username = System.getenv("GITHUB_USERNAME")
                 password = System.getenv("GITHUB_TOKEN")

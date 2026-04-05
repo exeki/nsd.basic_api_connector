@@ -1,4 +1,4 @@
-package ru.kazantsev.nsd.basic_api_connector;
+package ru.kazantsev.nsmp.basic_api_connector;
 
 import org.apache.hc.core5.http.ClassicHttpResponse;
 import org.apache.hc.core5.http.ParseException;

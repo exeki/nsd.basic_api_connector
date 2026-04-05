@@ -1,8 +1,8 @@
 package nsd_basic_api_connector;
 
 import org.junit.jupiter.api.Assumptions;
-import ru.kazantsev.nsd.basic_api_connector.Connector;
-import ru.kazantsev.nsd.basic_api_connector.ConnectorParams;
+import ru.kazantsev.nsmp.basic_api_connector.Connector;
+import ru.kazantsev.nsmp.basic_api_connector.ConnectorParams;
 
 import java.io.File;
 import java.io.IOException;
