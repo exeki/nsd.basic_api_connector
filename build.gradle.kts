@@ -4,7 +4,7 @@ plugins {
 }
 
 group = "ru.kazantsev.nsmp"
-version = "1.5.3"
+version = "1.5.4"
 
 java {
     //withJavadocJar()

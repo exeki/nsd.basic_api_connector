@@ -72,7 +72,7 @@ public class NsmpDto {
         public List<SrcChecksum> scripts;
         public List<SrcChecksum> modules;
         public List<ScriptCategory> scriptsCategories;
-        public List<HashMap<String, Object>> advimports;
+        public List<SrcChecksum> advimports;
     }
 
     /**
