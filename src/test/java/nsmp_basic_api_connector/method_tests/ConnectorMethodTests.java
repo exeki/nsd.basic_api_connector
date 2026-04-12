@@ -70,18 +70,18 @@ class ConnectorMethodTests {
 
     @Test
     void addFile() {
-        assertDoesNotThrow(() -> api().addFile(OBJECT_UUID, resourceFile("testFile.txt")));
+        assertDoesNotThrow(() -> api().addFile(OBJECT_UUID, resourceFile("test/testFile.txt")));
     }
 
     @Test
     void addFileFromBytes() {
-        byte[] bytes = resourceText("testFile.txt").getBytes(StandardCharsets.UTF_8);
+        byte[] bytes = resourceText("test/testFile.txt").getBytes(StandardCharsets.UTF_8);
         assertDoesNotThrow(() -> api().addFile(OBJECT_UUID, bytes, "get.txt"));
     }
 
     @Test
     void addFileFromFileList() {
-        List<File> files = List.of(resourceFile("testFile.txt"));
+        List<File> files = List.of(resourceFile("test/testFile.txt"));
         assertDoesNotThrow(() -> api().addFile(OBJECT_UUID, files));
     }
 
@@ -165,18 +165,18 @@ class ConnectorMethodTests {
 
     @Test
     void execFileFromFile() {
-        assertDoesNotThrow(() -> api().execFile(resourceFile("testScript.groovy")));
+        assertDoesNotThrow(() -> api().execFile(resourceFile("test/testScript.groovy")));
     }
 
     @Test
     void execFileFromBytes() {
-        byte[] bytes = resourceText("testScript.groovy").getBytes(StandardCharsets.UTF_8);
+        byte[] bytes = resourceText("test/testScript.groovy").getBytes(StandardCharsets.UTF_8);
         assertDoesNotThrow(() -> api().execFile(bytes));
     }
 
     @Test
     void execFileFromString() {
-        assertDoesNotThrow(() -> api().execFile(resourceText("testScript.groovy")));
+        assertDoesNotThrow(() -> api().execFile(resourceText("test/testScript.groovy")));
     }
 
     @Test

@@ -9,6 +9,7 @@ import java.util.Date;
 /**
  * Исключение в классе обслуживания
  */
+@SuppressWarnings("unused")
 public class ServiceTimeExclusionDto   {
     @JsonAlias("UUID")
     public String uuid;

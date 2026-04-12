@@ -1,3 +1,5 @@
+package test
+
 import groovy.json.JsonBuilder
 def list = utils.find('serviceCall', [:], sp.limit(20)).collect{
   return [

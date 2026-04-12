@@ -13,8 +13,10 @@ public class InstallationConfigDto {
     /** Признак необходимости игнорировать ssl */
     public Boolean ignoreSLL;
 
+    @SuppressWarnings("unused")
     public InstallationConfigDto(){}
 
+    @SuppressWarnings("unused")
     public InstallationConfigDto(String id, String scheme, String host, String accessKey, Boolean ignoreSLL) {
         this.id = id;
         this.scheme = scheme;

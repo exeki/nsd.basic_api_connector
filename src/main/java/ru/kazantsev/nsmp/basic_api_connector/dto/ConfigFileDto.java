@@ -7,8 +7,10 @@ public class ConfigFileDto {
     /** Перечень конфигов инталляций */
     public List<InstallationConfigDto> installations;
 
+    @SuppressWarnings("unused")
     public ConfigFileDto() {}
 
+    @SuppressWarnings("unused")
     public ConfigFileDto(List<InstallationConfigDto> installations) {
         this.installations = installations;
     }

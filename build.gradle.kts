@@ -42,7 +42,7 @@ dependencies {
 
     testImplementation(platform("org.junit:junit-bom:5.9.2"))
     testImplementation("org.junit.jupiter:junit-jupiter")
-    testImplementation("ch.qos.logback:logback-classic:1.4.11")
+    testImplementation("org.slf4j:slf4j-simple:2.0.17")
     testImplementation("org.codehaus.groovy:groovy-all:3.0.17")
 }
 
