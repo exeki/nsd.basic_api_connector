@@ -9,7 +9,7 @@ import java.io.IOException;
 /**
  * Исключение, которое выбрасывается при получении не успешного http ответа
  */
-public class HttpException extends RuntimeException {
+public class ConnectorHttpException extends RuntimeException {
 
     protected Integer serverResponseStatus;
 
@@ -20,7 +20,7 @@ public class HttpException extends RuntimeException {
      * @param status   HTTP статус
      * @param response полный ответ сервера
      */
-    public HttpException(String message, Integer status, ClassicHttpResponse response) {
+    public ConnectorHttpException(String message, Integer status, ClassicHttpResponse response) {
         super(message);
         this.serverResponseStatus = status;
         this.serverResponse = response;
@@ -70,7 +70,7 @@ public class HttpException extends RuntimeException {
             int status = response.getCode();
             if (status >= 400 || status < 200) {
                 String body = EntityUtils.toString(response.getEntity());
-                throw new HttpException(
+                throw new ConnectorHttpException(
                         createErrorText(connector.host, Integer.toString(status), body),
                         status,
                         response

@@ -1,6 +1,8 @@
 package ru.kazantsev.nsmp.basic_api_connector;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import ru.kazantsev.nsmp.basic_api_connector.dto.ConfigFileDto;
+import ru.kazantsev.nsmp.basic_api_connector.dto.InstallationConfigDto;
 
 import javax.naming.ConfigurationException;
 import java.io.File;
@@ -109,9 +111,9 @@ public class ConnectorParams {
             throw new IOException("Data could not be read from the configuration file at " + pathToConfigFile + ". Error text:" + e.getMessage());
         }
 
-        List<ConfigFileDto.InstallationConfig> installationConfigs = new ArrayList<>();
+        List<InstallationConfigDto> installationConfigs = new ArrayList<>();
 
-        for (ConfigFileDto.InstallationConfig config : configFileDto.installations) {
+        for (InstallationConfigDto config : configFileDto.installations) {
             if (Objects.equals(config.id, installationId)) installationConfigs.add(config);
         }
 
@@ -119,7 +121,7 @@ public class ConnectorParams {
             throw new ConfigurationException("Installation configuration " + installationId + " could not be obtained " +
                     "in the configuration file at " + pathToConfigFile);
         }
-        ConfigFileDto.InstallationConfig installationConfig = installationConfigs.getFirst();
+        InstallationConfigDto installationConfig = installationConfigs.getFirst();
         if (installationConfig.host == null || installationConfig.host.trim().isEmpty()) {
             throw new ConfigurationException("The host for installation is not specified" + installationId
                     + " in the configuration file at " + pathToConfigFile);
