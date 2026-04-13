@@ -1,7 +1,7 @@
 package ru.kazantsev.nsmp.basic_api_connector.dto;
 
 /** Конфиг конкретной инсталляции */
-public class InstallationConfigDto {
+public class InstallationDto {
     /** Идентификатор инсталляции */
     public String id;
     /** Схема, по которой система будет обращаться */
@@ -14,10 +14,10 @@ public class InstallationConfigDto {
     public Boolean ignoreSLL;
 
     @SuppressWarnings("unused")
-    public InstallationConfigDto(){}
+    public InstallationDto(){}
 
     @SuppressWarnings("unused")
-    public InstallationConfigDto(String id, String scheme, String host, String accessKey, Boolean ignoreSLL) {
+    public InstallationDto(String id, String scheme, String host, String accessKey, Boolean ignoreSLL) {
         this.id = id;
         this.scheme = scheme;
         this.host = host;

@@ -1,15 +1,16 @@
-package ru.kazantsev.nsmp.basic_api_connector;
+package ru.kazantsev.nsmp.basic_api_connector.exception;
 
 import org.apache.hc.core5.http.ClassicHttpResponse;
 import org.apache.hc.core5.http.ParseException;
 import org.apache.hc.core5.http.io.entity.EntityUtils;
+import ru.kazantsev.nsmp.basic_api_connector.Connector;
 
 import java.io.IOException;
 
 /**
  * Исключение, которое выбрасывается при получении не успешного http ответа
  */
-public class ConnectorHttpException extends RuntimeException {
+public class BadResponseException extends RuntimeException {
 
     protected Integer serverResponseStatus;
 
@@ -20,7 +21,7 @@ public class ConnectorHttpException extends RuntimeException {
      * @param status   HTTP статус
      * @param response полный ответ сервера
      */
-    public ConnectorHttpException(String message, Integer status, ClassicHttpResponse response) {
+    public BadResponseException(String message, Integer status, ClassicHttpResponse response) {
         super(message);
         this.serverResponseStatus = status;
         this.serverResponse = response;
@@ -70,8 +71,8 @@ public class ConnectorHttpException extends RuntimeException {
             int status = response.getCode();
             if (status >= 400 || status < 200) {
                 String body = EntityUtils.toString(response.getEntity());
-                throw new ConnectorHttpException(
-                        createErrorText(connector.host, Integer.toString(status), body),
+                throw new BadResponseException(
+                        createErrorText(connector.getHost(), Integer.toString(status), body),
                         status,
                         response
                 );

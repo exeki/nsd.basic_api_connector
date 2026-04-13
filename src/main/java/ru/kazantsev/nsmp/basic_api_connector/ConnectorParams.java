@@ -1,78 +1,68 @@
 package ru.kazantsev.nsmp.basic_api_connector;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import ru.kazantsev.nsmp.basic_api_connector.dto.ConfigFileDto;
-import ru.kazantsev.nsmp.basic_api_connector.dto.InstallationConfigDto;
+import ru.kazantsev.nsmp.basic_api_connector.dto.InstallationDto;
+import ru.kazantsev.nsmp.basic_api_connector.exception.ConfigurationException;
+import ru.kazantsev.nsmp.basic_api_connector.exception.ConnectorParamsException;
 
-import javax.naming.ConfigurationException;
-import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 /**
  * DTO, содержит параметры для связи с NSMP и методы по их упрощенному получению
  */
 public class ConnectorParams {
-    /**
-     * Расположение конфигурационного файла по умолчанию
-     */
-    private static final String DEFAULT_PARAMS_FILE_PATH = System.getProperty("user.home") + "\\.nsmp_sdk\\conf\\connector_params.json";
 
     /**
      * Пользовательский идентификатор
      */
-
-    private String installationId;
+    private final String installationId;
     /**
      * Ключ доступа
      */
-    private String accessKey;
+    private final String accessKey;
     /**
      * Хост
      */
-    private String host;
+    private final String host;
     /**
      * Схема (http/https)
      */
-    private String scheme;
+    private final String scheme;
     /**
      * Признак необходимости игнорировать ssl
      */
-    private Boolean ignoreSSL;
+    private final Boolean ignoreSSL;
 
     /**
      * Конструктор для ручного сбора параметров
      *
-     * @param installationId    пользовательский идентификатор
-     * @param scheme    Схема (http/https)
-     * @param host      Хост
-     * @param accessKey Ключ доступа
-     * @param ignoreSSL Признак необходимости игнорировать ssl
+     * @param installationId пользовательский идентификатор
+     * @param scheme         Схема (http/https)
+     * @param host           Хост
+     * @param accessKey      Ключ доступа
+     * @param ignoreSSL      Признак необходимости игнорировать ssl
      */
-
     public ConnectorParams(
             String installationId,
             String scheme,
             String host,
             String accessKey,
             Boolean ignoreSSL
-    ) {
+    ) throws ConnectorParamsException {
         this.installationId = installationId;
         this.scheme = scheme;
         this.host = host;
         this.accessKey = accessKey;
         this.ignoreSSL = ignoreSSL;
+        validateConnectorParams(this);
     }
 
-    @SuppressWarnings("unused")
-    protected ConnectorParams() {}
-
+    /**
+     * Получить расположение конфигурационного файла по умолчанию
+     */
     @SuppressWarnings("unused")
     public static String getDefaultParamsFilePath() {
-        return DEFAULT_PARAMS_FILE_PATH;
+        return ConfigService.getDefaultParamsFilePath();
     }
 
     /**
@@ -84,8 +74,24 @@ public class ConnectorParams {
      * @throws ConfigurationException выбрасывается конфиг не заполнен/заполнен не полностью
      * @throws IOException            выбрасывается если не удается считать json
      */
-    public static ConnectorParams byConfigFile(String installationId) throws ConfigurationException, IOException {
-        return byConfigFileInPath(installationId, DEFAULT_PARAMS_FILE_PATH);
+    public static ConnectorParams byConfigFile(String installationId) throws ConfigurationException, IOException, ConnectorParamsException {
+        return byConfigFileInPath(installationId, getDefaultParamsFilePath());
+    }
+
+    /**
+     * Создать ConnectorParams из dto InstallationDto
+     *
+     * @param dto InstallationDto
+     * @return новый экземпляр ConnectorParams
+     */
+    public static ConnectorParams fromDto(InstallationDto dto) throws ConnectorParamsException {
+        return new ConnectorParams(
+                dto.id,
+                dto.scheme,
+                dto.host,
+                dto.accessKey,
+                dto.ignoreSLL != null ? dto.ignoreSLL : false
+        );
     }
 
     /**
@@ -98,52 +104,27 @@ public class ConnectorParams {
      * @throws ConfigurationException выбрасывается конфиг не заполнен/заполнен не полностью
      * @throws IOException            выбрасывается если не удается считать json
      */
-    public static ConnectorParams byConfigFileInPath(String installationId, String pathToConfigFile) throws IOException, ConfigurationException {
-        File configFile = new File(pathToConfigFile);
-        if (!configFile.exists())
-            throw new FileNotFoundException("The configuration file was not found at " + pathToConfigFile);
+    public static ConnectorParams byConfigFileInPath(String installationId, String pathToConfigFile) throws IOException, ConnectorParamsException, ConfigurationException {
+        ConfigService service = new ConfigService(pathToConfigFile);
+        InstallationDto installationDto = service.getInstallation(installationId);
+        if (installationDto == null)
+            throw new ConfigurationException("Installation configuration " + installationId + " could not be obtained in the configuration file at " + pathToConfigFile);
+        return fromDto(installationDto);
+    }
 
-        ConfigFileDto configFileDto;
-
-        try {
-            configFileDto = new ObjectMapper().readValue(configFile, ConfigFileDto.class);
-        } catch (IOException e) {
-            throw new IOException("Data could not be read from the configuration file at " + pathToConfigFile + ". Error text:" + e.getMessage());
+    private static void validateConnectorParams(ConnectorParams dto) throws ConnectorParamsException {
+        List<String> schemes = List.of("https", "http");
+        if (dto.scheme == null || dto.scheme.trim().isEmpty())
+            throw new ConnectorParamsException("Scheme is not specified for installation " + dto.installationId);
+        if (schemes.stream().noneMatch(it -> it.equals(dto.scheme))) {
+            throw new ConnectorParamsException("Unknown scheme " + dto.scheme + " for installation " + dto.installationId);
         }
-
-        List<InstallationConfigDto> installationConfigs = new ArrayList<>();
-
-        for (InstallationConfigDto config : configFileDto.installations) {
-            if (Objects.equals(config.id, installationId)) installationConfigs.add(config);
+        if (dto.host == null || dto.host.trim().isEmpty()) {
+            throw new ConnectorParamsException("Host for installation " + dto.installationId + " is not specified");
         }
-
-        if (installationConfigs.size() != 1) {
-            throw new ConfigurationException("Installation configuration " + installationId + " could not be obtained " +
-                    "in the configuration file at " + pathToConfigFile);
+        if (dto.accessKey == null || dto.accessKey.trim().isEmpty()) {
+            throw new ConnectorParamsException("AccessKey for installation " + dto.installationId + " is not specified");
         }
-        InstallationConfigDto installationConfig = installationConfigs.getFirst();
-        if (installationConfig.host == null || installationConfig.host.trim().isEmpty()) {
-            throw new ConfigurationException("The host for installation is not specified" + installationId
-                    + " in the configuration file at " + pathToConfigFile);
-        }
-        /*
-        теперь это не обязательно
-        if (installationConfig.accessKey == null || installationConfig.accessKey.trim().length() == 0) {
-            throw new ConfigurationException("accessKey for installation is not specified for " + installationId +
-                    " in the configuration file at " + pathToConfigFile);
-        }
-        */
-        if (installationConfig.scheme == null || installationConfig.scheme.trim().isEmpty()) {
-            throw new ConfigurationException("Scheme is not specified for installation" + installationId +
-                    " in the configuration file at " + pathToConfigFile);
-        }
-        return new ConnectorParams(
-                installationId,
-                installationConfig.scheme,
-                installationConfig.host,
-                installationConfig.accessKey,
-                installationConfig.ignoreSLL != null ? installationConfig.ignoreSLL : false
-        );
     }
 
     public String getAccessKey() {

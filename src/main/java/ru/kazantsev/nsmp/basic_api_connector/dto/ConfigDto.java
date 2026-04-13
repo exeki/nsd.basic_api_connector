@@ -1,17 +1,18 @@
 package ru.kazantsev.nsmp.basic_api_connector.dto;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /** DTO со структурой файла конфига коннектора */
-public class ConfigFileDto {
-    /** Перечень конфигов инталляций */
-    public List<InstallationConfigDto> installations;
+public class ConfigDto {
+    /** Перечень конфигов инсталляций */
+    public List<InstallationDto> installations = new ArrayList<>();
 
     @SuppressWarnings("unused")
-    public ConfigFileDto() {}
+    public ConfigDto() {}
 
     @SuppressWarnings("unused")
-    public ConfigFileDto(List<InstallationConfigDto> installations) {
+    public ConfigDto(List<InstallationDto> installations) {
         this.installations = installations;
     }
 }

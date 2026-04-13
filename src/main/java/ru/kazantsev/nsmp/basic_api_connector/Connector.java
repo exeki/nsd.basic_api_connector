@@ -34,6 +34,7 @@ import org.apache.hc.core5.util.Timeout;
 import ru.kazantsev.nsmp.basic_api_connector.dto.nsmp.FileDto;
 import ru.kazantsev.nsmp.basic_api_connector.dto.nsmp.ScriptChecksums;
 import ru.kazantsev.nsmp.basic_api_connector.dto.nsmp.ServiceTimeExclusionDto;
+import ru.kazantsev.nsmp.basic_api_connector.exception.BadResponseException;
 
 import javax.net.ssl.SSLContext;
 import java.io.File;
@@ -66,12 +67,17 @@ public class Connector {
     protected Boolean debugLoggingIsEnabled = false;
     protected boolean ignoringSSL = false;
 
+    public String getHost() {
+        return host;
+    }
+
     /**
      * Клиент, с заранее вложенными парсером, авторизацией, обработчиком ошибок
      */
     protected CloseableHttpClient client;
+
     /**
-     * используемый при общении маппер
+     * Используемый при общении маппер
      */
     protected ObjectMapper objectMapper;
 
@@ -221,8 +227,8 @@ public class Connector {
             int status = response.getCode();
             if (status >= 400 || status < 200) {
                 String body = response.getEntity() != null ? EntityUtils.toString(response.getEntity()) : null;
-                throw new ConnectorHttpException(
-                        ConnectorHttpException.createErrorText(this.host, Integer.toString(status), body),
+                throw new BadResponseException(
+                        BadResponseException.createErrorText(this.host, Integer.toString(status), body),
                         status,
                         response
                 );
