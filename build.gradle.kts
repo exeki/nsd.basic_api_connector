@@ -4,7 +4,7 @@ plugins {
 }
 
 group = "ru.kazantsev.nsmp"
-version = "1.7.0"
+version = "1.7.1"
 
 java {
     //withJavadocJar()
@@ -37,7 +37,7 @@ publishing {
 
 dependencies {
     api("org.apache.httpcomponents.client5:httpclient5:5.6")
-    implementation("com.fasterxml.jackson.core:jackson-databind:2.19.2")
+    api("com.fasterxml.jackson.core:jackson-databind:2.19.2")
     implementation("org.slf4j:slf4j-api:2.0.9")
 
     testImplementation(platform("org.junit:junit-bom:5.9.2"))
