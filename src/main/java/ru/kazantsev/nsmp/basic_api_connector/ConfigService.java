@@ -9,6 +9,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 /**
  * Служба для управления конфигурационным файлом
@@ -129,7 +130,7 @@ public class ConfigService {
     }
 
     /**
-     * Сохранить несколько инсталляций, существующие инсталляции будут обновлены по id
+     * Сохранить полностью обновить список инсталляций на переданный
      * @param dtoList список dto инсталляций
      * @throws IOException если ошибка при записи/чтении
      * @throws ConfigurationException если ошибка в составе конфигурации
@@ -137,10 +138,11 @@ public class ConfigService {
     @SuppressWarnings("unused")
     public void saveInstallations(List<InstallationDto> dtoList) throws IOException, ConfigurationException {
         Objects.requireNonNull(dtoList, "Installations must not be null");
+        boolean uniqueIds = dtoList.stream().map(it -> it.id).collect(Collectors.toSet()).size() == dtoList.size();
+        if(!uniqueIds) throw new ConfigurationException("There is a non-unique id in the transmitted installation array");
         ConfigDto configDto = getConfig();
-        for (InstallationDto dto : dtoList) {
-            saveInstallation(dto, configDto);
-        }
+        if (configDto == null) configDto = new ConfigDto();
+        configDto.installations = dtoList;
         saveConfig(configDto);
     }
 
@@ -156,25 +158,6 @@ public class ConfigService {
         if (configDto == null) return;
         else configDto.installations.removeIf(it -> installationId.equals(it.id));
         saveConfig(configDto);
-    }
-
-    /**
-     * Сохранить инсталляцию в конфиг без записи в файл
-     * @param dto инсталляция
-     * @param configDto конфиг
-     * @throws ConfigurationException если ошибка в составе конфигурации
-     */
-    private void saveInstallation(InstallationDto dto, ConfigDto configDto) throws ConfigurationException {
-        Objects.requireNonNull(dto, "InstallationDto must not be null");
-        Objects.requireNonNull(configDto, "configDto must not be null");
-        InstallationDto existed = getInstallation(dto.id, configDto);
-        if (existed != null) {
-            existed.id = dto.id;
-            existed.scheme = dto.scheme;
-            existed.host = dto.host;
-            existed.accessKey = dto.accessKey;
-            existed.ignoreSSL = dto.ignoreSSL;
-        } else configDto.installations.add(dto);
     }
 
     /**

@@ -9,7 +9,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="cd7d6f01-7d11-4fa7-8097-bb28cc6220d7" name="Changes" comment="багофикс">
+    <list default="true" id="cd7d6f01-7d11-4fa7-8097-bb28cc6220d7" name="Changes" comment="расширен методы ConfigService">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle.kts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/ru/kazantsev/nsmp/basic_api_connector/ConfigService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/kazantsev/nsmp/basic_api_connector/ConfigService.java" afterDir="false" />
@@ -418,15 +418,7 @@
       <workItem from="1776067457921" duration="1318000" />
       <workItem from="1776094291649" duration="12766000" />
       <workItem from="1776161558708" duration="611000" />
-      <workItem from="1776235895981" duration="1896000" />
-    </task>
-    <task id="LOCAL-00014" summary="изменены зависимости">
-      <option name="closed" value="true" />
-      <created>1698166032792</created>
-      <option name="number" value="00014" />
-      <option name="presentableId" value="LOCAL-00014" />
-      <option name="project" value="LOCAL" />
-      <updated>1698166032792</updated>
+      <workItem from="1776235895981" duration="3264000" />
     </task>
     <task id="LOCAL-00015" summary="изменены зависимости">
       <option name="closed" value="true" />
@@ -812,7 +804,15 @@
       <option name="project" value="LOCAL" />
       <updated>1776236153641</updated>
     </task>
-    <option name="localTasksCounter" value="63" />
+    <task id="LOCAL-00063" summary="расширен методы ConfigService">
+      <option name="closed" value="true" />
+      <created>1776237849236</created>
+      <option name="number" value="00063" />
+      <option name="presentableId" value="LOCAL-00063" />
+      <option name="project" value="LOCAL" />
+      <updated>1776237849236</updated>
+    </task>
+    <option name="localTasksCounter" value="64" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -830,7 +830,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="добавлен файл модуля" />
     <MESSAGE value="понижен уровень логгирования" />
     <MESSAGE value="изменана сборка" />
     <MESSAGE value="удалена рантайм зависимость груви, оставлена только в тесте" />
@@ -855,7 +854,8 @@
     <MESSAGE value="Добавлен ConfigService для работы с файлом конфигурации. Логика создания ConnectorParams по конфигурационному файлу перенесена в него. &#10;Добавлена валидация схемы ConnectorParams. Валидация ConnectorParams теперь выполняется при создании ConnectorParams любым способом. &#10;Некоторые ДТО переименованы. &#10;Добавлены новые классы исключений. Исключения вынесены в отдельный пакет. &#10;Ну и по мелочи." />
     <MESSAGE value="Вернул Jackson в api зависимость" />
     <MESSAGE value="багофикс" />
-    <option name="LAST_COMMIT_MESSAGE" value="багофикс" />
+    <MESSAGE value="расширен методы ConfigService" />
+    <option name="LAST_COMMIT_MESSAGE" value="расширен методы ConfigService" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
