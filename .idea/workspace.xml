@@ -9,13 +9,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="cd7d6f01-7d11-4fa7-8097-bb28cc6220d7" name="Changes" comment="Вернул Jackson в api зависимость">
+    <list default="true" id="cd7d6f01-7d11-4fa7-8097-bb28cc6220d7" name="Changes" comment="багофикс">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle.kts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/ru/kazantsev/nsmp/basic_api_connector/ConfigService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/kazantsev/nsmp/basic_api_connector/ConfigService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ru/kazantsev/nsmp/basic_api_connector/ConnectorParams.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/kazantsev/nsmp/basic_api_connector/ConnectorParams.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ru/kazantsev/nsmp/basic_api_connector/dto/InstallationDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/kazantsev/nsmp/basic_api_connector/dto/InstallationDto.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -421,15 +418,7 @@
       <workItem from="1776067457921" duration="1318000" />
       <workItem from="1776094291649" duration="12766000" />
       <workItem from="1776161558708" duration="611000" />
-      <workItem from="1776235895981" duration="242000" />
-    </task>
-    <task id="LOCAL-00013" summary="build.gradle заменен на build.gradle.kts">
-      <option name="closed" value="true" />
-      <created>1698153807713</created>
-      <option name="number" value="00013" />
-      <option name="presentableId" value="LOCAL-00013" />
-      <option name="project" value="LOCAL" />
-      <updated>1698153807713</updated>
+      <workItem from="1776235895981" duration="1896000" />
     </task>
     <task id="LOCAL-00014" summary="изменены зависимости">
       <option name="closed" value="true" />
@@ -815,7 +804,15 @@
       <option name="project" value="LOCAL" />
       <updated>1776105030330</updated>
     </task>
-    <option name="localTasksCounter" value="62" />
+    <task id="LOCAL-00062" summary="багофикс">
+      <option name="closed" value="true" />
+      <created>1776236153640</created>
+      <option name="number" value="00062" />
+      <option name="presentableId" value="LOCAL-00062" />
+      <option name="project" value="LOCAL" />
+      <updated>1776236153641</updated>
+    </task>
+    <option name="localTasksCounter" value="63" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -833,7 +830,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="изменен доступ к методу формирования теста исключения" />
     <MESSAGE value="добавлен файл модуля" />
     <MESSAGE value="понижен уровень логгирования" />
     <MESSAGE value="изменана сборка" />
@@ -858,7 +854,8 @@
     <MESSAGE value="dto разнесены по разным пакетам из класса NsdDto" />
     <MESSAGE value="Добавлен ConfigService для работы с файлом конфигурации. Логика создания ConnectorParams по конфигурационному файлу перенесена в него. &#10;Добавлена валидация схемы ConnectorParams. Валидация ConnectorParams теперь выполняется при создании ConnectorParams любым способом. &#10;Некоторые ДТО переименованы. &#10;Добавлены новые классы исключений. Исключения вынесены в отдельный пакет. &#10;Ну и по мелочи." />
     <MESSAGE value="Вернул Jackson в api зависимость" />
-    <option name="LAST_COMMIT_MESSAGE" value="Вернул Jackson в api зависимость" />
+    <MESSAGE value="багофикс" />
+    <option name="LAST_COMMIT_MESSAGE" value="багофикс" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

@@ -81,23 +81,15 @@ public class ConfigService {
     }
 
     /**
-     * Получить конфигурацию конкретной инсталляции
-     * @param installationId идентификатор инсталляции
-     * @param configDto дто инсталляции
-     * @return конфигурация инсталляции, null если ее не существует
-     * @throws ConfigurationException если в конфигурации ошибка
+     * Получить список инсталляций из конфигурации
+     * @return список инсталляций
+     * @throws IOException если ошибка при чтении
      */
-    private InstallationDto getInstallation(String installationId, ConfigDto configDto) throws ConfigurationException {
-        Objects.requireNonNull(installationId, "InstallationId must not be null");
-        Objects.requireNonNull(configDto, "configDto must not be null");
-        List<InstallationDto> installations = configDto.installations
-                .stream()
-                .filter(it -> it.id.equals(installationId))
-                .toList();
-        if (installations.size() == 1) return installations.getFirst();
-        else if (installations.isEmpty()) return null;
-        else throw new ConfigurationException("Several installations with ID " + installationId +
-                    " were found. Please manually fix config file in path: " + pathToConfigFile);
+    @SuppressWarnings("unused")
+    public List<InstallationDto> getInstallations() throws IOException {
+        var config = getConfig();
+        if(config == null) return List.of();
+        else return config.installations;
     }
 
     /**
@@ -137,6 +129,22 @@ public class ConfigService {
     }
 
     /**
+     * Сохранить несколько инсталляций, существующие инсталляции будут обновлены по id
+     * @param dtoList список dto инсталляций
+     * @throws IOException если ошибка при записи/чтении
+     * @throws ConfigurationException если ошибка в составе конфигурации
+     */
+    @SuppressWarnings("unused")
+    public void saveInstallations(List<InstallationDto> dtoList) throws IOException, ConfigurationException {
+        Objects.requireNonNull(dtoList, "Installations must not be null");
+        ConfigDto configDto = getConfig();
+        for (InstallationDto dto : dtoList) {
+            saveInstallation(dto, configDto);
+        }
+        saveConfig(configDto);
+    }
+
+    /**
      * Удалить конфигурацию инсталляции
      * @param installationId идентификатор инсталляции
      * @throws IOException если ошибка при чтении/записи
@@ -148,5 +156,44 @@ public class ConfigService {
         if (configDto == null) return;
         else configDto.installations.removeIf(it -> installationId.equals(it.id));
         saveConfig(configDto);
+    }
+
+    /**
+     * Сохранить инсталляцию в конфиг без записи в файл
+     * @param dto инсталляция
+     * @param configDto конфиг
+     * @throws ConfigurationException если ошибка в составе конфигурации
+     */
+    private void saveInstallation(InstallationDto dto, ConfigDto configDto) throws ConfigurationException {
+        Objects.requireNonNull(dto, "InstallationDto must not be null");
+        Objects.requireNonNull(configDto, "configDto must not be null");
+        InstallationDto existed = getInstallation(dto.id, configDto);
+        if (existed != null) {
+            existed.id = dto.id;
+            existed.scheme = dto.scheme;
+            existed.host = dto.host;
+            existed.accessKey = dto.accessKey;
+            existed.ignoreSSL = dto.ignoreSSL;
+        } else configDto.installations.add(dto);
+    }
+
+    /**
+     * Получить конфигурацию конкретной инсталляции
+     * @param installationId идентификатор инсталляции
+     * @param configDto дто инсталляции
+     * @return конфигурация инсталляции, null если ее не существует
+     * @throws ConfigurationException если в конфигурации ошибка
+     */
+    private InstallationDto getInstallation(String installationId, ConfigDto configDto) throws ConfigurationException {
+        Objects.requireNonNull(installationId, "InstallationId must not be null");
+        Objects.requireNonNull(configDto, "configDto must not be null");
+        List<InstallationDto> installations = configDto.installations
+                .stream()
+                .filter(it -> it.id.equals(installationId))
+                .toList();
+        if (installations.size() == 1) return installations.getFirst();
+        else if (installations.isEmpty()) return null;
+        else throw new ConfigurationException("Several installations with ID " + installationId +
+                    " were found. Please manually fix config file in path: " + pathToConfigFile);
     }
 }
