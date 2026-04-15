@@ -11,17 +11,17 @@ public class InstallationDto {
     /** Ключ, по которому будет происходить обращение */
     public String accessKey;
     /** Признак необходимости игнорировать ssl */
-    public Boolean ignoreSLL;
+    public Boolean ignoreSSL;
 
     @SuppressWarnings("unused")
     public InstallationDto(){}
 
     @SuppressWarnings("unused")
-    public InstallationDto(String id, String scheme, String host, String accessKey, Boolean ignoreSLL) {
+    public InstallationDto(String id, String scheme, String host, String accessKey, Boolean ignoreSSL) {
         this.id = id;
         this.scheme = scheme;
         this.host = host;
         this.accessKey = accessKey;
-        this.ignoreSLL = ignoreSLL;
+        this.ignoreSSL = ignoreSSL;
     }
 }

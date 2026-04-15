@@ -9,14 +9,21 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="cd7d6f01-7d11-4fa7-8097-bb28cc6220d7" name="Changes" comment="Добавлен ConfigService для работы с файлом конфигурации. Логика создания ConnectorParams по конфигурационному файлу перенесена в него. &#10;Добавлена валидация схемы ConnectorParams. Валидация ConnectorParams теперь выполняется при создании ConnectorParams любым способом. &#10;Некоторые ДТО переименованы. &#10;Добавлены новые классы исключений. Исключения вынесены в отдельный пакет. &#10;Ну и по мелочи." />
+    <list default="true" id="cd7d6f01-7d11-4fa7-8097-bb28cc6220d7" name="Changes" comment="Вернул Jackson в api зависимость">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle.kts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/kazantsev/nsmp/basic_api_connector/ConfigService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/kazantsev/nsmp/basic_api_connector/ConfigService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/kazantsev/nsmp/basic_api_connector/ConnectorParams.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/kazantsev/nsmp/basic_api_connector/ConnectorParams.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/kazantsev/nsmp/basic_api_connector/dto/InstallationDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/kazantsev/nsmp/basic_api_connector/dto/InstallationDto.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="EmbeddingIndexingInfo">
-    <option name="cachedIndexableFilesCount" value="44" />
+    <option name="cachedIndexableFilesCount" value="47" />
   </component>
   <component name="ExternalProjectsData">
     <projectState path="$PROJECT_DIR$">
@@ -331,8 +338,8 @@
     <recent_temporary>
       <list>
         <item itemvalue="Gradle.nsd.basic_api_connector [test]" />
-        <item itemvalue="Gradle.ConnectorMethodTests.createExcl" />
         <item itemvalue="Gradle.nsd.basic_api_connector [build]" />
+        <item itemvalue="Gradle.ConnectorMethodTests.createExcl" />
         <item itemvalue="Gradle.nsd.basic_api_connector [buildDependents]" />
         <item itemvalue="Gradle.nsd.basic_api_connector [publishToMavenLocal]" />
       </list>
@@ -412,15 +419,9 @@
       <workItem from="1775801211665" duration="3202000" />
       <workItem from="1775999924906" duration="1701000" />
       <workItem from="1776067457921" duration="1318000" />
-      <workItem from="1776094291649" duration="10550000" />
-    </task>
-    <task id="LOCAL-00012" summary="build.gradle заменен на build.gradle.kts">
-      <option name="closed" value="true" />
-      <created>1698102692488</created>
-      <option name="number" value="00012" />
-      <option name="presentableId" value="LOCAL-00012" />
-      <option name="project" value="LOCAL" />
-      <updated>1698102692488</updated>
+      <workItem from="1776094291649" duration="12766000" />
+      <workItem from="1776161558708" duration="611000" />
+      <workItem from="1776235895981" duration="242000" />
     </task>
     <task id="LOCAL-00013" summary="build.gradle заменен на build.gradle.kts">
       <option name="closed" value="true" />
@@ -806,7 +807,15 @@
       <option name="project" value="LOCAL" />
       <updated>1776104310116</updated>
     </task>
-    <option name="localTasksCounter" value="61" />
+    <task id="LOCAL-00061" summary="Вернул Jackson в api зависимость">
+      <option name="closed" value="true" />
+      <created>1776105030330</created>
+      <option name="number" value="00061" />
+      <option name="presentableId" value="LOCAL-00061" />
+      <option name="project" value="LOCAL" />
+      <updated>1776105030330</updated>
+    </task>
+    <option name="localTasksCounter" value="62" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -824,7 +833,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="убран утилитарный класс" />
     <MESSAGE value="изменен доступ к методу формирования теста исключения" />
     <MESSAGE value="добавлен файл модуля" />
     <MESSAGE value="понижен уровень логгирования" />
@@ -849,7 +857,8 @@
     <MESSAGE value="тык" />
     <MESSAGE value="dto разнесены по разным пакетам из класса NsdDto" />
     <MESSAGE value="Добавлен ConfigService для работы с файлом конфигурации. Логика создания ConnectorParams по конфигурационному файлу перенесена в него. &#10;Добавлена валидация схемы ConnectorParams. Валидация ConnectorParams теперь выполняется при создании ConnectorParams любым способом. &#10;Некоторые ДТО переименованы. &#10;Добавлены новые классы исключений. Исключения вынесены в отдельный пакет. &#10;Ну и по мелочи." />
-    <option name="LAST_COMMIT_MESSAGE" value="Добавлен ConfigService для работы с файлом конфигурации. Логика создания ConnectorParams по конфигурационному файлу перенесена в него. &#10;Добавлена валидация схемы ConnectorParams. Валидация ConnectorParams теперь выполняется при создании ConnectorParams любым способом. &#10;Некоторые ДТО переименованы. &#10;Добавлены новые классы исключений. Исключения вынесены в отдельный пакет. &#10;Ну и по мелочи." />
+    <MESSAGE value="Вернул Jackson в api зависимость" />
+    <option name="LAST_COMMIT_MESSAGE" value="Вернул Jackson в api зависимость" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

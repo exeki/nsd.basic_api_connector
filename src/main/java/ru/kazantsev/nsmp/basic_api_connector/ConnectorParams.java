@@ -90,7 +90,7 @@ public class ConnectorParams {
                 dto.scheme,
                 dto.host,
                 dto.accessKey,
-                dto.ignoreSLL != null ? dto.ignoreSLL : false
+                dto.ignoreSSL != null ? dto.ignoreSSL : false
         );
     }
 

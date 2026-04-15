@@ -131,7 +131,7 @@ public class ConfigService {
             existed.scheme = dto.scheme;
             existed.host = dto.host;
             existed.accessKey = dto.accessKey;
-            existed.ignoreSLL = dto.ignoreSLL;
+            existed.ignoreSSL = dto.ignoreSSL;
         } else configDto.installations.add(dto);
         saveConfig(configDto);
     }
