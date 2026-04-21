@@ -222,22 +222,11 @@ public class Connector {
             String method,
             ClassicHttpResponse response,
             java.util.function.Function<ClassicHttpResponse, T> responseMapper
-    ) throws IOException {
-        try {
-            int status = response.getCode();
-            if (status >= 400 || status < 200) {
-                String body = response.getEntity() != null ? EntityUtils.toString(response.getEntity()) : null;
-                throw new BadResponseException(
-                        BadResponseException.createErrorText(this.host, Integer.toString(status), body),
-                        status,
-                        response
-                );
-            }
-            logDebug(method + " response status: " + status);
-            return responseMapper(responseMapper, response);
-        } catch (IOException | ParseException e) {
-            throw new RuntimeException(e);
-        }
+    ) {
+        var status = response.getCode();
+        BadResponseException.throwIfNotOk(this, response);
+        logDebug(method + " response status: " + status);
+        return responseMapper(responseMapper, response);
     }
 
     private static <T> T responseMapper(
@@ -830,7 +819,7 @@ public class Connector {
      *
      * @return строка с xml-ником метаинформации
      */
-    public String metainfo(){
+    public String metainfo() {
         return metainfo(100000);
     }
 

@@ -4,7 +4,7 @@ plugins {
 }
 
 group = "ru.kazantsev.nsmp"
-version = "1.7.4"
+version = "1.8.0"
 
 java {
     //withJavadocJar()
@@ -42,8 +42,9 @@ dependencies {
 
     testImplementation(platform("org.junit:junit-bom:5.9.2"))
     testImplementation("org.junit.jupiter:junit-jupiter")
+    testRuntimeOnly("org.junit.platform:junit-platform-launcher")
     testImplementation("org.slf4j:slf4j-simple:2.0.17")
-    testImplementation("org.codehaus.groovy:groovy-all:3.0.17")
+    //testImplementation("org.codehaus.groovy:groovy-all:3.0.17")
 }
 
 repositories {

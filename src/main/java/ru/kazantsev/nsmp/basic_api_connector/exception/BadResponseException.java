@@ -1,85 +1,83 @@
 package ru.kazantsev.nsmp.basic_api_connector.exception;
 
 import org.apache.hc.core5.http.ClassicHttpResponse;
-import org.apache.hc.core5.http.ParseException;
-import org.apache.hc.core5.http.io.entity.EntityUtils;
 import ru.kazantsev.nsmp.basic_api_connector.Connector;
 
 import java.io.IOException;
 
 /**
- * Исключение, которое выбрасывается при получении не успешного http ответа
+ * Исключение, которое выбрасывается при получении неуспешного HTTP-ответа.
  */
 public class BadResponseException extends RuntimeException {
 
-    protected Integer serverResponseStatus;
+    protected static int MAX_BODY_SIZE_IN_MESSAGE = 1000;
 
-    protected ClassicHttpResponse serverResponse;
+    protected ResponseSnapshot responseSnapshot;
 
-    /**
-     * @param message  сообщение
-     * @param status   HTTP статус
-     * @param response полный ответ сервера
-     */
-    public BadResponseException(String message, Integer status, ClassicHttpResponse response) {
+    public BadResponseException(String message, ResponseSnapshot response) {
         super(message);
-        this.serverResponseStatus = status;
-        this.serverResponse = response;
+        this.responseSnapshot = response;
+    }
+
+    protected static boolean isTextContentType(String contentType) {
+        if (contentType == null) {
+            return false;
+        }
+
+        String value = contentType.toLowerCase();
+
+        return value.startsWith("text/")
+                || value.contains("json")
+                || value.contains("xml")
+                || value.contains("html");
     }
 
     /**
-     * Получить статус ответа
+     * Создаёт текст исключения по шаблону.
      *
-     * @return статус ответа
+     * @param host             хост, к которому выполнялось обращение
+     * @param responseSnapshot снимок ответа
+     * @return текст исключения
+     */
+    protected static String createErrorText(String host, ResponseSnapshot responseSnapshot) {
+        String message = "Error when accessing to " + host + ", response status: " + responseSnapshot.getStatus();
+        if (isTextContentType(responseSnapshot.getContentType())) {
+            var bodyString = responseSnapshot.getBodyAsString();
+            message += ", message: " + bodyString.substring(0, Math.min(bodyString.length(), MAX_BODY_SIZE_IN_MESSAGE));
+        }
+        return message;
+    }
+
+    /**
+     * Получить сохранённый снимок ответа сервера.
+     *
+     * @return снимок ответа сервера
      */
     @SuppressWarnings("unused")
-    public Integer getServerResponseStatus() {
-        return this.serverResponseStatus;
+    public ResponseSnapshot getResponseSnapshot() {
+        return this.responseSnapshot;
     }
 
     /**
-     * Получить body ответа
-     *
-     * @return body ответа
-     */
-    @SuppressWarnings("unused")
-    public ClassicHttpResponse getServerResponse() {
-        return this.serverResponse;
-    }
-
-    /**
-     * Создает текст исключения по шаблону
-     * @param host хост, к которому происходит обращение
-     * @param status статус ответа
-     * @param body тело ответа
-     * @return текстовка исключения
-     */
-    public static String createErrorText(String host, String status, String body) {
-        return "Error when accessing to " + host + ", response status: " + status + ", message:" + body;
-    }
-
-    /**
-     * Выбрасывает исключение, если в переданном response код не успешный
-     * иначе ничего не делает
+     * Выбрасывает исключение, если код ответа неуспешный.
      *
      * @param connector коннектор
-     * @param response  ответ nsmp
+     * @param response  ответ NSMP
      */
     @SuppressWarnings("unused")
     public static void throwIfNotOk(Connector connector, ClassicHttpResponse response) {
         try {
             int status = response.getCode();
             if (status >= 400 || status < 200) {
-                String body = EntityUtils.toString(response.getEntity());
+                var responseSnapshot = new ResponseSnapshot(response);
+                var bodyString = responseSnapshot.getBodyAsString();
                 throw new BadResponseException(
-                        createErrorText(connector.getHost(), Integer.toString(status), body),
-                        status,
-                        response
+                        createErrorText(connector.getHost(), responseSnapshot),
+                        responseSnapshot
                 );
             }
-        } catch (IOException | ParseException e) {
+        } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
-
 }
