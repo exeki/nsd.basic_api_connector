@@ -13,10 +13,11 @@ public class BadResponseException extends RuntimeException {
     protected static int MAX_BODY_SIZE_IN_MESSAGE = 1000;
 
     protected ResponseSnapshot responseSnapshot;
+    protected String host;
 
-    public BadResponseException(String message, ResponseSnapshot response) {
-        super(message);
-        this.responseSnapshot = response;
+    public BadResponseException(Connector connector, ClassicHttpResponse response) throws IOException {
+        this.responseSnapshot = new ResponseSnapshot(response);
+        this.host = connector.getHost();
     }
 
     protected static boolean isTextContentType(String contentType) {
@@ -32,14 +33,8 @@ public class BadResponseException extends RuntimeException {
                 || value.contains("html");
     }
 
-    /**
-     * Создаёт текст исключения по шаблону.
-     *
-     * @param host             хост, к которому выполнялось обращение
-     * @param responseSnapshot снимок ответа
-     * @return текст исключения
-     */
-    protected static String createErrorText(String host, ResponseSnapshot responseSnapshot) {
+    @Override
+    public String getMessage() {
         String message = "Error when accessing to " + host + ", response status: " + responseSnapshot.getStatus();
         if (isTextContentType(responseSnapshot.getContentType())) {
             var bodyString = responseSnapshot.getBodyAsString();
@@ -68,14 +63,7 @@ public class BadResponseException extends RuntimeException {
     public static void throwIfNotOk(Connector connector, ClassicHttpResponse response) {
         try {
             int status = response.getCode();
-            if (status >= 400 || status < 200) {
-                var responseSnapshot = new ResponseSnapshot(response);
-                var bodyString = responseSnapshot.getBodyAsString();
-                throw new BadResponseException(
-                        createErrorText(connector.getHost(), responseSnapshot),
-                        responseSnapshot
-                );
-            }
+            if (status >= 400 || status < 200) throw new BadResponseException(connector, response);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
